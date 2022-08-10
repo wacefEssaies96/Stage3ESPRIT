@@ -1,0 +1,411 @@
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('/fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('/fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('/fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-SemiBold;
+    src: url('/fonts/poppins/Poppins-SemiBold.ttf'); 
+  }
+  
+/*//////////////////////////////////////////////////////////////////*/
+body{
+    margin: 0;
+}
+.container{
+    display: grid;
+    display: -ms-grid;
+    display: -moz-grid;
+    grid-template-columns: 70% 30%;
+    height: 100vh;
+}
+
+/* ******************************* **** **** ******************************* */
+/* ******************************* Left Side ******************************* */
+
+/* ==================================================================== */
+/* ================================= PopUp des. ========================== */
+.popup-wrap {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    content: "";
+    background: rgba(0, 0, 0, 0.85);
+  }
+  
+  .popup-box {
+    width: 400px;
+    padding: 70px;
+    transform: translate(-50%, -50%) scale(0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    background: #fff;
+    text-align: center;
+  }
+  .popup-box h2 {
+    color: #ff0000;
+  }
+  .popup-box h3 {
+    color: #888;
+  }
+  .popup-box .close-btn {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    -webkit-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    border-radius: 1000px;
+    background: #FCB918;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    line-height: 190%;
+  }
+  .popup-box .close-btn:hover {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  
+  .transform-in, .transform-out {
+    display: block;
+    -webkit-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+  }
+  
+  .transform-in {
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .transform-out {
+    -webkit-transform: translate(-50%, -50%) scale(0.5);
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+/* ==================================================================== */
+/* ==================================================================== */
+
+h2{
+    font-family: Poppins-SemiBold;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #FCB918;
+    position: relative;
+    margin-top: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 3%;
+}
+
+h2 b{
+    background-color: white;
+    position: relative;
+    padding: 2% 5%;
+}
+
+#log-title:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    left: 0;
+    top: 22px;
+    background: #FCB918;
+    height: 1px;
+}
+
+.icons{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.icons .social-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    margin-left: .5%;
+    margin-right: .5%;
+    border: gainsboro 1px solid;
+    border-radius: 50%;
+    padding: 1%;
+}
+
+.icons .social-icon:hover{
+    border: #FCB918 1px solid;
+    color: #FCB918;
+    -ms-transform: scale(1.12,1.12); /* IE 9 */
+    transform: scale(1.12,1.12); /* Standard syntax */
+    box-shadow: rgba(255, 146, 21, 0.5) 0px 15px 25px, rgba(255, 146, 21, 0.1) 0px 5px 10px;
+    cursor: pointer;
+    transition: ease .5s;
+}
+
+.login-box{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input{
+    font: 15px/24px Poppins-Regular, sans-serif; 
+    color: #333; 
+    width: 100%; 
+    box-sizing: border-box; 
+    letter-spacing: 1px;
+}
+
+input:focus{
+    outline: none;
+}
+
+.invalid-feedback{
+    position: absolute; 
+    font-size: small;
+    bottom: -100%;  
+    left: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+.col{                     /* necessary to give position: relative to parent. */
+    float: left; 
+    width: 28%; 
+    margin: 40px 3%; 
+    position: relative;
+}
+
+.border-effect{
+    border: 0;
+    padding: 4px 0; 
+    border-bottom: 1px solid rgb(226, 226, 226); 
+    background-color: transparent;
+}
+
+.border-effect ~ .focus-border{
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 2px; 
+    z-index: 99;
+}
+
+.border-effect ~ .focus-border:before, 
+.border-effect ~ .focus-border:after{
+    content: ""; 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 0; 
+    height: 100%; 
+    background-color: #FCB918; 
+    transition: 0.4s;
+}
+
+.border-effect ~ .focus-border:after{
+    left: auto; 
+    right: 0;
+}
+
+.border-effect:focus ~ .focus-border:before, 
+.border-effect:focus ~ .focus-border:after,
+.has-content.border-effect ~ .focus-border:before,
+.has-content.border-effect ~ .focus-border:after{
+    width: 50%; 
+    transition: 0.4s;
+}
+
+.border-effect ~ label{
+    font-family: Poppins-Regular;
+    font-weight: lighter;
+    font-size: 15px;
+    position: absolute; 
+    left: 0; 
+    width: 100%; 
+    top: 5px; 
+    color: rgb(204, 204, 204); 
+    transition: 0.3s; 
+    z-index: -1; 
+    letter-spacing: 0.5px;
+}
+
+.border-effect:focus ~ label, .has-content.border-effect ~ label{
+    top: -16px; 
+    font-size: 12px; 
+    color: #FCB918; 
+    transition: 0.3s;
+}
+
+.forget-pwd{
+    padding: 2%;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+}
+
+.forget-pwd a{
+    text-align: center;
+    font-family: Poppins-Regular, sans-serif;
+    font-size: small;
+    text-decoration: none;
+    color: rgb(59, 59, 59);
+}
+
+.forget-pwd a:hover{
+    color: #FCB918;
+    border-bottom: #FCB918 1px solid;
+    transition: all .5s;
+}
+
+.login-btn{
+    position: relative;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn{
+    margin-top: 5%;
+    position: relative;
+    width: fit-content;
+    background-color: transparent;
+    border: none;
+    border-radius: 25px;
+    padding: 2% 5%;
+    color: white;
+    font-family: Poppins-Regular, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+}
+
+.btn::after{
+    content: '';
+    position: absolute;
+    background-color: #FCB918;
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: ease-in .5s;
+}
+
+
+
+
+.btn:hover.btn::after{
+    width: 0;
+    background-color: transparent;
+}
+
+.btn:hover{
+    border: #FCB918 1px solid;
+    transition: ease-in .5s;
+    color: #FCB918;
+    cursor: pointer;
+}
+/* ******************************* **** **** ******************************* */
+/* ******************************* Right Side ******************************* */
+.right{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FCB918;
+}
+
+.right h1{
+    font-family: Poppins-SemiBold;
+    color: white;
+}
+
+.right p{
+    font-family: Poppins-Regular;
+    font-size: small;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.right .sign-up{
+    position: relative;
+    background-color: transparent;
+    padding: 3% 5%;
+    border: white 1px solid;
+    border-radius: 15px;
+    margin-top: 30%;
+}
+
+.sign-up-link{
+    color: white;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-family: Poppins-Regular;
+}
+
+.sign-up::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    bottom: 0;
+    right: 50%;
+    transition: ease-in .2s;
+}
+
+.sign-up::before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    bottom: 0;
+    left: 50%;
+    transition: ease-in .2s;
+}
+
+.sign-up:hover{
+    border: none;
+    transition: ease-out .5s;
+    cursor: pointer;
+}
+
+.sign-up:hover.sign-up::after{
+    width: 35%;
+}
+
+.sign-up:hover.sign-up::before{
+    width: 35%;
+}
+/* ******************************* **** **** ******************************* */

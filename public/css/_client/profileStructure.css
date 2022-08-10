@@ -1,0 +1,133 @@
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('/fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('/fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('/fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-SemiBold;
+    src: url('/fonts/poppins/Poppins-SemiBold.ttf'); 
+  }
+  
+/*//////////////////////////////////////////////////////////////////*/
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.page-content{
+    height: 100vh;
+    display: grid;
+    gap: 0;
+    grid-template-areas: 'menu header header header header header'
+                         'menu main main main main main';
+    grid-template-rows: 1fr 7fr;
+}
+/*****************************************************************/
+/*****************************************************************/
+.left-menu{
+    grid-area: menu;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    padding-top: 45%;
+    padding-bottom: 7%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.left-menu :last-child{
+    margin-top: auto;
+}
+
+.left-menu *{
+    padding: 5% 10%;
+    font-family: Poppins-Regular;
+}
+
+.left-menu .item1{
+    color: #acacac;
+}
+
+.left-menu .item2{
+    background-color: #FCB918;
+    color: whitesmoke;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.left-menu .item3{
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/*****************************************************************/
+/*****************************************************************/
+/*######################################################################################*/
+/*****************************************************************/
+/*****************************************************************/
+.page-header{
+    grid-area: header;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    padding-left: 5%;
+}
+
+input[type='search']{
+    font-family: Poppins-Regular, monospace;
+    color: #acacac;
+    font-weight: lighter;
+    padding: 1% 2%;
+    border: none;
+    /* border-bottom: 1px #acacac solid; */
+}
+
+.page-header .notification{
+    margin-left: auto;
+}
+
+.page-header .notification,
+.page-header .user_name,
+.page-header .user_img{
+    padding-right: 3%;
+}
+
+.page-header .user_name{
+    font-family: Poppins-Medium;
+    color: #636363;
+}
+
+.page-header .user_img{
+    border-radius: 50%;
+}
+/*****************************************************************/
+/*****************************************************************/
+/*#######################################################################################*/
+/*****************************************************************/
+/*****************************************************************/
+.container{
+    grid-area: main;
+    padding-left: 5%;
+    padding-right: 3%;
+}
+/*****************************************************************/
+/*****************************************************************/
+/*#######################################################################################*/
+
+
+
+
+

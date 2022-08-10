@@ -1,0 +1,390 @@
+body{
+    height: auto;
+    padding-top: 20;
+    bottom: 0;
+    background-color: gainsboro;
+}
+
+.page-content{
+    height: 100%;
+    display: flex;
+    display: -webkit-flex;
+    bottom: 0;
+}
+/*******************************************************************************************************************/
+/*******************************************************************************************************************/
+/***********####################################### Left Side ##############################################********/
+div.left-side{
+    height: 100vh;
+    width: 30%;
+    max-width: 30%;
+    margin-right: 3%;
+    margin-left: 0;
+    background-color: #FCB918;
+    border-top-right-radius: 25px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 2%;
+}
+
+.left-side-top{
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    margin-left: 10%;
+    margin-right: 5%;
+}
+
+.left-side-top div.logo{
+    flex-grow: 3;
+    padding-left: 3%;
+    justify-content: center;
+}
+
+.left-side-top div.menuLines{
+    flex-grow: 1;
+    text-align: center;
+    justify-content: center;
+}
+
+img#ppp90Lg{
+    max-width: 100px;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+.left-side div.drpodown{
+    margin-left: 10%;
+    margin-top: 10%;
+    margin-right: 10%;
+    padding: 2% 5%;
+    background-color: seashell;
+    border-radius: 5px;
+}
+
+.left-side div.drpodown{
+    min-width: 25px;
+    box-shadow: 0 4px 8px 0 rgba(65, 65, 65, 0.774), 0 6px 20px 0 rgba(121, 121, 121, 0.486);
+}
+
+.drpodown a{
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    font-weight: bold;
+    color: rgb(27, 27, 27);
+}
+
+button.dropbtn{
+    background:none; 
+    color: #FCB918; 
+    font-size: medium;  
+    border: none;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+  
+.dropdown-content {
+    display: none;
+    overflow: auto;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    font-weight: lighter;
+    color: rgb(58, 58, 58);
+    padding: 12px 16px;
+    display: block;
+}
+  
+.dropdown-content a:hover {
+    background-color: rgb(224, 224, 224);
+    color: rgb(59, 59, 59);
+}
+  
+.show {
+    rotate: 90;
+    display: block;
+    max-height: 100px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: scroll; 
+    animation-name: dropDown;
+    animation-duration: 1s;
+}
+
+.show::-webkit-scrollbar {
+    display: none;
+}
+
+/****************************************/
+@keyframes dropDown{
+    from { height: 0;}
+    to { height: 100px;}
+}
+
+@-o-keyframes dropDown{
+    from { height: 0;}
+    to { height: 100px;}
+}
+
+@-moz-keyframes dropDown{
+    from { height: 0;}
+    to { height: 100px;}
+}
+
+@-webkit-keyframes dropDown{
+    from { height: 0;}
+    to { height: 100px;}
+}
+/***************************************/
+/***************************************/
+@keyframes dropUp{
+    from { height: 100px;}
+    to { height: 0;}
+}
+
+@-o-keyframes dropUp{
+    from { height: 100px;}
+    to { height: 0;}
+}
+
+@-moz-keyframes dropUp{
+    from { height: 100px;}
+    to { height: 0;}
+}
+
+@-webkit-keyframes dropUp{
+    from { height: 100px;}
+    to { height: 0;}
+}
+/***************************************/
+/***************************************/
+@keyframes smallestLogo{
+    from { flex-grow: 3;}
+    to { flex-grow: 0;}
+}
+
+@-o-keyframes smallestLogo{
+    from { flex-grow: 3;}
+    to { flex-grow: 0;}
+}
+
+@-moz-keyframes smallestLogo{
+    from { flex-grow: 3;}
+    to { flex-grow: 0;}
+}
+
+@-webkit-keyframes smallestLogo{
+    from { flex-grow: 3;}
+    to { flex-grow: 0;}
+}
+/***************************************/
+/***************************************/
+@keyframes rotateMenuLines{
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@-o-keyframes rotateMenuLines{
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@-moz-keyframes rotateMenuLines{
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(-90deg); }
+}
+
+@-webkit-keyframes rotateMenuLines{
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+/***************************************/
+/***************************************/
+@keyframes translateLeftSide{
+    from { width: 30%;}
+    to { width: 10%;}
+}
+
+@-o-keyframes translateLeftSide{
+    from { width: 30%;}
+    to { width: 10%;}
+}
+
+@-moz-keyframes translateLeftSide{
+    from { width: 30%;}
+    to { width: 10%;}
+}
+
+@-webkit-keyframes translateLeftSide{
+    from { width: 30%;}
+    to { width: 10%;}
+}
+/***************************************/
+/***************************************/
+@keyframes smallestImg{
+    from { width: auto;}
+    to { width: 25px;}
+}
+
+@-o-keyframes smallestImg{
+    from { width: auto;}
+    to { width: 25px;}
+}
+
+@-moz-keyframes smallestImg{
+    from { width: auto;}
+    to { width: 25px;}
+}
+
+@-webkit-keyframes smallestImg{
+    from { width: auto;}
+    to { width: 25px;}
+}
+/***************************************/
+/***************************************/
+@keyframes _smallestLogo{
+    from { flex-grow: 0;}
+    to { flex-grow: 3;}
+}
+
+@-o-keyframes _smallestLogo{
+    from { flex-grow: 0;}
+    to { flex-grow: 3;}
+}
+
+@-moz-keyframes _smallestLogo{
+    from { flex-grow: 0;}
+    to { flex-grow: 3;}
+}
+
+@-webkit-keyframes _smallestLogo{
+    from { flex-grow: 0;}
+    to { flex-grow: 3;}
+}
+/***************************************/
+/***************************************/
+@keyframes _rotateMenuLines{
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@-o-keyframes _rotateMenuLines{
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@-moz-keyframes _rotateMenuLines{
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@-webkit-keyframes _rotateMenuLines{
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+/***************************************/
+/***************************************/
+@keyframes _translateLeftSide{
+    from { width: 10%;}
+    to { width: 30%;}
+}
+
+@-o-keyframes _translateLeftSide{
+    from { width: 10%;}
+    to { width: 30%;}
+}
+
+@-moz-keyframes _translateLeftSide{
+    from { width: 10%;}
+    to { width: 30%;}
+}
+
+@-webkit-keyframes _translateLeftSide{
+    from { width: 10%;}
+    to { width: 30%;}
+}
+/***************************************/
+/***************************************/
+@keyframes _smallestImg{
+    from { width: 25px;}
+    to { width: auto;}
+}
+
+@-o-keyframes _smallestImg{
+    from { width: 25px;}
+    to { width: auto;}
+}
+
+@-moz-keyframes _smallestImg{
+    from { width: 25px;}
+    to { width: auto;}
+}
+
+@-webkit-keyframes _smallestImg{
+    from { width: 25px;}
+    to { width: auto;}
+}
+
+
+/*******####################################### End Left Side ##############################################********/
+/*******************************************************************************************************************/
+/*******************************************************************************************************************/
+
+.right-side{
+    width: 70%;
+    margin-top: 1%;
+}
+
+div.right-side-id{
+    display: flex;
+    display: -webkit-flex;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 2%;
+}
+
+._id{
+    min-width: 24px;
+    flex-grow: 2;
+    display: flex;
+    display: -webkit-flex;
+    padding: .5% 2%;
+    background-color: white;
+    border: rgba(0, 0, 0, 0.2) .5px solid;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.b_right-side-id{
+    flex-grow: 10;
+    padding: .5% 2%;
+}
+
+._id svg{
+    align-self: center;
+}
+
+._id h3{
+    align-self: center;
+    margin-left: 2%;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: smaller;
+    color: #606161;
+}
+
+.right-side-description{
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: x-large;
+    color: #FCB918;
+}
+
+.right-side-description h5{
+    padding-bottom: 1%;
+    border-bottom: #FCB918 2px solid;
+}
