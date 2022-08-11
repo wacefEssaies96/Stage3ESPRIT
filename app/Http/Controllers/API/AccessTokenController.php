@@ -12,7 +12,7 @@ use Twilio\Jwt\Grants\ChatGrant;
 
 class AccessTokenController extends Controller
 {
-    public function generate_token($email,$room)
+    public function generate_token($email, $room, $id)
     {
         // Substitute your Twilio Account SID and API Key details
         $accountSid = env('TWILIO_ACCOUNT_SID');
@@ -31,7 +31,7 @@ class AccessTokenController extends Controller
         );
         // Grant access to Video
         $grant = new VideoGrant();
-        $roomName = $this->genererChaineAleatoire(20);
+        $roomName = $this->genererChaineAleatoire(20, $id);
         if($room == 'null'){
             $grant->setRoom($roomName);
             $this->sendMailInvitation($email, $roomName);
@@ -39,47 +39,6 @@ class AccessTokenController extends Controller
         if($email == 'null'){
             $grant->setRoom($room);
         }
-
-        $chatGrant = new ChatGrant();
-        $chatGrant->setServiceSid(env('TWILIO_SERVICE_SID'));
-
-
-        $token->addGrant($chatGrant);
-        $token->addGrant($grant);
-
-        // Serialize the token as a JWT
-        echo $token->toJWT();
-    }
-
-    public function generate_token_post(Request $request)
-    {
-
-        // Substitute your Twilio Account SID and API Key details
-        $accountSid = env('TWILIO_ACCOUNT_SID');
-        $apiKeySid = env('TWILIO_API_KEY_SID');
-        $apiKeySecret = env('TWILIO_API_KEY_SECRET');
-
-        $identity = uniqid();
-
-        // Create an Access Token
-        $token = new AccessToken(
-            $accountSid,
-            $apiKeySid,
-            $apiKeySecret,
-            3600,
-            $identity
-        );
-
-        // Grant access to Video
-        $grant = new VideoGrant();
-        $grant->setRoom($request->room);
-
-
-        $chatGrant = new ChatGrant();
-        $chatGrant->setServiceSid(env('TWILIO_SERVICE_SID'));
-
-        
-        $token->addGrant($chatGrant);
         $token->addGrant($grant);
 
         // Serialize the token as a JWT
@@ -105,7 +64,7 @@ class AccessTokenController extends Controller
                 ]);
         }
 
-    function genererChaineAleatoire($longueur = 20)
+    function genererChaineAleatoire($longueur = 20, $id)
     {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $longueurMax = strlen($caracteres);
@@ -114,12 +73,11 @@ class AccessTokenController extends Controller
         {
             $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
         }
-        return $chaineAleatoire;
+        return $id.'-'.$chaineAleatoire;
     }
     public function sendMailInvitation($email, $roomName){
-        //$currentUser = Auth::user();
         $details = [
-            'title' => 'Video call invitation from ',//.$currentUser->name,
+            'title' => 'Video call invitation',
             'body' => $roomName
         ];
         Mail::to($email)->send(new VideoCallInvitation($details));

@@ -5101,6 +5101,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     otherUser: {
       type: Object,
       required: true
+    },
+    room: {
+      required: true
     }
   },
   data: function data() {
@@ -5206,17 +5209,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     }
                   }, _callee3);
                 })));
-                _context4.next = 6;
+
+                if (!(_this3.room == 'null')) {
+                  _context4.next = 10;
+                  break;
+                }
+
+                _context4.next = 7;
                 return client.getChannelByUniqueName("".concat(_this3.authUser.id, "-").concat(_this3.otherUser.id));
 
-              case 6:
+              case 7:
+                _this3.channel = _context4.sent;
+                _context4.next = 13;
+                break;
+
+              case 10:
+                _context4.next = 12;
+                return client.getChannelByUniqueName("".concat(_this3.otherUser.id, "-").concat(_this3.authUser.id));
+
+              case 12:
                 _this3.channel = _context4.sent;
 
+              case 13:
                 _this3.channel.on("messageAdded", function (message) {
                   _this3.messages.push(message);
                 });
 
-              case 8:
+              case 14:
               case "end":
                 return _context4.stop();
             }
@@ -5270,7 +5289,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'video-chat',
-  props: ['useremail', 'roomname'],
+  props: ['useremail', 'roomname', 'userid'],
   data: function data() {
     return {
       accessToken: '',
@@ -5284,7 +5303,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // Request a new token
 
 
-      axios.get('/api/access_token/' + this.useremail + '/' + this.roomname).then(function (response) {
+      axios.get('/api/access_token/' + this.useremail + '/' + this.roomname + '/' + this.userid).then(function (response) {
         _this.accessToken = response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -78637,8 +78656,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\wacef\Desktop\Nouveau dossier\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\wacef\Desktop\Nouveau dossier\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\wacef\Documents\GitHub\Stage3ESPRIT\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\wacef\Documents\GitHub\Stage3ESPRIT\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

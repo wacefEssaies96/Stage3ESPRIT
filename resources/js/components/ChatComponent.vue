@@ -29,6 +29,9 @@ export default {
         otherUser: {
             type: Object,
             required: true
+        },
+        room: {
+            required : true
         }
     },
     data() {
@@ -61,17 +64,24 @@ export default {
         async initializeClient(token) {
             const client = await Twilio.Chat.Client.create(token);
 
-
             client.on("tokenAboutToExpire", async () => {
                 const token = await this.fetchToken();
 
 
                 client.updateToken(token);
             });
-
-            this.channel = await client.getChannelByUniqueName(
-                `${this.authUser.id}-${this.otherUser.id}`
-            );
+            if(this.room == 'null'){
+                this.channel = await client.getChannelByUniqueName(
+                    `${this.authUser.id}-${this.otherUser.id}`
+                );
+            }
+            else{
+                this.channel = await client.getChannelByUniqueName(
+                    `${this.otherUser.id}-${this.authUser.id}`
+                );
+            }
+            
+            
             this.channel.on("messageAdded", message => {
                 this.messages.push(message);
             });

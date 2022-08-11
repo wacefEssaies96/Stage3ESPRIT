@@ -11,8 +11,17 @@
     </head>
     <body>
         <div id="app">
-            {{-- <chat-component :auth-user="{{ auth()->user() }}" :other-user="{{ $otherUser }}"></chat-component> --}}
-            <video-chat :userid="{{ auth()->user()->id }}" v-bind:useremail="{{ json_encode($email) }} " v-bind:roomName="{{ json_encode($room) }}"></video-chat>
+            {{-- <div class="container"> --}}
+                {{-- <div class="row">
+                    <div class="col-sm-5"> --}}
+                        <video-chat :userid="{{ auth()->user()->id }}" v-bind:useremail="{{ json_encode($email) }} " v-bind:roomName="{{ json_encode($room) }}"></video-chat>
+                    {{-- </div>
+                    <div class="col-sm-4"> --}}
+                        <chat-component v-bind:room="{{ json_encode($room) }}" :auth-user="{{ auth()->user() }}" :other-user="{{ $otherUser }}"></chat-component>
+                    {{-- </div>
+                </div> --}}
+            {{-- </div> --}}
+            
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="https://media.twiliocdn.com/sdk/js/chat/v3.3/twilio-chat.min.js"></script>

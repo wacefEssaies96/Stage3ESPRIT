@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('access_token/{email}/{room}', 'API\AccessTokenController@generate_token');
+Route::get('access_token/{email}/{room}/{id}', 'API\AccessTokenController@generate_token');
 Route::post('/token', 'API\AccessTokenController@generate');

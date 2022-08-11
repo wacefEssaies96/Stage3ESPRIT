@@ -16,7 +16,7 @@
 <script>
 export default {
     name: 'video-chat',
-    props: ['useremail', 'roomname'],
+    props: ['useremail', 'roomname', 'userid'],
     data: function () {
         return {
             accessToken: '',
@@ -28,7 +28,7 @@ export default {
             const _this = this
             const axios = require('axios')
             // Request a new token
-            axios.get('/api/access_token/'+this.useremail+'/'+this.roomname)
+            axios.get('/api/access_token/'+this.useremail+'/'+this.roomname+'/'+this.userid)
                 .then(function (response) {
                     _this.accessToken = response.data
                 })
