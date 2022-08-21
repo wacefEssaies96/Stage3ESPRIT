@@ -388,3 +388,24 @@ div.right-side-id{
     padding-bottom: 1%;
     border-bottom: #FCB918 2px solid;
 }
+
+#inputRoom {
+    border: 2px solid #FCB918;
+    border-radius: 10px;
+    width: 100vh;
+    height: 40px;
+  }
+
+.btnRoom {
+    color: whitesmoke;
+    background: #FCB918;
+    border: 0;
+    border-radius: 10px;
+    padding: 15px;
+}
+.btnRoom:hover,
+.btnRoom:focus {
+    color: #FCB918;
+    background-color: whitesmoke;
+    border: 1px solid #FCB918;
+}

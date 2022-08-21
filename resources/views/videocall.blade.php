@@ -12,14 +12,14 @@
     <body>
         <div id="app">
             {{-- <div class="container"> --}}
-                {{-- <div class="row">
-                    <div class="col-sm-5"> --}}
+                <div class="rowvideo">
+                    <div class="videoconference">
                         <video-chat :userid="{{ auth()->user()->id }}" v-bind:useremail="{{ json_encode($email) }} " v-bind:roomName="{{ json_encode($room) }}"></video-chat>
-                    {{-- </div>
-                    <div class="col-sm-4"> --}}
+                    </div>
+                    <div class="chatvideo">
                         <chat-component v-bind:room="{{ json_encode($room) }}" :auth-user="{{ auth()->user() }}" :other-user="{{ $otherUser }}"></chat-component>
-                    {{-- </div>
-                </div> --}}
+                    </div>
+                </div>
             {{-- </div> --}}
             
         </div>

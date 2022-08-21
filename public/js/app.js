@@ -5460,20 +5460,48 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", [_c("div", {
-    staticClass: "card"
+    staticClass: "card",
+    staticStyle: {
+      width: "50vh",
+      height: "90vh"
+    }
   }, [_c("div", {
     staticClass: "card-header"
   }, [_vm._v(_vm._s(_vm.otherUser.name))]), _vm._v(" "), _c("div", {
-    staticClass: "card-body"
+    staticClass: "card-body",
+    staticStyle: {
+      height: "100%",
+      overflow: "scroll"
+    }
+  }, [_c("div", {
+    staticClass: "mesgs"
+  }, [_c("div", {
+    staticClass: "msg_history"
   }, _vm._l(_vm.messages, function (message) {
     return _c("div", {
       key: message.id
-    }, [_c("div", {
+    }, [message.author === _vm.authUser.email ? _c("div", {
       "class": {
-        "text-right": message.author === _vm.authUser.email
+        incoming_msg: message.author === _vm.authUser.email
       }
-    }, [_vm._v("\r\n                    " + _vm._s(message.body) + "\r\n                ")])]);
-  }), 0), _vm._v(" "), _c("div", {
+    }, [_c("div", {
+      staticClass: "incoming_msg_img"
+    }), _vm._v(" "), _c("div", {
+      staticClass: "received_msg"
+    }, [_c("div", {
+      staticClass: "received_withd_msg"
+    }, [_c("p", {
+      staticStyle: {
+        right: "0"
+      }
+    }, [_vm._v(_vm._s(message.body))])])])]) : _vm._e(), _vm._v(" "), message.author === _vm.otherUser.email ? _c("div", {
+      "class": {
+        outgoing_msg: message.author === _vm.otherUser.email
+      }
+    }, [_c("div", {
+      staticClass: "sent_msg"
+    }, [_c("p", [_vm._v(_vm._s(message.body))])])]) : _vm._e()]);
+  }), 0)])]), _vm._v(" "), _c("div", {
     staticClass: "card-footer"
   }, [_c("input", {
     directives: [{

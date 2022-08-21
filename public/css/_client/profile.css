@@ -72,13 +72,6 @@ h2{
     background: whitesmoke;
     border: 1px solid #FCB918;
 }
-  
-#form .next-step {
-    color: whitesmoke;
-    background: #FCB918;
-    border: 0
-}
-  
 #form .previous-step:hover,
 #form .previous-step:focus {
     color: whitesmoke;
@@ -86,6 +79,11 @@ h2{
     border: 0;
 }
   
+#form .next-step {
+    color: whitesmoke;
+    background: #FCB918;
+    border: 0
+}
 #form .next-step:hover,
 #form .next-step:focus {
     color: #FCB918;

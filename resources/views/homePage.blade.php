@@ -24,7 +24,8 @@
                     <a href=" {{ route('about-us') }} " class="menu-item bgeff">Qui sommes nous ?</a>
                     <a href=" {{ route('services') }} " class="menu-item bgeff">Nos services</a>
                     <a href=" {{ route('contact') }} " class="menu-item bgeff">Contacter nous</a>
-                    <a href="" class="menu-item bgeff">FAQ</a>
+                    <a href=" {{ route('projects') }} " class="menu-item bgeff">Projets</a>
+                    {{-- <a href=" {{ route('projects') }} " class="menu-item bgeff">JCP</a> --}}
                 </div>
                 <div class="rightSide">
                     <a href="" class="menu-item bgeff" style="border-right: white 1px solid"><span class="fa">&#xf002;</span></a>

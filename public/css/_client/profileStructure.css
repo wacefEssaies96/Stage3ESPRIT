@@ -28,11 +28,15 @@
     margin: 0;
 }
 
+#logo{
+    max-width: 50px;
+}
+
 .page-content{
     height: 100vh;
     display: grid;
     gap: 0;
-    grid-template-areas: 'menu header header header header header'
+    grid-template-areas: 'header header header header header header'
                          'menu main main main main main';
     grid-template-rows: 1fr 7fr;
 }
@@ -112,6 +116,9 @@ input[type='search']{
 
 .page-header .user_img{
     border-radius: 50%;
+}
+.page-header{
+    background-color: #FCB918;
 }
 /*****************************************************************/
 /*****************************************************************/

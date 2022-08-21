@@ -8,8 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function checkout($operation)
     {   
+        
         // Enter Your Stripe Secret
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         		
@@ -40,6 +45,9 @@ class CheckoutController extends Controller
 
         if($request->operation == 'depot'){
             return redirect('/'.Auth::user()->id.'/Dépot_dossier');
+        }
+        if($request->operation == 'expert'){
+            return redirect()->route('expertChat');
         }
         return redirect()->route('home');
     }

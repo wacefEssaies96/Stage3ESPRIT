@@ -132,9 +132,6 @@
                     </div>
                 </form>
             </main>
-            <footer>
-                <p>Vous avez déjà un compte? <a href=" {{ route('login') }} ">Se connecter</a> <a href="{{ route('home') }}" class="fa fa-home" style="text-decorationt: none; margin-left: 2%; color: black"></a></p>
-            </footer>
             <i class="wave"></i>
         </section>
     </div>

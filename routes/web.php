@@ -88,3 +88,11 @@ Route::get('/Qui_somme_nous', function (){
 Route::get('/Nos_contacter', function (){
     return view('contact');
 })->name('contact');
+
+Route::get('/projects', function (){
+    return view('projects');
+})->name('projects');
+Route::get('/projects/videos', function (){
+    return view('videos');
+})->name('videos');
+

@@ -21,7 +21,7 @@
     <div class="row">
         <section class="section">
             <header>
-                <h3>Créer un compte</h3>
+                <h3>Modifier un compte</h3>
                 <h4>Veuillez remplir tous les champs convenablement. </h4>
             </header>
             <main>

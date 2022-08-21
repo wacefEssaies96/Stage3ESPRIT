@@ -28,17 +28,16 @@
             <a id="home" hidden href="{{ route('home') }}">Acceuil</a>
             <a id="logout" hidden href="{{ route('logout') }}">Déconnexion</a>
             <div class="item1" style="cursor: pointer;" onclick="goHome()">Acceuil</div>
-            <div class="item2">Conditature</div>
+            <div class="item2" style="cursor: pointer;">Conditature</div>
             <div class="item3" style="cursor: pointer;" onclick="logout()">Déconnexion</div>
         </div>
-        <a id="home" hidden href="{{ route('home') }}">Acceuil</a>
-        <a id="logout" hidden href="{{ route('logout') }}">Déconnexion</a>
         {{-- ------------------ --}}
         {{-- ------------------ --}}
+        
         <div class="page-header">
-            {{-- <div class="search">
-                <input type="search" value="Rechercher ..." name="" id="">
-            </div> --}}
+            <div class="logo" onclick="goHome()" style="cursor: pointer;">
+                <img id="logo" src="{{ asset('images/logo.png') }}">
+            </div>
             <div class="notification">
                 <i style="font-size:18px; color: #9c9c9c;" class="fa">&#xf0a2;</i>
             </div>

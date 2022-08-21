@@ -10,11 +10,17 @@ use Twilio\Rest\Client;
 
 class ExpertController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        $paiement = Paiement::where('client_id', Auth::user()->id)->where('operation', 'expert')->get();
-        if(sizeof($paiement) == 0){
-            return redirect()->route('checkout', ['operation' => 'expert']);
+        if(Auth::user()->type == "Client"){
+            $paiement = Paiement::where('client_id', Auth::user()->id)->where('operation', 'expert')->get();
+            if(sizeof($paiement) == 0){
+                return redirect()->route('checkout', ['operation' => 'expert']);
+            }
         }
         return view('expert', ['users' => User::where('type', 'expert')->get()]);
     }
@@ -23,6 +29,8 @@ class ExpertController extends Controller
     {
         $otherUser = User::where('email', $email)->first();
         $this->chat($room, $otherUser);
+        // $paiement = Paiement::where('client_id', Auth::user()->id)->where('operation', 'expert')->first();
+        // $paiement->delete();
         return view('videocall', [
             'email'=> $email,
             'room' => $room,

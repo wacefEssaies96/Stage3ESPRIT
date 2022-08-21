@@ -1,82 +1,84 @@
-body{
-    background:#0F2027;
-    background:-webkit-linear-gradient(to right, #60642c, #434320, #27270f) ;
-    background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+body {
+    background: #0F2027;
+    background: -webkit-linear-gradient(to right, #2d2c2c, #2c2c2d, #2c2c2d);
+    background: linear-gradient(to right, #2c2c2d, #2c2c2d, #2c2c2d);
 }
 
-#video-streams{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+#video-streams {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
     height: 90vh;
-    width: 1400px;
-    margin:0 auto;
+    /* width: 1400px; */
+    margin: 0 auto;
 }
 
-.video-container{
+.video-container {
     max-height: 100%;
     border: 2px solid black;
-    background-color: #203A49;
+    background-color: #2c2c2d;
     overflow: hidden;
 }
 
-video{
+video {
     height: 100%;
     width: 100%;
-
 }
 
-button{
-    border:none;
-    padding:10px 20px;
-    font-size:16px;
-    margin:2px;
+button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 2px;
     cursor: pointer;
 }
 
-#stream-controls{
+#stream-controls {
     /* justify-content: center; */
     /* margin-top:0.5em;*/
-    position: fixed; 
+    position: fixed;
     width: 100px;
     height: 100px;
-    display:flex;
+    display: flex;
     gap: 5%;
     bottom: 0;
     margin-left: 43%;
     margin-right: 40%;
 }
 
-@media screen and (max-width:1400px){
-    #video-streams{
+@media screen and (max-width:1400px) {
+    #video-streams {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         width: 95%;
     }
 }
 
 button#stopMic-btn,
-button#stopCamera-btn{
+button#stopCamera-btn {
     background: none;
     padding: 2%;
     /* width: 40px;
     height: 40px; */
 }
+
 button#stopMic-btn i,
-button#stopCamera-btn i{
+button#stopCamera-btn i {
     color: antiquewhite;
     font-size: 30px;
 }
 
 button#mic-btn,
-button#camera-btn{
+button#camera-btn {
     background: none;
     padding: 2%;
 }
+
 button#mic-btn i,
-button#camera-btn i{
+button#camera-btn i {
     color: antiquewhite;
     font-size: 20px;
 }
-button#leave-btn{
+
+button#leave-btn {
     background-color: red;
     padding: 35%;
     border-radius: 50%;
@@ -84,7 +86,85 @@ button#leave-btn{
     margin-right: 20px;
 }
 
-button#leave-btn i{
+button#leave-btn i {
     color: white;
     font-size: 25px;
+}
+
+.rowvideo {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.textRight {
+    background-color: #FCB918;
+    border-radius: 30px;
+    max-width: fit-content;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+
+}
+
+.textLeft {
+    background-color: #bcbcbc;
+    border-radius: 30px;
+    max-width: fit-content;
+    padding: 5px;
+    margin: 5px;
+}
+
+.incoming_msg_img {
+    display: inline-block;
+    width: 6%;
+}
+
+.received_msg {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+    margin:1px;
+}
+
+.received_withd_msg p {
+    background: #ebebeb none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #646464;
+    font-size: 14px;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+}
+
+.received_withd_msg {
+    /* width: 57%; */
+    max-width: fit-content;
+}
+
+.mesgs {
+    float: left;
+    padding: 5px 5px 5px 5px;
+    width: 42vh;
+}
+
+.sent_msg p {
+    background: #FCB918 none repeat scroll 0 0;
+    border-radius: 3px;
+    font-size: 14px;
+    margin: 0;
+    color: #fff;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+}
+
+.outgoing_msg {
+    overflow: hidden;
+    margin: 26px 5px 26px;
+}
+
+.sent_msg {
+    float: right;max-width: fit-content;
 }
