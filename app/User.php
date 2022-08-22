@@ -35,4 +35,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Projects::class);
+    }
+
+    public function investor()
+    {
+        return $this->hasOne(Investor::class);
+    }
+    public function expert()
+    {
+        return $this->hasOne(Expert::class);
+    }
+    public function adminPro()
+    {
+        return $this->hasOne(AdminPro::class);
+    }
 }

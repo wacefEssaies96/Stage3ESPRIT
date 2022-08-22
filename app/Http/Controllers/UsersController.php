@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Expert;
+use App\Investor;
 use App\Projects;
 use App\User;
 use Hash;
@@ -59,7 +61,7 @@ class UsersController extends Controller
             'phoneNbr' => 'required|regex:/[0-9]/|min:8|unique:users'
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'gender' => $request->gender,
@@ -70,6 +72,19 @@ class UsersController extends Controller
             'image' => ' '
         ]);
 
+        if($request->description != null){
+            Investor::create([
+                'client_id' => $user->id,
+                'description' => $request->description,
+                'fonds' => $request->fonds
+            ]);
+        }
+        if($request->service != null){
+            Expert::create([
+                'client_id' => $user->id,
+                'service' => $request->service
+            ]);
+        }
         return $this->index();
     }
 
@@ -100,7 +115,18 @@ class UsersController extends Controller
     {
         if(Auth::user()->type != 'Super admin')
             $this->accessDenied();
-        return view('superadmin.edit',['user'=>User::find($id)]);
+        $user = User::find($id);
+        $v = '';
+        if($user->type == 'Expert'){
+            $v = Expert::where('client_id', $user->id)->first();
+        }
+        if($user->type == 'Investor'){
+            $v = Investor::where('client_id', $user->id)->first();
+        }
+        return view('superadmin.edit',[
+            'user' => $user,
+            'v' => $v
+        ]);
     }
 
     /**
@@ -125,6 +151,40 @@ class UsersController extends Controller
             'phoneNbr' => 'required|regex:/[0-9]/|min:8'
         ]);
         $user=User::find($id);
+        if($user->type != $request->gender2){
+            if($user->type == 'Expert'){
+                $expert = Expert::where('client_id', $user->id)->first();
+                $expert->delete();
+                Investor::create([
+                    'client_id' => $user->id,
+                    'description' => $request->description,
+                    'fonds' => $request->fonds
+                ]);
+            }
+            if($user->type == 'Investor'){
+                $i = Investor::where('client_id', $user->id)->first();
+                $i->delete();
+                Expert::create([
+                    'client_id' => $user->id,
+                    'service' => $request->service
+                ]);
+            }
+        }
+        else{
+            if($request->type='Expert'){
+                $expert = Expert::where('client_id', $user->id)->first();
+                $expert->update([
+                    'service' => $request->service
+                ]);
+            }
+            if($request->type='Investor'){
+                $investor = Investor::where('client_id', $user->id)->first();
+                $investor->update([
+                    'description' => $request->description,
+                    'fonds' => $request->fonds
+                ]);
+            }
+        }
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -187,6 +247,14 @@ class UsersController extends Controller
         if(Auth::user()->type != 'Super admin')
             return $this->accessDenied();
         $user = User::findOrFail($id);
+        if($user->type == 'Expert'){
+            $expert = Expert::where('client_id', $user->id)->first();
+            $expert->delete();
+        }
+        if($user->type == 'Investor'){
+            $investor = Investor::where('client_id', $user->id)->first();
+            $investor->delete();
+        }
         $user->delete();
         return redirect()->route('user.index')->with('success','User deleted successfully');
     }

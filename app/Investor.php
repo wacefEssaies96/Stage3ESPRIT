@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class File extends Model
+class Investor extends Model
 {
+    //
     protected $guarded = [];
 
-    public function project()
+    public function user()
     {
-        return $this->belongsTo(Projects::class);
+        return $this->belongsTo(User::class);
     }
 }

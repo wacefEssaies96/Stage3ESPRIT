@@ -7,9 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Consulter un expert</title>
 
-    <script src=" {{ asset('js/baseLeftSide.js') }} "></script>
-    <script src=" {{ asset('js/windowAccess.js') }} "></script>
-
     <link rel="stylesheet" href=" {{ asset('css/base.css') }} ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href=" {{ asset('css/expertConsultingRightSide.css') }} ">
@@ -64,16 +61,12 @@
                             <div class="text">Service</div>
                             @if ($i % 2 != 0)
                                 <div class="service-description" style="background-color: #808285; color:#d8d8d8">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id similique, architecto aut
-                                    autem esse temporibus, libero mollitia vitae eos nisi veniam qui vero eaque molestiae
-                                    voluptatum eius dicta nobis. Reiciendis.
+                                    {{ $users[$i]->service }}
                                 </div>
                             @endif
                             @if ($i % 2 == 0)
                                 <div class="service-description" style="background-color: #BCBEC0; color: #4e4e4e">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id similique, architecto aut
-                                    autem esse temporibus, libero mollitia vitae eos nisi veniam qui vero eaque molestiae
-                                    voluptatum eius dicta nobis. Reiciendis.
+                                    {{ $users[$i]->service }}
                                 </div>
                             @endif
                             <br>
@@ -93,7 +86,8 @@
         {{-- ***************************************************************************************************************** --}}
         {{-- ***************************************************************************************************************** --}}
     </div>
-
+    <script src=" {{ asset('js/baseLeftSide.js') }} "></script>
+    <script src=" {{ asset('js/windowAccess.js') }} "></script>
 </body>
 
 </html>

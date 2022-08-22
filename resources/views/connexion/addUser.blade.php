@@ -9,9 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Créer votre compte</title>
 
-    <script language="JavaScript" type="text/javascript" src="{{ asset('js/connexion/addUser.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <link rel="stylesheet" href=" {{ asset('css/connexion/addUser.css') }} ">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -29,7 +26,7 @@
                 <form method="POST" action=" {{ route('sign-up') }} ">
                     @csrf
                     <div class="form-item box-item">
-                        <input type="text" name="name" placeholder="Nom" data-required>
+                        <input type="text" name="name" placeholder="Nom" data-required required>
                         @error('name')
                             <span class="invalid-feedback" role="alert" style="color: red">
                                 <i>{{ $message }}</i>
@@ -37,7 +34,7 @@
                         @enderror
                     </div>
                     <div class="form-item box-item">
-                        <input type="email" name="email" placeholder="E-mail" data-email data-required>
+                        <input type="email" name="email" placeholder="E-mail" data-email data-required required>
                         @error('email')
                             <span class="invalid-feedback" role="alert" style="color: red">
                                 <i>{{ $message }}</i>
@@ -50,11 +47,11 @@
                                 <label class="label">Genre</label>
                             </div>
                             <div class="form-item"> 
-                                <input id="Male" type="radio" name="gender" value="Male" data-once>
+                                <input id="Male" type="radio" name="gender" value="Male" data-once required>
                                 <label for="Male">Homme</label>
                             </div>
                             <div class="form-item"> 
-                                <input id="Female" type="radio" name="gender" value="Female" data-once>
+                                <input id="Female" type="radio" name="gender" value="Female" data-once required>
                                 <label for="Female">Femme</label>
                             </div>
                         </div>
@@ -70,16 +67,12 @@
                                 <label class="label">Type</label>
                             </div>
                             <div class="form-item"> 
-                                <input id="client" type="radio" name="gender2" value="Client" data-once>
+                                <input id="client" type="radio" name="gender2" value="Client" onclick="c()" data-once>
                                 <label for="client">Client</label>
                             </div>
                             <div class="form-item"> 
-                                <input id="investor" type="radio" name="gender2" value="Investor" data-once>
+                                <input id="investor" type="radio" name="gender2" value="Investor" onclick="i()" data-once >
                                 <label for="investor">Investisseur</label>
-                            </div>
-                            <div class="form-item"> 
-                                <input id="expert" type="radio" name="gender2" value="Expert" data-once>
-                                <label for="expert">Expert</label>
                             </div>
                         </div>
                         @error('gender2')
@@ -89,7 +82,8 @@
                         @enderror
                     </div>
                     <div class="form-item box-item">
-                        <select name="address">
+                        <label style="color: #fdc541;" for="address">Municipalité</label>
+                        <select style="float: right;" name="address">
                             <option value="Tunis">Tunis</option>
                             <option value="Ariana">Ariana</option>
                             <option value="Ben Arous">Ben Arous</option>
@@ -123,7 +117,7 @@
                      </div>
                     <div class="form-item-double box-item">
                         <div class="form-item ">
-                            <input type="password" name="pwd" placeholder="Mot de passe" data-required>
+                            <input type="password" name="pwd" placeholder="Mot de passe" data-required required>
                             @error('pwd')
                                 <span class="invalid-feedback" role="alert" style="color: red">
                                     <i>{{ $message }}</i>
@@ -131,7 +125,7 @@
                             @enderror
                         </div>
                         <div class="form-item">
-                            <input type="password" name="rePwd" placeholder="Confirmer votre mot de passe" data-required>
+                            <input type="password" name="rePwd" placeholder="Confirmer votre mot de passe" data-required required>
                             @error('rePwd')
                                 <span class="invalid-feedback" role="alert" style="color: red">
                                     <i>{{ $message }}</i>
@@ -140,13 +134,17 @@
                         </div>
                     </div>
                     <div class="form-item box-item">
-                        <input type="tel" name="phoneNbr" placeholder="N° portable">
+                        <input type="tel" name="phoneNbr" placeholder="N° portable" pattern="[0-9]{8}" required>
                         @error('phoneNbr')
                             <span class="invalid-feedback" role="alert" style="color: red">
                                 <i>{{ $message }}</i>
                             </span>
                         @enderror
                     </div>
+                    <div id="addons">
+                        
+                    </div>
+                    
                     <div class="form-item">
                         <button type="submit" id="submit" class="submit">Enregistrer</button>
                         <button type="button" class="fa fa-remove" onclick="reset()"></button>
@@ -159,6 +157,7 @@
             <i class="wave"></i>
         </section>
     </div>
-    
+    <script language="JavaScript" type="text/javascript" src="{{ asset('js/connexion/addUser.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

@@ -23,6 +23,6 @@ class AdminUserSeeder extends Seeder
             'image' => ' '
         ]);
 
-        factory(App\User::class, 30)->create();
+        // factory(App\User::class, 30)->create();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Investor;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -26,7 +27,7 @@ class AuthController extends Controller
             'phoneNbr' => 'required|regex:/[0-9]/|min:8|unique:users'
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'gender' => $request->gender,
@@ -36,6 +37,21 @@ class AuthController extends Controller
             'phoneNbr' => $request->phoneNbr,
             'image' => ' '
         ]);
+        
+        if($request->description != null){
+            Investor::create([
+                'client_id' => $user->id,
+                'description' => $request->description,
+                'fonds' => $request->fonds
+            ]);
+        }
+
+        if($request->service != null){
+            Expert::create([
+                'client_id' => $user->id,
+                'service' => $request->service
+            ]);
+        }
 
         return redirect('login');
 

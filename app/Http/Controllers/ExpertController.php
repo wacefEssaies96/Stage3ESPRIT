@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Expert;
 use App\Paiement;
 use App\User;
 use Illuminate\Http\Request;
@@ -22,15 +23,14 @@ class ExpertController extends Controller
                 return redirect()->route('checkout', ['operation' => 'expert']);
             }
         }
-        return view('expert', ['users' => User::where('type', 'expert')->get()]);
+        $user = User::where('type', 'expert')->join('experts','users.id', '=', 'experts.client_id')->select('users.*' , 'experts.service')->get();
+        return view('expert', ['users' => $user]);
     }
 
     public function videoCall($email, $room)
     {
         $otherUser = User::where('email', $email)->first();
         $this->chat($room, $otherUser);
-        // $paiement = Paiement::where('client_id', Auth::user()->id)->where('operation', 'expert')->first();
-        // $paiement->delete();
         return view('videocall', [
             'email'=> $email,
             'room' => $room,
