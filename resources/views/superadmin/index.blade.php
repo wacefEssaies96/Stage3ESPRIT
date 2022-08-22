@@ -65,14 +65,16 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        @if (Auth::user()->image == " ") 
+                        @if (Auth::user()->image == ' ')
                             <img src="{{ asset('images/man.png') }}" class="img-circle elevation-2" alt="User Image">
-                        @else 
-                            <img style="border-radius: 50%;" src="{{ asset('upload/'.Auth::user()->image.'') }}" class="img-circle elevation-2" alt="User Image" >
+                        @else
+                            <img style="border-radius: 50%;" src="{{ asset('upload/' . Auth::user()->image . '') }}"
+                                class="img-circle elevation-2" alt="User Image">
                         @endif
                     </div>
                     <div class="info">
-                        <a href="{{route('user.show', [Auth::user()->id])}}" class="d-block">{{ Auth::user()->name }}</a>
+                        <a href="{{ route('user.show', [Auth::user()->id]) }}"
+                            class="d-block">{{ Auth::user()->name }}</a>
                     </div>
                 </div>
 
@@ -104,7 +106,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="{{route('home')}}">Acceuil</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Acceuil</a></li>
                                 <li class="breadcrumb-item active">Gestion des utilisateurs</li>
                             </ol>
                         </div>
@@ -117,7 +119,8 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('user.create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un nouveau utilisateur</a>
+                            <a href="{{ route('user.create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter
+                                un nouveau utilisateur</a>
                             <div class="card-tools">
 
 
@@ -160,15 +163,20 @@
                                             <td>{{ $user->state }}</td>
                                             <td>{{ $user->phoneNbr }}</td>
                                             <td>
-                                              <div style="display: grid; grid-template-columns: auto auto;">
-                                                <a href="{{ route('user.edit', $user->id) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
-                                                <form method="POST" action="{{ route('user.destroy', $user->id) }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" style="background: none; border: none;"><i class="fa fa-trash" aria-hidden="true" style="color: red;"></i></button>
-                                                </form>
-                                              </div>
-                                               
+                                                <div style="display: grid; grid-template-columns: auto auto;">
+                                                    <a href="{{ route('user.edit', $user->id) }}"><i
+                                                            class="fas fa-edit" aria-hidden="true"></i></a>
+                                                    <form method="POST"
+                                                        action="{{ route('user.destroy', $user->id) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            style="background: none; border: none;"><i
+                                                                class="fa fa-trash" aria-hidden="true"
+                                                                style="color: red;"></i></button>
+                                                    </form>
+                                                </div>
+
                                             </td>
                                         </tr>
                                     @endforeach

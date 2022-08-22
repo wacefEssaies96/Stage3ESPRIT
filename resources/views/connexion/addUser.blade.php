@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
+
 <body style="background-color:'white';">
 
     <div class="row">
@@ -43,14 +45,14 @@
                     </div>
                     <div class="form-item box-item">
                         <div class="form-item-triple">
-                            <div class="radio-label"> 
+                            <div class="radio-label">
                                 <label class="label">Genre</label>
                             </div>
-                            <div class="form-item"> 
+                            <div class="form-item">
                                 <input id="Male" type="radio" name="gender" value="Male" data-once required>
                                 <label for="Male">Homme</label>
                             </div>
-                            <div class="form-item"> 
+                            <div class="form-item">
                                 <input id="Female" type="radio" name="gender" value="Female" data-once required>
                                 <label for="Female">Femme</label>
                             </div>
@@ -63,15 +65,17 @@
                     </div>
                     <div class="form-item box-item">
                         <div class="form-item-triple">
-                            <div class="radio-label"> 
+                            <div class="radio-label">
                                 <label class="label">Type</label>
                             </div>
-                            <div class="form-item"> 
-                                <input id="client" type="radio" name="gender2" value="Client" onclick="c()" data-once>
+                            <div class="form-item">
+                                <input id="client" type="radio" name="gender2" value="Client" onclick="c()"
+                                    data-once>
                                 <label for="client">Client</label>
                             </div>
-                            <div class="form-item"> 
-                                <input id="investor" type="radio" name="gender2" value="Investor" onclick="i()" data-once >
+                            <div class="form-item">
+                                <input id="investor" type="radio" name="gender2" value="Investor" onclick="i()"
+                                    data-once>
                                 <label for="investor">Investisseur</label>
                             </div>
                         </div>
@@ -113,8 +117,8 @@
                             <span class="invalid-feedback" role="alert" style="color: red">
                                 <i>{{ $message }}</i>
                             </span>
-                        @enderror                   
-                     </div>
+                        @enderror
+                    </div>
                     <div class="form-item-double box-item">
                         <div class="form-item ">
                             <input type="password" name="pwd" placeholder="Mot de passe" data-required required>
@@ -125,7 +129,8 @@
                             @enderror
                         </div>
                         <div class="form-item">
-                            <input type="password" name="rePwd" placeholder="Confirmer votre mot de passe" data-required required>
+                            <input type="password" name="rePwd" placeholder="Confirmer votre mot de passe"
+                                data-required required>
                             @error('rePwd')
                                 <span class="invalid-feedback" role="alert" style="color: red">
                                     <i>{{ $message }}</i>
@@ -142,9 +147,9 @@
                         @enderror
                     </div>
                     <div id="addons">
-                        
+
                     </div>
-                    
+
                     <div class="form-item">
                         <button type="submit" id="submit" class="submit">Enregistrer</button>
                         <button type="button" class="fa fa-remove" onclick="reset()"></button>
@@ -152,7 +157,9 @@
                 </form>
             </main>
             <footer>
-                <p>Vous avez déjà un compte? <a href=" {{ route('login') }} ">Se connecter</a> <a href="{{ route('home') }}" class="fa fa-home" style="text-decorationt: none; margin-left: 2%; color: black"></a></p>
+                <p>Vous avez déjà un compte? <a href=" {{ route('login') }} ">Se connecter</a> <a
+                        href="{{ route('home') }}" class="fa fa-home"
+                        style="text-decorationt: none; margin-left: 2%; color: black"></a></p>
             </footer>
             <i class="wave"></i>
         </section>
@@ -160,4 +167,5 @@
     <script language="JavaScript" type="text/javascript" src="{{ asset('js/connexion/addUser.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
+
 </html>

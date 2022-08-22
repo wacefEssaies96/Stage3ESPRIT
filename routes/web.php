@@ -53,37 +53,36 @@ Route::post('/validate', 'ProjectController@addToValidationQueue')->name('projec
 
 // *********************************************************************** //
 
-Route::post('/video-call','ExpertController@videoCallPost')->name('videocallpost');
-Route::get('/video-call/{email}/{room}','ExpertController@videoCall')->name('videocall');
-Route::get('/consultation-en-ligne','ExpertController@index')->name('expertChat');
+Route::post('/video-call', 'ExpertController@videoCallPost')->name('videocallpost');
+Route::get('/video-call/{email}/{room}', 'ExpertController@videoCall')->name('videocall');
+Route::get('/consultation-en-ligne', 'ExpertController@index')->name('expertChat');
 
 // *********************************************************************** //
 
-Route::get('checkout/{operation}','CheckoutController@checkout')->name('checkout');
-Route::post('checkout','CheckoutController@afterpayment')->name('checkout.credit-card');
+Route::get('checkout/{operation}', 'CheckoutController@checkout')->name('checkout');
+Route::post('checkout', 'CheckoutController@afterpayment')->name('checkout.credit-card');
 
 
-Route::get('/investisseur', function (){
+Route::get('/investisseur', function () {
     return view('investor');
 })->name('investor');
 
-Route::get('/nos-service', function (){
+Route::get('/nos-service', function () {
     return view('our-service');
 })->name('services');
 
-Route::get('/eligibilite', function (){
+Route::get('/eligibilite', function () {
     return view('websiteElig');
 })->name('elig');
 
-Route::get('/qui-somme-nous', function (){
+Route::get('/qui-somme-nous', function () {
     return view('about-us');
 })->name('about-us');
 
-Route::get('/contact', function (){
+Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/projects', function (){
+Route::get('/projects', function () {
     return view('projects');
 })->name('projects');
-

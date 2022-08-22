@@ -67,9 +67,9 @@ $(document).ready(function () {
 	})
 });
 
-function goHome(){
+function goHome() {
 	document.getElementById('home').click();
 }
-function logout(){
-	document.getElementById('logout').click(); 
+function logout() {
+	document.getElementById('logout').click();
 }

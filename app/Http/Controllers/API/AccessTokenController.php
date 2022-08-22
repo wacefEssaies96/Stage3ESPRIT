@@ -32,11 +32,11 @@ class AccessTokenController extends Controller
         // Grant access to Video
         $grant = new VideoGrant();
         $roomName = $this->genererChaineAleatoire(20, $id);
-        if($room == 'null'){
+        if ($room == 'null') {
             $grant->setRoom($roomName);
             $this->sendMailInvitation($email, $roomName);
         }
-        if($email == 'null'){
+        if ($email == 'null') {
             $grant->setRoom($room);
         }
         $token->addGrant($grant);
@@ -46,36 +46,36 @@ class AccessTokenController extends Controller
     }
 
     public function generate(Request $request)
-        {
-                $token = new AccessToken(
-                        env('TWILIO_ACCOUNT_SID'),
-                        env('TWILIO_API_KEY_SID'),
-                        env('TWILIO_API_KEY_SECRET'),
-                        3600,
-                        $request->email
-                );
+    {
+        $token = new AccessToken(
+            env('TWILIO_ACCOUNT_SID'),
+            env('TWILIO_API_KEY_SID'),
+            env('TWILIO_API_KEY_SECRET'),
+            3600,
+            $request->email
+        );
 
-                $chatGrant = new ChatGrant();
-                $chatGrant->setServiceSid(env('TWILIO_SERVICE_SID'));
-                $token->addGrant($chatGrant);
+        $chatGrant = new ChatGrant();
+        $chatGrant->setServiceSid(env('TWILIO_SERVICE_SID'));
+        $token->addGrant($chatGrant);
 
-                return response()->json([
-                        'token' => $token->toJWT()
-                ]);
-        }
+        return response()->json([
+            'token' => $token->toJWT()
+        ]);
+    }
 
     function genererChaineAleatoire($longueur = 20, $id)
     {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $longueurMax = strlen($caracteres);
         $chaineAleatoire = '';
-        for ($i = 0; $i < $longueur; $i++)
-        {
+        for ($i = 0; $i < $longueur; $i++) {
             $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
         }
-        return $id.'-'.$chaineAleatoire;
+        return $id . '-' . $chaineAleatoire;
     }
-    public function sendMailInvitation($email, $roomName){
+    public function sendMailInvitation($email, $roomName)
+    {
         $details = [
             'title' => 'Video call invitation',
             'body' => $roomName

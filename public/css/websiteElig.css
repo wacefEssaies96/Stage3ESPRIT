@@ -1,36 +1,37 @@
 body {
     -ms-overflow-style: none;
     scrollbar-width: none;
-    overflow-y: scroll; 
+    overflow-y: scroll;
 }
 
 body::-webkit-scrollbar {
     display: none;
 }
 
-.right-side{
+.right-side {
     display: flex;
     display: -webkit-flex;
 }
+
 /* *********************************************************** */
 /* *********************************************************** */
-.right-sideP1{
+.right-sideP1 {
     flex-grow: 70%;
     margin-right: 2%;
 }
 
-.question{
+.question {
     margin-bottom: 5%;
 }
 
-.question-id{
+.question-id {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: large;
     font-weight: 500;
     color: #606161;
 }
 
-.question-content{
+.question-content {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: small;
     font-weight: 500;
@@ -39,12 +40,12 @@ body::-webkit-scrollbar {
     padding-left: 5%;
 }
 
-.question-responses{
+.question-responses {
     padding-left: 5%;
     padding-top: 2%;
 }
 
-.question-responses button{
+.question-responses button {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: small;
     font-weight: 600;
@@ -53,27 +54,27 @@ body::-webkit-scrollbar {
     border-radius: 10px;
 }
 
-.question-responses button#no{
+.question-responses button#no {
     background-color: #FCB918;
     margin-left: 1%;
 }
 
-button#no:active{
+button#no:active {
     border: red 1px solid;
     background-color: transparent;
 }
 
-.question-responses button#yes{
+.question-responses button#yes {
     background-color: #BCBEC0;
     margin-right: 1%;
 }
 
-button#yes:active{
+button#yes:active {
     border: green 1px solid;
     background-color: transparent;
 }
 
-#back-to-top{
+#back-to-top {
     display: flex;
     justify-content: center;
     justify-items: center;
@@ -83,7 +84,7 @@ button#yes:active{
     bottom: 10%;
 }
 
-#back-to-top button{
+#back-to-top button {
     border: none;
     border-radius: 25px;
     padding-left: 2%;
@@ -99,19 +100,20 @@ button#yes:active{
     font-weight: 600;
 }
 
-#back-to-top button:hover{
+#back-to-top button:hover {
     background-color: transparent;
     border: rgb(235, 159, 46) 1px solid;
     color: rgb(235, 159, 46);
     animation: topPage .5s infinite;
 }
 
-@keyframes topPage{
-    from{ 
+@keyframes topPage {
+    from {
         padding-bottom: 0;
         padding-top: 4%;
-     }
-    to{ 
+    }
+
+    to {
         padding-bottom: 2%;
         padding-top: 2%;
     }
@@ -119,7 +121,7 @@ button#yes:active{
 
 /* ********************************************************** */
 /* ********************************************************** */
-.right-sideP2{
+.right-sideP2 {
     display: flex;
     position: sticky;
     position: -webkit-sticky;
@@ -128,27 +130,28 @@ button#yes:active{
     top: 2%;
 }
 
-.right-sideP2 img{
+.right-sideP2 img {
     width: 300px;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
 }
 
 @media only screen and (max-width: 800px) {
-    div.right-sideP2 img{
+    div.right-sideP2 img {
         width: 150px;
     }
 }
+
 /* *********************************************************** */
 /* *********************************************************** */
-.right-sideNextBtn{
+.right-sideNextBtn {
     position: absolute;
     float: right;
     left: 72%;
     top: 90%;
 }
 
-.right-sideNextBtn button{
+.right-sideNextBtn button {
     text-align: center;
     letter-spacing: 4px;
     position: fixed;
@@ -159,36 +162,37 @@ button#yes:active{
     transition-duration: 0.4s;
 }
 
-.right-sideNextBtn button:hover{
+.right-sideNextBtn button:hover {
     cursor: pointer;
     border: rgb(255, 184, 30) .5px solid;
     box-shadow: 0 4px 8px 0 rgba(255, 145, 0, 0.2), 0 6px 20px 0 rgba(206, 140, 19, 0.19);
     color: rgb(255, 184, 30);
 }
 
-.right-sideNextBtn button:active{
+.right-sideNextBtn button:active {
     animation: gradient 200ms;
     background-color: none;
 }
 
 @keyframes gradient {
     0% {
-      background: radial-gradient(circle at center, rgba( 255, 125 , 125, 0 ) 0%, #fff 0%, #fff 100%);
+        background: radial-gradient(circle at center, rgba(255, 125, 125, 0) 0%, #fff 0%, #fff 100%);
     }
+
     25% {
-      background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.3 ) 24%, #fff 25%, #fff 100%);
+        background: radial-gradient(circle at center, rgba(255, 125, 125, 0.3) 24%, #fff 25%, #fff 100%);
     }
+
     50% {
-      background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.5 ) 49%, #fff 50%, #fff 100%);
+        background: radial-gradient(circle at center, rgba(255, 125, 125, 0.5) 49%, #fff 50%, #fff 100%);
     }
+
     75% {
-      background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.8 ) 74%, #fff 75%, #fff 100%);
+        background: radial-gradient(circle at center, rgba(255, 125, 125, 0.8) 74%, #fff 75%, #fff 100%);
     }
+
     100% {
-      color: #fff;
-      background: radial-gradient(circle at center, #f88 99%, #fff 100%, #fff 100%);
+        color: #fff;
+        background: radial-gradient(circle at center, #f88 99%, #fff 100%, #fff 100%);
     }
-  }
-
-
-
+}

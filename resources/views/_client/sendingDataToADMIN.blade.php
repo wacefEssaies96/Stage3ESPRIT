@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,16 @@
     <title>Sending Data ...</title>
 
     <script src=" {{ asset('js/_client/sendingDataToADMIN.js') }} "></script>
-    
+
     <link rel="stylesheet" href=" {{ asset('css/_client/sendingDataToADMIN.css') }} ">
 
 </head>
+
 <body>
     <form id="linkerForm" method="post" action=" {{ route('project.validate') }} " enctype="multipart/form-data">
         @csrf
-        <input type="text" name="idOfUser" value=" {{$id}} ">
-        <input type="text" name="theProIdentifier" value=" {{$proTitle}} ">
+        <input type="text" name="idOfUser" value=" {{ $id }} ">
+        <input type="text" name="theProIdentifier" value=" {{ $proTitle }} ">
     </form>
     <div class='container'>
         <div class='loader'>
@@ -33,4 +35,5 @@
         redirectFormData();
     </script>
 </body>
+
 </html>

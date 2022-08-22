@@ -1,14 +1,14 @@
-html{
+html {
     display: flex;
-    flex-flow: row nowrap;  
+    flex-flow: row nowrap;
     justify-content: center;
     align-content: center;
     align-items: center;
-    height:100%;
+    height: 100%;
     width: 100%
 }
 
-form#linkerForm{
+form#linkerForm {
     display: none
 }
 
@@ -17,7 +17,7 @@ form#linkerForm{
     width: 100vw;
     font-family: Helvetica
 }
-  
+
 .loader {
     height: 20px;
     width: 250px;
@@ -28,7 +28,7 @@ form#linkerForm{
     right: 0;
     margin: auto
 }
-  
+
 .loader--dot {
     animation-name: loader;
     animation-timing-function: ease-in-out;
@@ -41,7 +41,7 @@ form#linkerForm{
     position: absolute;
     border: 2px solid white
 }
-  
+
 .loader--dot:first-child {
     background-color: #f9a74b;
     animation-delay: 0.5s;
@@ -66,7 +66,7 @@ form#linkerForm{
     background-color: #f95f4b;
     animation-delay: 0.1s;
 }
-  
+
 .loader--dot:nth-child(6) {
     background-color: #8cc759;
     animation-delay: 0s;
@@ -85,53 +85,64 @@ form#linkerForm{
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
+
 /*****************************************************************************/
 /*****************************************************************************/
 
-@-o-keyframes loader{
+@-o-keyframes loader {
     15% {
         transform: translateX(0);
     }
+
     45% {
         transform: translateX(230px);
     }
+
     65% {
         transform: translateX(230px);
     }
+
     95% {
         transform: translateX(0);
-    } 
+    }
 }
 
-@-moz-keyframes loader{
+@-moz-keyframes loader {
     15% {
         transform: translateX(0);
     }
+
     45% {
         transform: translateX(230px);
     }
+
     65% {
         transform: translateX(230px);
     }
+
     95% {
         transform: translateX(0);
-    } 
+    }
 }
-  
+
 @keyframes loader {
     15% {
-      transform: translateX(0);
+        transform: translateX(0);
     }
+
     45% {
-      transform: translateX(230px);
+        transform: translateX(230px);
     }
+
     65% {
-      transform: translateX(230px);
+        transform: translateX(230px);
     }
+
     95% {
-      transform: translateX(0);
+        transform: translateX(0);
     }
 }
+
 /***********************************************************/
 /***********************************************************/
 @keyframes loading-text {
@@ -139,19 +150,19 @@ form#linkerForm{
         content: "Transfering Data In Progress";
         color: #f9a74b;
     }
+
     25% {
         content: "Transfering Data In Progress.";
         color: #8cc759;
     }
+
     50% {
         content: "Transfering Data In Progress..";
         color: #8cc759;
     }
+
     75% {
         content: "Transfering Data In Progress...";
         color: #f9a74b;
     }
 }
-
-
-

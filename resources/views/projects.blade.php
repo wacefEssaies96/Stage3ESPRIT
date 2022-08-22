@@ -7,8 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Projects</title>
 
-    <script src=" {{ asset('js/baseLeftSide.js') }} "></script>
-    <script src=" {{ asset('js/windowAccess.js') }} "></script>
 
     <link rel="stylesheet" href=" {{ asset('css/base.css') }} ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -71,7 +69,7 @@
                 <h5 id="rs-des">Introduction</h5>
             </div>
             <div>
-                
+
                 <img style="margin-right: 20px; width: 45vh; float: left;" src="{{ asset('images/projects/1.png') }}">
 
                 <p dir="rtl">الشراكة بين القطاع العام والقطاع الخاص <span dir="ltr">PPP،</span> عنوان ثالث
@@ -220,21 +218,21 @@
                         Your browser does not support the video tag.
                     </video>
                 </center>
-    
+
                 <center>
                     <video width="400" style="width:80%; height:auto;" controls>
                         <source src="{{ asset('videos/borhene igppp2.mp4') }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </center>
-    
+
                 <center>
                     <video width="400" style="width:80%; height:auto;" controls>
                         <source src="{{ asset('videos/atef majdoub p2.mp4') }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </center>
-    
+
                 <center>
                     <video width="400" style="width:80%; height:auto;" controls>
                         <source src="{{ asset('videos/atef majdoub p3mp4.mp4') }}" type="video/mp4">
@@ -246,6 +244,8 @@
             {{-- ***************************************************************************************************************** --}}
         </div>
 
+        <script src=" {{ asset('js/baseLeftSide.js') }} "></script>
+        <script src=" {{ asset('js/windowAccess.js') }} "></script>
 </body>
 
 </html>

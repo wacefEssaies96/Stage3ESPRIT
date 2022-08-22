@@ -126,7 +126,7 @@ button#leave-btn i {
     padding: 0 0 0 10px;
     vertical-align: top;
     width: 92%;
-    margin:1px;
+    margin: 1px;
 }
 
 .received_withd_msg p {
@@ -166,5 +166,6 @@ button#leave-btn i {
 }
 
 .sent_msg {
-    float: right;max-width: fit-content;
+    float: right;
+    max-width: fit-content;
 }

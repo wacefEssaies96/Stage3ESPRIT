@@ -2,40 +2,41 @@
 [ FONT ]*/
 
 @font-face {
-    font-family: Poppins-Regular;
-    src: url('/fonts/poppins/Poppins-Regular.ttf'); 
-  }
-  
-  @font-face {
-    font-family: Poppins-Medium;
-    src: url('/fonts/poppins/Poppins-Medium.ttf'); 
-  }
-  
-  @font-face {
-    font-family: Poppins-Bold;
-    src: url('/fonts/poppins/Poppins-Bold.ttf'); 
-  }
-  
-  @font-face {
-    font-family: Poppins-SemiBold;
-    src: url('/fonts/poppins/Poppins-SemiBold.ttf'); 
-  }
-  
+  font-family: Poppins-Regular;
+  src: url('/fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('/fonts/poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('/fonts/poppins/Poppins-Bold.ttf');
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('/fonts/poppins/Poppins-SemiBold.ttf');
+}
+
 /*//////////////////////////////////////////////////////////////////*/
 
-body{
+body {
   margin: 0;
   height: 100vh;
 }
 
-.page-content{
+.page-content {
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 11fr 2fr;
 }
+
 /* ##################################################### */
 /* ##################################################### */
-nav{
+nav {
   background-color: #FCB918;
   display: grid;
   grid-template-columns: 7fr 3fr;
@@ -43,7 +44,7 @@ nav{
   padding: 1% 2%;
 }
 
-.menu-item{
+.menu-item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,7 +54,7 @@ nav{
   color: white;
 }
 
-.bgeff{
+.bgeff {
   transition: 1s ease-out;
 }
 
@@ -62,25 +63,26 @@ nav{
   color: #EEA200;
 }
 
-img#ppp90Lg{
+img#ppp90Lg {
   max-width: 50px;
   height: auto;
-  width: auto\9; /* ie8 */
+  width: auto\9;
+  /* ie8 */
 }
 
-nav .leftSide{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
-    font-size: small;
+nav .leftSide {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+  font-size: small;
 }
 
-nav .rightSide{
+nav .rightSide {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 2fr;
   font-size: x-large;
 }
 
-nav .rightSide>button{
+nav .rightSide>button {
   align-self: center;
   background-color: white;
   border: none;
@@ -88,12 +90,13 @@ nav .rightSide>button{
   padding: 5% 1%;
 }
 
-nav .rightSide>button a{
+nav .rightSide>button a {
   color: #FCB918;
 }
+
 /* ##################################################### */
 /* ##################################################### */
-section{
+section {
   position: relative;
   z-index: 1;
   color: white;
@@ -106,38 +109,40 @@ section{
 section::before {
   content: "";
   position: absolute;
-  top: 0; 
+  top: 0;
   left: 0;
-  width: 100%; 
-  height: 100%;  
-  opacity: .7; 
+  width: 100%;
+  height: 100%;
+  opacity: .7;
   z-index: -1;
   background: url('/images/homeBG.jpg') no-repeat;
   background-size: cover;
 }
 
-section h1, section h2{
+section h1,
+section h2 {
   font-family: Poppins-Bold, sans-serif;
   opacity: 1;
   margin: 0;
   z-index: 1;
 }
 
-section p{
+section p {
   font-family: Poppins-Regular, sans-serif;
   opacity: 1;
   margin: 0;
   z-index: 1;
 }
+
 /* ##################################################### */
 /* ##################################################### */
-footer{
+footer {
   background-color: #E8E9E9;
   display: grid;
   grid-template-columns: 2fr 8fr;
 }
 
-footer .info{
+footer .info {
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
@@ -150,22 +155,23 @@ footer .info{
   z-index: 1;
 }
 
-footer .info:hover{
+footer .info:hover {
   cursor: pointer;
   animation: slideUp 1s forwards;
   -webkit-animation: slideUp 1s forwards;
 }
 
-@keyframes slideUp{
-  from{
+@keyframes slideUp {
+  from {
     bottom: 0;
   }
-  to{
+
+  to {
     bottom: 50%;
   }
 }
 
-#infoContent{
+#infoContent {
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: medium;
@@ -173,14 +179,14 @@ footer .info:hover{
   font-weight: 500;
 }
 
-footer .bottom-menu{
+footer .bottom-menu {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   column-gap: 2%;
   padding: 3% 10%;
 }
 
-footer .bottom-menu>div{
+footer .bottom-menu>div {
   font-family: 'Roboto', sans-serif;
   font-size: small;
   font-weight: bold;
@@ -192,40 +198,43 @@ footer .bottom-menu>div{
   -webkit-transition: all 0.1s;
   -moz-transition: all 0.1s;
   transition: all 0.1s;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 footer .bottom-menu>.flex-container:hover {
-  -ms-transform: scale(1.1,1.1); /* IE 9 */
-  -webkit-transform: scale(1.1,1.1); /* Safari */
-  transform: scale(1.1,1.1);
+  -ms-transform: scale(1.1, 1.1);
+  /* IE 9 */
+  -webkit-transform: scale(1.1, 1.1);
+  /* Safari */
+  transform: scale(1.1, 1.1);
   -webkit-box-shadow: 0 4px 8px 0 #fcb8189a, 0 6px 20px 0 #fcb8189a;
   -moz-box-shadow: 0 4px 8px 0 #fcb8189a, 0 6px 20px 0 #fcb8189a;
   box-shadow: 0 4px 8px 0 #fcb8189a, 0 6px 20px 0 #fcb8189a;
-  z-index:9999;
+  z-index: 9999;
   border-color: #FCB918;
-  cursor:pointer;
+  cursor: pointer;
   background-color: transparent;
   color: #FCB918;
 }
 
-.flex-container{
+.flex-container {
   display: flex;
   display: -webkit-flex;
   align-items: center;
   justify-content: center;
 }
 
-.flex-container>.row{
+.flex-container>.row {
   text-align: center;
 }
 
-.flex-container .row>div{
+.flex-container .row>div {
   padding: 2% 2%;
 }
 
-footer span.fa{
+footer span.fa {
   font-size: xx-large;
 }
+
 /* ##################################################### */
 /* ##################################################### */

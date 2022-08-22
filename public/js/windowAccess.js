@@ -11,7 +11,7 @@ function getWH() {
 
 
 function blockRezise() {
-    
+
 }
 
 // const size = [window.width,window.height];  //public variable

@@ -3,46 +3,47 @@
 
 @font-face {
     font-family: Poppins-Regular;
-    src: url('/fonts/poppins/Poppins-Regular.ttf'); 
-  }
-  
-  @font-face {
+    src: url('/fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
     font-family: Poppins-Medium;
-    src: url('/fonts/poppins/Poppins-Medium.ttf'); 
-  }
-  
-  @font-face {
+    src: url('/fonts/poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
     font-family: Poppins-Bold;
-    src: url('/fonts/poppins/Poppins-Bold.ttf'); 
-  }
-  
-  @font-face {
+    src: url('/fonts/poppins/Poppins-Bold.ttf');
+}
+
+@font-face {
     font-family: Poppins-SemiBold;
-    src: url('/fonts/poppins/Poppins-SemiBold.ttf'); 
-  }
-  
+    src: url('/fonts/poppins/Poppins-SemiBold.ttf');
+}
+
 /*//////////////////////////////////////////////////////////////////*/
 
-*{
+* {
     padding: 0;
     margin: 0;
 }
 
-#logo{
+#logo {
     max-width: 50px;
 }
 
-.page-content{
+.page-content {
     height: 100vh;
     display: grid;
     gap: 0;
     grid-template-areas: 'header header header header header header'
-                         'menu main main main main main';
+        'menu main main main main main';
     grid-template-rows: 1fr 7fr;
 }
+
 /*****************************************************************/
 /*****************************************************************/
-.left-menu{
+.left-menu {
     grid-area: menu;
     display: flex;
     display: -webkit-flex;
@@ -53,36 +54,37 @@
     padding-right: 5%;
 }
 
-.left-menu :last-child{
+.left-menu :last-child {
     margin-top: auto;
 }
 
-.left-menu *{
+.left-menu * {
     padding: 5% 10%;
     font-family: Poppins-Regular;
 }
 
-.left-menu .item1{
+.left-menu .item1 {
     color: #acacac;
 }
 
-.left-menu .item2{
+.left-menu .item2 {
     background-color: #FCB918;
     color: whitesmoke;
     font-weight: bold;
     border-radius: 20px;
 }
 
-.left-menu .item3{
+.left-menu .item3 {
     border-radius: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 /*****************************************************************/
 /*****************************************************************/
 /*######################################################################################*/
 /*****************************************************************/
 /*****************************************************************/
-.page-header{
+.page-header {
     grid-area: header;
     display: flex;
     display: -webkit-flex;
@@ -90,7 +92,7 @@
     padding-left: 5%;
 }
 
-input[type='search']{
+input[type='search'] {
     font-family: Poppins-Regular, monospace;
     color: #acacac;
     font-weight: lighter;
@@ -99,42 +101,40 @@ input[type='search']{
     /* border-bottom: 1px #acacac solid; */
 }
 
-.page-header .notification{
+.page-header .notification {
     margin-left: auto;
 }
 
 .page-header .notification,
 .page-header .user_name,
-.page-header .user_img{
+.page-header .user_img {
     padding-right: 3%;
 }
 
-.page-header .user_name{
+.page-header .user_name {
     font-family: Poppins-Medium;
     color: #636363;
 }
 
-.page-header .user_img{
+.page-header .user_img {
     border-radius: 50%;
 }
-.page-header{
+
+.page-header {
     background-color: #FCB918;
 }
+
 /*****************************************************************/
 /*****************************************************************/
 /*#######################################################################################*/
 /*****************************************************************/
 /*****************************************************************/
-.container{
+.container {
     grid-area: main;
     padding-left: 5%;
     padding-right: 3%;
 }
+
 /*****************************************************************/
 /*****************************************************************/
 /*#######################################################################################*/
-
-
-
-
-

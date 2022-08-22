@@ -7,7 +7,8 @@
                 <div class="mesgs">
                     <div class="msg_history">
                         <div v-for="message in messages" v-bind:key="message.id">
-                            <div v-if="message.author === authUser.email" :class="{ 'incoming_msg': message.author === authUser.email }">
+                            <div v-if="message.author === authUser.email"
+                                :class="{ 'incoming_msg': message.author === authUser.email }">
                                 <div class="incoming_msg_img"></div>
                                 <div class="received_msg">
                                     <div class="received_withd_msg">
@@ -15,7 +16,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="message.author === otherUser.email" :class="{ 'outgoing_msg': message.author === otherUser.email }">
+                            <div v-if="message.author === otherUser.email"
+                                :class="{ 'outgoing_msg': message.author === otherUser.email }">
                                 <div class="sent_msg">
                                     <p>{{ message.body }}</p>
                                 </div>

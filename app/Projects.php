@@ -26,5 +26,4 @@ class Projects extends Model
     {
         return $this->hasOne(AdminPro::class);
     }
-    
 }

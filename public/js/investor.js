@@ -1,5 +1,5 @@
 var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
+window.onscroll = function () {
   var currentScrollPos = window.pageYOffset;
   if (prevScrollpos < currentScrollPos) {
     document.getElementById("rs-des").style.visibility = "hidden";

@@ -2,8 +2,8 @@ function displayPreview(event) {
 	const docExtensions = /(\.zip)$/i;
 	const previewBloc = document.getElementsByClassName('icon')[0];
 	const filesPath = document.getElementById('uploadedFiles');
-	
-	if( filesPath.files.length > 0 && filesPath.files.length < 2 ){
+
+	if (filesPath.files.length > 0 && filesPath.files.length < 2) {
 		document.getElementById('preview').style.display = "none";
 		let fileName = filesPath.files[0].name;
 		let oldPreviewClasses = document.getElementsByClassName('preview');
@@ -12,13 +12,13 @@ function displayPreview(event) {
 				previewBloc.removeChild(previewBloc.lastChild);
 			}
 		}
-		if ( docExtensions.exec(fileName) ) {
+		if (docExtensions.exec(fileName)) {
 			var img = document.createElement('img');
 			img.setAttribute('class', 'preview');
 			img.setAttribute('src', '/images/zip.png');
 			previewBloc.appendChild(img);
 		}
-		else{
+		else {
 			var i = document.createElement('i');
 			i.setAttribute('class', 'preview');
 			i.setAttribute('style', 'color:red; text-align: center');
@@ -28,7 +28,7 @@ function displayPreview(event) {
 		document.getElementById('op1').style.display = "block";
 		document.getElementById('op2').style.display = "block";
 	}
-	else{
+	else {
 		alert('vous devez ajouter une seule fichier .zip');
 	}
 }
@@ -39,7 +39,7 @@ function deleteAllFiles() {
 	while (filesParent.childNodes.length > 2) {
 		filesParent.removeChild(filesParent.lastChild);
 	}
-	
+
 	document.getElementById('uploadedFiles').value = '';
 	document.getElementById('op1').style.display = "none";
 	document.getElementById('op2').style.display = "none";

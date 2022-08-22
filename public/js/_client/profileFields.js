@@ -1,5 +1,5 @@
-$('input').focus(function() {
-    $(this).parent().find('label').animate({
+$('input').focus(function () {
+  $(this).parent().find('label').animate({
     top: '-50%',
     fontSize: '12px'
   }, 300);
@@ -8,8 +8,8 @@ $('input').focus(function() {
   }, 600)
 })
 
-$('input').blur(function() {
-  if ( !this.value ) {
+$('input').blur(function () {
+  if (!this.value) {
     $(this).parent().find('label').animate({
       top: '20%',
       fontSize: '20px'

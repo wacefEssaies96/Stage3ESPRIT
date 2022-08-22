@@ -1,7 +1,7 @@
 /**************************************************************************************************/
 /**************************************************************************************************/
 
-.right-side-content{
+.right-side-content {
     position: relative;
     display: flex;
     display: -webkit-flex;
@@ -11,7 +11,7 @@
     text-align: center;
 }
 
-.right-side-content .fade{
+.right-side-content .fade {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 2s;
     animation-name: fade;
@@ -19,16 +19,26 @@
 }
 
 @-webkit-keyframes fade {
-    from {opacity: 0} 
-    to {opacity: 1}
-  }
-  
-@keyframes fade {
-    from {opacity: 0} 
-    to {opacity: 1}
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
 }
 
-.right-side-content .user{
+@keyframes fade {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.right-side-content .user {
     margin-left: 1%;
     margin-right: 1%;
     width: 200px;
@@ -36,7 +46,7 @@
     max-width: 200px;
 }
 
-.right-side-content .user .picture{
+.right-side-content .user .picture {
     background-color: rgb(238, 238, 238);
     padding-top: 10%;
     border: rgb(27, 27, 27) .5px solid;
@@ -44,7 +54,7 @@
     text-align: center;
 }
 
-.right-side-content .user .text{
+.right-side-content .user .text {
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
@@ -54,7 +64,7 @@
     padding: 5%;
 }
 
-.right-side-content .user .service-description{
+.right-side-content .user .service-description {
     text-align: center;
     font-family: sans-serif;
     font-size: medium;
@@ -70,14 +80,14 @@
     display: none;
 }
 
-.right-side-content .user .contact{
+.right-side-content .user .contact {
     text-align: center;
     padding: 2%;
     background-color: #FCB918;
     border-radius: 10px;
 }
 
-.right-side-content .user .contact button{
+.right-side-content .user .contact button {
     border: none;
     padding: 2%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -85,11 +95,13 @@
     background-color: #FCB918;
     color: white;
 }
+
 /**********************************************************************************************/
 /**********************************************************************************************/
 
 /* Next & previous buttons */
-.prev, .next {
+.prev,
+.next {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -102,16 +114,18 @@
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
-  }
-  
-  .next {
+}
+
+.next {
     right: 15px;
     border-radius: 3px 0 0 3px;
-  }
-  
-  .prev:hover, .next:hover {
+}
+
+.prev:hover,
+.next:hover {
     background-color: rgba(75, 75, 75, 0.8);
-  }
+}
+
 /* .slide-btns{
     margin-top: 2%;
     text-align: center;

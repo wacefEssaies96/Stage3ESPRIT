@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,12 +18,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
+
 <body onload="controlLab()">
-    
+
     <div class="container">
-        <form method="POST" action=" {{route('login')}} " class="left">
+        <form method="POST" action=" {{ route('login') }} " class="left">
             {{-- ***************************************************** --}}
-            @if(session()->has('error'))
+            @if (session()->has('error'))
                 <div class="popup-wrap">
                     <div class="popup-box">
                         <h2>Une erreur se produite!</h2>
@@ -61,7 +63,8 @@
             {{-- ***************************************************** --}}
             <div class="login-box log">
                 <div class="col input-effect">
-                    <input name="email" class="border-effect" type="email" value="{{ old('email') }}" placeholder="" autocomplete="email">
+                    <input name="email" class="border-effect" type="email" value="{{ old('email') }}"
+                        placeholder="" autocomplete="email">
                     <label><span class="fa fa-user-o" style="margin-right: 2%"></span>E-mail</label>
                     <span class="focus-border"></span>
                     @error('email')
@@ -71,7 +74,8 @@
                     @enderror
                 </div>
                 <div class="col input-effect">
-                    <input name="password" class="border-effect" type="password" placeholder="" autocomplete="current-password">
+                    <input name="password" class="border-effect" type="password" placeholder=""
+                        autocomplete="current-password">
                     <label><span class="fa fa-lock" style="margin-right: 2%"></span>Mot de passe</label>
                     <span class="focus-border"></span>
                     @error('password')
@@ -83,8 +87,8 @@
             </div>
             {{-- ***************************************************** --}}
             <div class="forget-pwd">
-                <a href="#" style="margin-right: 2%">Mot de passe oublié?</a> 
-                <a href=" {{route('home')}} " style="margin-left: 2%"><span class="fa fa-home"></span></a>
+                <a href="#" style="margin-right: 2%">Mot de passe oublié?</a>
+                <a href=" {{ route('home') }} " style="margin-left: 2%"><span class="fa fa-home"></span></a>
             </div>
             <div class="login-btn">
                 <button type="submit" class="btn">Se connecter</button>
@@ -104,4 +108,5 @@
     </div>
 
 </body>
+
 </html>

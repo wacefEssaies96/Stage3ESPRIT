@@ -13,24 +13,24 @@ class CheckoutController extends Controller
         $this->middleware('auth');
     }
     public function checkout($operation)
-    {   
-        
+    {
+
         // Enter Your Stripe Secret
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        		
-		$amount = 100;
-		$amount *= 100;
+
+        $amount = 100;
+        $amount *= 100;
         $amount = (int) $amount;
-        
+
         $payment_intent = \Stripe\PaymentIntent::create([
-			'description' => 'Stripe Test Payment',
-			'amount' => $amount,
-			'currency' => 'USD',
-			'description' => 'Payment From Codehunger',
-			'payment_method_types' => ['card'],
-		]);
-		$intent = $payment_intent->client_secret;
-		return view('checkout.credit-card', [
+            'description' => 'Stripe Test Payment',
+            'amount' => $amount,
+            'currency' => 'USD',
+            'description' => 'Payment From Codehunger',
+            'payment_method_types' => ['card'],
+        ]);
+        $intent = $payment_intent->client_secret;
+        return view('checkout.credit-card', [
             'intent' => $intent,
             'operation' => $operation
         ]);
@@ -43,10 +43,10 @@ class CheckoutController extends Controller
             'operation' => $request->operation
         ]);
 
-        if($request->operation == 'depot'){
-            return redirect('/'.Auth::user()->id.'/Dépot_dossier');
+        if ($request->operation == 'depot') {
+            return redirect('/' . Auth::user()->id . '/Dépot_dossier');
         }
-        if($request->operation == 'expert'){
+        if ($request->operation == 'expert') {
             return redirect()->route('expertChat');
         }
         return redirect()->route('home');

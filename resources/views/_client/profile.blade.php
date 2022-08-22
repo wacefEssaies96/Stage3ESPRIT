@@ -33,7 +33,7 @@
         </div>
         {{-- ------------------ --}}
         {{-- ------------------ --}}
-        
+
         <div class="page-header">
             <div class="logo" onclick="goHome()" style="cursor: pointer;">
                 <img id="logo" src="{{ asset('images/logo.png') }}">
@@ -45,10 +45,11 @@
                 {{ Auth::user()->name }}
             </div>
             <div class="user_img">
-                @if ($user->image == " ") 
+                @if ($user->image == ' ')
                     <img src="{{ asset('images/man.png') }}" alt="ERROR" width="48" height="48">
-                @else 
-                    <img style="border-radius: 50%;" src="{{ asset('upload/'.$user->image.'') }}" alt="ERROR" width="48" height="48">
+                @else
+                    <img style="border-radius: 50%;" src="{{ asset('upload/' . $user->image . '') }}" alt="ERROR"
+                        width="48" height="48">
                 @endif
             </div>
         </div>
@@ -153,8 +154,9 @@
                                         <div class="input-field mt-3">
                                             <div class="border-bottom"></div>
                                             <label for="tel">télèphone</label>
-                                            <input id="phoneNbr" name="phoneNbr" type="text" placeholder="12345678"
-                                                autocomplete="off" value="{{ $user->phoneNbr }}">
+                                            <input id="phoneNbr" name="phoneNbr" type="text"
+                                                placeholder="12345678" autocomplete="off"
+                                                value="{{ $user->phoneNbr }}">
                                         </div>
                                     </div>
                                 </div>
@@ -166,14 +168,14 @@
                                 <div class="attachment">
                                     <h3 style="width:100%; vertical-align: middle;">Image à transférer</h3>
                                     <div class="icon">
-                                        @if ($user->image == " ") 
-                                        <img id="preview" src="{{ asset('images/upload-file.png') }}"
-                                        alt="NO IMAGE">
+                                        @if ($user->image == ' ')
+                                            <img id="preview" src="{{ asset('images/upload-file.png') }}"
+                                                alt="NO IMAGE">
                                         @else
-                                        <img id="preview" src="{{ asset('upload/'.$user->image.'') }}"
-                                        alt="{{$user->image}}">
+                                            <img id="preview" src="{{ asset('upload/' . $user->image . '') }}"
+                                                alt="{{ $user->image }}">
                                         @endif
-                                        
+
                                     </div>
                                     <div class="addBtn">
                                         <button class="trigger">
@@ -197,10 +199,16 @@
                                                 @if ($projects->count() == 0)
                                                     @if (Auth::user()->type == 'Client')
                                                         <h1 style="color: red;">Vous n'avez déposé aucun projet !</h1>
-                                                        <h3><a style="color: #FCB918;" href="{{route('uploadF', Auth::user()->id)}}">Cliquer ici pour déposer un dossier.</a></h3>
+                                                        <h3><a style="color: #FCB918;"
+                                                                href="{{ route('uploadF', Auth::user()->id) }}">Cliquer
+                                                                ici pour déposer un dossier.</a></h3>
                                                     @else
-                                                        <h1 style="color: red;">Vous ne pouvez pas déposer des dossiers en tant que {{Auth::user()->type}} !</h1>
-                                                        <h3><a style="color: #FCB918;" href="{{route('sign-up')}}">Cliquer ici pour créer un compte Client et pouvoir déposer des dossiers.</a></h3>
+                                                        <h1 style="color: red;">Vous ne pouvez pas déposer des dossiers
+                                                            en tant que {{ Auth::user()->type }} !</h1>
+                                                        <h3><a style="color: #FCB918;"
+                                                                href="{{ route('sign-up') }}">Cliquer ici pour créer
+                                                                un compte Client et pouvoir déposer des dossiers.</a>
+                                                        </h3>
                                                     @endif
                                                 @else
                                                     @foreach ($projects as $item)
@@ -230,7 +238,8 @@
 
                                 {{-- End last fieldset --}}
                             </fieldset>
-                            <button class="btn btn-success" type="submit" onclick="window.location='{{ route('update-profile', $user->id) }}'">Sauvegarder</button>
+                            <button class="btn btn-success" type="submit"
+                                onclick="window.location='{{ route('update-profile', $user->id) }}'">Sauvegarder</button>
                         </form>
                     </div>
                 </div>

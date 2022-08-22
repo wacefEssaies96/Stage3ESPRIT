@@ -11,11 +11,13 @@ use Hash;
 
 class AuthController extends Controller
 {
-    public function register(){
+    public function register()
+    {
         return view('connexion/addUser');
     }
-// ********************************************************** //
-    public function storeUser(Request $request){
+    // ********************************************************** //
+    public function storeUser(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:75',
             'email' => 'required|string|email|max:255|unique:users',
@@ -37,8 +39,8 @@ class AuthController extends Controller
             'phoneNbr' => $request->phoneNbr,
             'image' => ' '
         ]);
-        
-        if($request->description != null){
+
+        if ($request->description != null) {
             Investor::create([
                 'client_id' => $user->id,
                 'description' => $request->description,
@@ -46,7 +48,7 @@ class AuthController extends Controller
             ]);
         }
 
-        if($request->service != null){
+        if ($request->service != null) {
             Expert::create([
                 'client_id' => $user->id,
                 'service' => $request->service
@@ -54,14 +56,15 @@ class AuthController extends Controller
         }
 
         return redirect('login');
-
     }
-// ********************************************************** //
-    public function login(){
+    // ********************************************************** //
+    public function login()
+    {
         return view('connexion/login');
     }
 
-    public function authenticate(Request $request){
+    public function authenticate(Request $request)
+    {
         $user = User::where('email', $request->email)->first();
         $request->validate([
             'email' => 'required|string|email',
@@ -71,20 +74,20 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            if($user->type == 'Super admin'){
+            if ($user->type == 'Super admin') {
                 return redirect('user');
             }
             return redirect()->intended('/');
         }
 
         return redirect('login')->with('error', "Opps! Vous avez entré des informations d'identification invalides");
-
     }
-// ************************************************************ //
-    public function logout() {
+    // ************************************************************ //
+    public function logout()
+    {
         Auth::logout();
         return redirect('login');
     }
-// ************************************************************ //
-    
+    // ************************************************************ //
+
 }

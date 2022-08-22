@@ -3,31 +3,31 @@
 
 @font-face {
     font-family: Poppins-Regular;
-    src: url('/fonts/poppins/Poppins-Regular.ttf'); 
-  }
-  
-  @font-face {
+    src: url('/fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
     font-family: Poppins-Medium;
-    src: url('/fonts/poppins/Poppins-Medium.ttf'); 
-  }
-  
-  @font-face {
+    src: url('/fonts/poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
     font-family: Poppins-Bold;
-    src: url('/fonts/poppins/Poppins-Bold.ttf'); 
-  }
-  
-  @font-face {
+    src: url('/fonts/poppins/Poppins-Bold.ttf');
+}
+
+@font-face {
     font-family: Poppins-SemiBold;
-    src: url('/fonts/poppins/Poppins-SemiBold.ttf'); 
-  }
-  
+    src: url('/fonts/poppins/Poppins-SemiBold.ttf');
+}
+
 /*//////////////////////////////////////////////////////////////////*/
 
 /* .content section HEADER
 *   Progress 3 steps Bar 
 *   #######################(
 */
-h2{
+h2 {
     color: #6ABA96;
 }
 
@@ -36,7 +36,7 @@ h2{
     position: relative;
     margin-top: 20px
 }
-  
+
 #form fieldset {
     background: white;
     border: 0 none;
@@ -47,16 +47,17 @@ h2{
     padding-bottom: 20px;
     position: relative
 }
-  
+
 .finish {
     text-align: center
 }
-  
+
 #form fieldset:not(:first-of-type) {
     display: none
 }
-  
-#form .previous-step, .next-step {
+
+#form .previous-step,
+.next-step {
     width: 100px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
@@ -66,46 +67,48 @@ h2{
     margin: 10px 5px 10px 0px;
     float: right
 }
-  
+
 #form .previous-step {
     color: #FCB918;
     background: whitesmoke;
     border: 1px solid #FCB918;
 }
+
 #form .previous-step:hover,
 #form .previous-step:focus {
     color: whitesmoke;
     background-color: #FCB918;
     border: 0;
 }
-  
+
 #form .next-step {
     color: whitesmoke;
     background: #FCB918;
     border: 0
 }
+
 #form .next-step:hover,
 #form .next-step:focus {
     color: #FCB918;
     background-color: whitesmoke;
     border: 1px solid #FCB918;
 }
-  
+
 .text {
     color: #6ABA96;
     font-weight: normal;
 }
-  
+
 #progressbar {
     margin-bottom: 30px;
     overflow: hidden;
     color: lightgrey
 }
-  
+
 #progressbar .active {
     color: #6ABA96
 }
-  
+
 #progressbar li {
     list-style-type: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -122,19 +125,19 @@ h2{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center
 } */
-  
+
 #progressbar #step1:before {
     content: " "
 }
-  
+
 #progressbar #step2:before {
     content: " "
 }
-  
+
 #progressbar #step3:before {
     content: " "
 }
-  
+
 #progressbar li:before {
     width: 30px;
     height: 30px;
@@ -147,7 +150,7 @@ h2{
     margin: 0 auto 10px auto;
     padding: 2px
 }
-  
+
 #progressbar li:after {
     content: '';
     width: 100%;
@@ -158,25 +161,26 @@ h2{
     top: 15px;
     z-index: -1
 }
-  
+
 #progressbar li.active:before,
 #progressbar li.active:after {
     background: #6ABA96
 }
-  
+
 .progress {
     height: 10px
 }
-  
+
 .progress-bar {
     background-color: #6ABA96
 }
+
 /* 
 *   ##########################################################################)
 *   ############################ .content section BODY #######################
 *   ####################(
 */
-.fields{
+.fields {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding-left: 5%;
@@ -187,7 +191,7 @@ h2{
     position: relative;
     display: block;
 }
-  
+
 .input-field label {
     position: absolute;
     top: 20%;
@@ -204,7 +208,7 @@ h2{
     border-bottom: 1px solid #666;
     width: 0%;
 }
-    
+
 .center {
     flex: 2;
     align-items: center;
@@ -231,17 +235,17 @@ input[type=text] {
     /* WebKit browsers */
     color: transparent;
 }
-  
+
 :-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
     color: transparent;
 }
-  
+
 ::-moz-placeholder {
     /* Mozilla Firefox 19+ */
     color: transparent;
 }
-  
+
 :-ms-input-placeholder {
     /* Internet Explorer 10+ */
     color: transparent;
@@ -251,22 +255,22 @@ textarea::-webkit-input-placeholder {
     /* WebKit browsers */
     color: transparent;
 }
-  
+
 textarea:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
     color: transparent;
 }
-  
+
 textarea::-moz-placeholder {
     /* Mozilla Firefox 19+ */
     color: transparent;
 }
-  
+
 textarea:-ms-input-placeholder {
     /* Internet Explorer 10+ */
     color: transparent;
 }
+
 /* 
 *   ##################################################################)
 */
-

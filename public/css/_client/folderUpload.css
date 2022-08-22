@@ -3,29 +3,29 @@
 
 @font-face {
     font-family: Poppins-Regular;
-    src: url('/fonts/poppins/Poppins-Regular.ttf'); 
-  }
-  
-  @font-face {
+    src: url('/fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
     font-family: Poppins-Medium;
-    src: url('/fonts/poppins/Poppins-Medium.ttf'); 
-  }
-  
-  @font-face {
+    src: url('/fonts/poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
     font-family: Poppins-Bold;
-    src: url('/fonts/poppins/Poppins-Bold.ttf'); 
-  }
-  
-  @font-face {
+    src: url('/fonts/poppins/Poppins-Bold.ttf');
+}
+
+@font-face {
     font-family: Poppins-SemiBold;
-    src: url('/fonts/poppins/Poppins-SemiBold.ttf'); 
-  }
-  
+    src: url('/fonts/poppins/Poppins-SemiBold.ttf');
+}
+
 /*//////////////////////////////////////////////////////////////////*/
 
 /* ***************************************************************************** */
 /* ************************** General Information ****************************** */
-div.field{
+div.field {
     width: 65%;
     font-family: Poppins-Regular;
 }
@@ -48,15 +48,15 @@ input[type="text"] {
 input[type="text"]:focus {
     border-color: #FCB918;
 }
-  
-input[type="text"]:focus + label[placeholder]:before {
+
+input[type="text"]:focus+label[placeholder]:before {
     color: #FCB918;
 }
-  
-input[type="text"]:focus + label[placeholder]:before,
-input[type="text"]:valid + label[placeholder]:before {
+
+input[type="text"]:focus+label[placeholder]:before,
+input[type="text"]:valid+label[placeholder]:before {
     transition-duration: .2s;
-    transform: translate(0, -1.6em) scale(0.9, 0.9);	
+    transform: translate(0, -1.6em) scale(0.9, 0.9);
     font-weight: bold;
 }
 
@@ -64,23 +64,23 @@ input[type="text"]:valid {
     border-color: green;
 }
 
-input[type="text"]:valid + label[placeholder]:before {
+input[type="text"]:valid+label[placeholder]:before {
     color: green;
 }
 
-input[type="text"]:invalid + label[placeholder][alt]:before {
+input[type="text"]:invalid+label[placeholder][alt]:before {
     content: attr(alt);
 }
 
-input[type="text"] + label[placeholder] {
-    display: block;	
+input[type="text"]+label[placeholder] {
+    display: block;
     pointer-events: none;
     line-height: 1.25em;
     margin-top: calc(-3em - 2px);
     margin-bottom: calc((3em - 1em) + 2px);
 }
 
-input[type="text"] + label[placeholder]:before {
+input[type="text"]+label[placeholder]:before {
     content: attr(placeholder);
     display: inline-block;
     margin: 0 calc(0.5em + 2px);
@@ -93,26 +93,28 @@ input[type="text"] + label[placeholder]:before {
     background-repeat: no-repeat;
     background-position: center;
 }
+
 /* *************************************************************************** */
 /* *************************************************************************** */
 /* ****************************** attachment ********************************* */
-.attachment{
+.attachment {
     border: rgb(58, 58, 58) 1px dashed;
     padding: 2%;
     margin-bottom: 2%;
 }
-.attachment h3{
+
+.attachment h3 {
     text-align: center;
 }
 
-.icon{
+.icon {
     display: flex;
     display: -webkit-flex;
     align-items: center;
     justify-content: center;
 }
 
-.icon .preview{
+.icon .preview {
     padding-left: 3%;
     padding-right: 3%;
     width: 200px;
@@ -120,13 +122,13 @@ input[type="text"] + label[placeholder]:before {
     transition: ease-out .5s;
 }
 
-.icon img#preview{
+.icon img#preview {
     width: 200px;
     height: 200px;
     transition: ease-in .5s;
 }
 
-.addBtn{
+.addBtn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -135,7 +137,7 @@ input[type="text"] + label[placeholder]:before {
 }
 
 button#op1,
-button#op2{
+button#op2 {
     display: none;
 }
 
@@ -161,21 +163,22 @@ button#op2{
     box-shadow: 0 0.875rem 1.75rem rgba(0, 0, 0, 0.25), 0 0.625rem 0.625rem rgba(0, 0, 0, 0.22);
 }
 
-.trigger input{
+.trigger input {
     text-decoration: none;
     border: none;
 }
 
-.trigger input[type="file"]{
+.trigger input[type="file"] {
     font-family: Poppins-Regular, sans-serif;
 }
 
-.trigger input:hover{
+.trigger input:hover {
     cursor: pointer;
 }
+
 /* *************************************************************************** */
 /* *************************************************************************** */
-div.btns{
+div.btns {
     padding: 2% 15%;
     float: right;
     display: flex;
@@ -183,7 +186,7 @@ div.btns{
     margin-top: 2%;
 }
 
-button.btn1{
+button.btn1 {
     text-align: center;
     padding: 1% 3%;
     background-color: darkgray;
@@ -192,7 +195,7 @@ button.btn1{
     border: none;
 }
 
-button.btn2{
+button.btn2 {
     text-align: center;
     padding: 2% 5%;
     background-color: #FCB918;
@@ -201,6 +204,6 @@ button.btn2{
     border: none;
 }
 
-.btns > button:hover{
+.btns>button:hover {
     cursor: pointer;
 }

@@ -3,14 +3,14 @@
     {{-- ################################################################################################ --}}
     <div class="left-side-top">
         <div class="logo">
-            <a href="{{ route('home') }}"><img id="ppp90Lg" src="{{ asset('images/logo.png') }}"
-                    alt="PPP 90" srcset=""></a>
+            <a href="{{ route('home') }}"><img id="ppp90Lg" src="{{ asset('images/logo.png') }}" alt="PPP 90"
+                    srcset=""></a>
         </div>
         <div class="menuLines">
             <span id="bars" class="fa fa-bars" style="color: seashell; font-size: x-large"
                 onclick="closeMenu()"></span>
-            <span id="anti-bars" class="fa fa-bars"
-                style="color:seashell; font-size: x-large; visibility: hidden" onclick="openMenu()"></span>
+            <span id="anti-bars" class="fa fa-bars" style="color:seashell; font-size: x-large; visibility: hidden"
+                onclick="openMenu()"></span>
         </div>
     </div>
     {{-- ################################################################################################ --}}

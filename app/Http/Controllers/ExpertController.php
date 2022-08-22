@@ -17,13 +17,13 @@ class ExpertController extends Controller
     }
     public function index()
     {
-        if(Auth::user()->type == "Client"){
+        if (Auth::user()->type == "Client") {
             $paiement = Paiement::where('client_id', Auth::user()->id)->where('operation', 'expert')->get();
-            if(sizeof($paiement) == 0){
+            if (sizeof($paiement) == 0) {
                 return redirect()->route('checkout', ['operation' => 'expert']);
             }
         }
-        $user = User::where('type', 'expert')->join('experts','users.id', '=', 'experts.client_id')->select('users.*' , 'experts.service')->get();
+        $user = User::where('type', 'expert')->join('experts', 'users.id', '=', 'experts.client_id')->select('users.*', 'experts.service')->get();
         return view('expert', ['users' => $user]);
     }
 
@@ -32,19 +32,20 @@ class ExpertController extends Controller
         $otherUser = User::where('email', $email)->first();
         $this->chat($room, $otherUser);
         return view('videocall', [
-            'email'=> $email,
+            'email' => $email,
             'room' => $room,
             'otherUser' => $otherUser
         ]);
     }
 
-    public function videoCallPost(Request $request){
+    public function videoCallPost(Request $request)
+    {
         $idOtherUser = explode('-', $request->room)[0];
         $otherUser = User::find($idOtherUser);
         $this->chat($request->room, $otherUser);
         return view('videocall', [
-            'email'=> $request->email,
-            'room'=>$request->room,
+            'email' => $request->email,
+            'room' => $request->room,
             'otherUser' => $otherUser
         ]);
     }
@@ -64,8 +65,8 @@ class ExpertController extends Controller
             $channel = $twilio->chat->v2->services(env('TWILIO_SERVICE_SID'))
                 ->channels
                 ->create([
-                        'uniqueName' => $ids,
-                        'type' => 'private',
+                    'uniqueName' => $ids,
+                    'type' => 'private',
                 ]);
         }
 
@@ -75,7 +76,6 @@ class ExpertController extends Controller
                 ->channels($ids)
                 ->members($authUser->email)
                 ->fetch();
-
         } catch (\Twilio\Exceptions\RestException $e) {
             $member = $twilio->chat->v2->services(env('TWILIO_SERVICE_SID'))
                 ->channels($ids)
@@ -89,7 +89,6 @@ class ExpertController extends Controller
                 ->channels($ids)
                 ->members($otherUser->email)
                 ->fetch();
-
         } catch (\Twilio\Exceptions\RestException $e) {
             $twilio->chat->v2->services(env('TWILIO_SERVICE_SID'))
                 ->channels($ids)
@@ -98,5 +97,4 @@ class ExpertController extends Controller
         }
         return true;
     }
-
 }

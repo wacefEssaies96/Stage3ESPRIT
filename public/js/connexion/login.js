@@ -1,15 +1,15 @@
 function controlLab() {
-    setInterval(function(){
+    setInterval(function () {
         var inputFields = document.getElementsByClassName('border-effect');
         for (let i = 0; i < inputFields.length; i++) {
             const inputField = inputFields[i];
-            if ( (inputField.value).localeCompare('')!=0 ) {
+            if ((inputField.value).localeCompare('') != 0) {
                 inputField.style.backgroundColor = 'white';
             }
-            else{
+            else {
                 inputField.style.backgroundColor = 'transparent';
             }
         }
-    }, 20);  
+    }, 20);
 }
 
