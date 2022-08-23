@@ -7,8 +7,8 @@
                 <div class="mesgs">
                     <div class="msg_history">
                         <div v-for="message in messages" v-bind:key="message.id">
-                            <div v-if="message.author === authUser.email"
-                                :class="{ 'incoming_msg': message.author === authUser.email }">
+                            <div v-if="message.author === otherUser.email "
+                                :class="{ 'incoming_msg': message.author === otherUser.email }">
                                 <div class="incoming_msg_img"></div>
                                 <div class="received_msg">
                                     <div class="received_withd_msg">
@@ -16,8 +16,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="message.author === otherUser.email"
-                                :class="{ 'outgoing_msg': message.author === otherUser.email }">
+                            <div v-if="message.author === authUser.email"
+                                :class="{ 'outgoing_msg': message.author === authUser.email }">
                                 <div class="sent_msg">
                                     <p>{{ message.body }}</p>
                                 </div>
@@ -59,6 +59,7 @@ export default {
         };
     },
     async created() {
+        await this.chat();
         const token = await this.fetchToken();
         await this.initializeClient(token);
         await this.fetchMessages();
@@ -69,22 +70,26 @@ export default {
             this.channel.sendMessage(this.newMessage);
             this.newMessage = "";
         },
+        async chat() {
+            axios.get('/api/chat/' + this.authUser.id + '/' + this.otherUser.id)
+                .then(function (response) {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
 
         async fetchToken() {
             const { data } = await axios.post("/api/token", {
                 email: this.authUser.email
             });
-
-
             return data.token;
         },
         async initializeClient(token) {
             const client = await Twilio.Chat.Client.create(token);
-
             client.on("tokenAboutToExpire", async () => {
                 const token = await this.fetchToken();
-
-
                 client.updateToken(token);
             });
             if (this.room == 'null') {
@@ -97,8 +102,6 @@ export default {
                     `${this.otherUser.id}-${this.authUser.id}`
                 );
             }
-
-
             this.channel.on("messageAdded", message => {
                 this.messages.push(message);
             });
@@ -107,7 +110,6 @@ export default {
         async fetchMessages() {
             this.messages = (await this.channel.getMessages()).items;
         },
-
     }
 };
 </script>

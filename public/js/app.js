@@ -5123,18 +5123,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.fetchToken();
+              return _this.chat();
 
             case 2:
+              _context.next = 4;
+              return _this.fetchToken();
+
+            case 4:
               token = _context.sent;
-              _context.next = 5;
+              _context.next = 7;
               return _this.initializeClient(token);
 
-            case 5:
-              _context.next = 7;
+            case 7:
+              _context.next = 9;
               return _this.fetchMessages();
 
-            case 7:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -5147,27 +5151,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.channel.sendMessage(this.newMessage);
       this.newMessage = "";
     },
-    fetchToken: function fetchToken() {
+    chat: function chat() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _yield$axios$post, data;
-
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return axios.post("/api/token", {
-                  email: _this2.authUser.email
+                axios.get('/api/chat/' + _this2.authUser.id + '/' + _this2.otherUser.id).then(function (response) {
+                  console.log(response.data);
+                })["catch"](function (error) {
+                  console.log(error);
                 });
 
-              case 2:
-                _yield$axios$post = _context2.sent;
-                data = _yield$axios$post.data;
-                return _context2.abrupt("return", data.token);
-
-              case 5:
+              case 1:
               case "end":
                 return _context2.stop();
             }
@@ -5175,94 +5173,122 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    initializeClient: function initializeClient(token) {
+    fetchToken: function fetchToken() {
       var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-        var client;
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var _yield$axios$post, data;
+
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context4.next = 2;
-                return Twilio.Chat.Client.create(token);
-
-              case 2:
-                client = _context4.sent;
-                client.on("tokenAboutToExpire", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-                  var token;
-                  return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-                    while (1) {
-                      switch (_context3.prev = _context3.next) {
-                        case 0:
-                          _context3.next = 2;
-                          return _this3.fetchToken();
-
-                        case 2:
-                          token = _context3.sent;
-                          client.updateToken(token);
-
-                        case 4:
-                        case "end":
-                          return _context3.stop();
-                      }
-                    }
-                  }, _callee3);
-                })));
-
-                if (!(_this3.room == 'null')) {
-                  _context4.next = 10;
-                  break;
-                }
-
-                _context4.next = 7;
-                return client.getChannelByUniqueName("".concat(_this3.authUser.id, "-").concat(_this3.otherUser.id));
-
-              case 7:
-                _this3.channel = _context4.sent;
-                _context4.next = 13;
-                break;
-
-              case 10:
-                _context4.next = 12;
-                return client.getChannelByUniqueName("".concat(_this3.otherUser.id, "-").concat(_this3.authUser.id));
-
-              case 12:
-                _this3.channel = _context4.sent;
-
-              case 13:
-                _this3.channel.on("messageAdded", function (message) {
-                  _this3.messages.push(message);
+                _context3.next = 2;
+                return axios.post("/api/token", {
+                  email: _this3.authUser.email
                 });
 
-              case 14:
+              case 2:
+                _yield$axios$post = _context3.sent;
+                data = _yield$axios$post.data;
+                return _context3.abrupt("return", data.token);
+
+              case 5:
               case "end":
-                return _context4.stop();
+                return _context3.stop();
             }
           }
-        }, _callee4);
+        }, _callee3);
       }))();
     },
-    fetchMessages: function fetchMessages() {
+    initializeClient: function initializeClient(token) {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        var client;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.next = 2;
-                return _this4.channel.getMessages();
+                return Twilio.Chat.Client.create(token);
 
               case 2:
-                _this4.messages = _context5.sent.items;
+                client = _context5.sent;
+                client.on("tokenAboutToExpire", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+                  var token;
+                  return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+                    while (1) {
+                      switch (_context4.prev = _context4.next) {
+                        case 0:
+                          _context4.next = 2;
+                          return _this4.fetchToken();
 
-              case 3:
+                        case 2:
+                          token = _context4.sent;
+                          client.updateToken(token);
+
+                        case 4:
+                        case "end":
+                          return _context4.stop();
+                      }
+                    }
+                  }, _callee4);
+                })));
+
+                if (!(_this4.room == 'null')) {
+                  _context5.next = 10;
+                  break;
+                }
+
+                _context5.next = 7;
+                return client.getChannelByUniqueName("".concat(_this4.authUser.id, "-").concat(_this4.otherUser.id));
+
+              case 7:
+                _this4.channel = _context5.sent;
+                _context5.next = 13;
+                break;
+
+              case 10:
+                _context5.next = 12;
+                return client.getChannelByUniqueName("".concat(_this4.otherUser.id, "-").concat(_this4.authUser.id));
+
+              case 12:
+                _this4.channel = _context5.sent;
+
+              case 13:
+                _this4.channel.on("messageAdded", function (message) {
+                  _this4.messages.push(message);
+                });
+
+              case 14:
               case "end":
                 return _context5.stop();
             }
           }
         }, _callee5);
+      }))();
+    },
+    fetchMessages: function fetchMessages() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.next = 2;
+                return _this5.channel.getMessages();
+
+              case 2:
+                _this5.messages = _context6.sent.items;
+
+              case 3:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
       }))();
     }
   }
@@ -5480,9 +5506,9 @@ var render = function render() {
   }, _vm._l(_vm.messages, function (message) {
     return _c("div", {
       key: message.id
-    }, [message.author === _vm.authUser.email ? _c("div", {
+    }, [message.author === _vm.otherUser.email ? _c("div", {
       "class": {
-        incoming_msg: message.author === _vm.authUser.email
+        incoming_msg: message.author === _vm.otherUser.email
       }
     }, [_c("div", {
       staticClass: "incoming_msg_img"
@@ -5494,9 +5520,9 @@ var render = function render() {
       staticStyle: {
         right: "0"
       }
-    }, [_vm._v(_vm._s(message.body))])])])]) : _vm._e(), _vm._v(" "), message.author === _vm.otherUser.email ? _c("div", {
+    }, [_vm._v(_vm._s(message.body))])])])]) : _vm._e(), _vm._v(" "), message.author === _vm.authUser.email ? _c("div", {
       "class": {
-        outgoing_msg: message.author === _vm.otherUser.email
+        outgoing_msg: message.author === _vm.authUser.email
       }
     }, [_c("div", {
       staticClass: "sent_msg"

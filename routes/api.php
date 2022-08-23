@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('access_token/{email}/{room}/{id}', 'API\AccessTokenController@generate_token');
+Route::get('/chat/{authUserId}/{otherUserId}', 'API\AccessTokenController@chat');
 Route::post('/token', 'API\AccessTokenController@generate');

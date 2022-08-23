@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Expert;
 use App\Investor;
+use App\Paiement;
 use App\Projects;
 use App\User;
 use Hash;
@@ -260,5 +261,23 @@ class UsersController extends Controller
     public function accessDenied()
     {
         return redirect()->route('home');
+    }
+    public function investors(){
+        $investors = User::join('investors', 'users.id', '=', 'investors.client_id')->select('users.*', 'investors.description', 'investors.fonds')->get();
+        return view('investor', [
+            'investors' => $investors
+        ]);
+    }
+
+    public function experts()
+    {
+        if (Auth::user()->type == "Client") {
+            $paiement = Paiement::where('client_id', Auth::user()->id)->where('operation', 'expert')->get();
+            if (sizeof($paiement) == 0) {
+                return redirect()->route('checkout', ['operation' => 'expert']);
+            }
+        }
+        $user = User::where('type', 'expert')->join('experts', 'users.id', '=', 'experts.client_id')->select('users.*', 'experts.service')->get();
+        return view('expert', ['users' => $user]);
     }
 }

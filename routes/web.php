@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ********************************************************************** //
+// ******************************** HOME PAGE ************************************** //
 
 Route::get('/', function () {
     return view('homePage');
@@ -22,11 +22,11 @@ Route::get('/', function () {
 // ********************************************************************** //
 
 Route::get('/admin/index', 'ProjectController@index')->name('admin-index');
-// ********************************************************************** //
+// ******************************** CRUD USER ************************************** //
 Route::resource('user', UsersController::class);
 Route::post('/update/{id}', 'UsersController@updateProfile')->name('update-profile');
 
-// ********************************************************************** //
+// ********************************* AUTHENTICATION ************************************* //
 Route::get('/inscription', 'Auth\AuthController@register')->name('sign-up');
 Route::post('/inscription', 'Auth\AuthController@storeUser');
 
@@ -34,10 +34,9 @@ Route::get('/login', 'Auth\AuthController@login')->name('login');
 Route::post('/login', 'Auth\AuthController@authenticate');
 
 Route::get('logout', 'Auth\AuthController@logout')->name('logout');
-// ********************************************************************** //
 
 
-// *********************************************************************** //
+// ******************************** DEPOT DES DOSSIER *************************************** //
 Route::get('/{id}/Dépot_dossier', 'ProjectController@filesUploadView')->name('uploadF');
 Route::post('/{id}/Dépot_dossier', 'ProjectController@addProject');
 Route::post('/update-project', 'ProjectController@updateProject')->name('dossier.update');
@@ -46,26 +45,24 @@ Route::get('/edit-project/{id}', 'ProjectController@editProject')->name('edit.do
 
 Route::get('/download-zip/{fileName}', 'ProjectController@downloadZip')->name('download.zip');
 
-// ************************************************************************ //
+// ********************************* VALIDATE PROJECT *************************************** //
 
 Route::get('/validate/{id}/{proTitle}', 'ProjectController@addToValidationQueueView')->name('sendProjectToADMIN');
 Route::post('/validate', 'ProjectController@addToValidationQueue')->name('project.validate');
 
-// *********************************************************************** //
+// *********************************VIDEO CHAT CONFERENCE************************************** //
 
-Route::post('/video-call', 'ExpertController@videoCallPost')->name('videocallpost');
-Route::get('/video-call/{email}/{room}', 'ExpertController@videoCall')->name('videocall');
-Route::get('/consultation-en-ligne', 'ExpertController@index')->name('expertChat');
+Route::post('/video-call', 'VideoChatConferenceController@videoCallPost')->name('videocallpost');
+Route::get('/video-call/{email}/{room}', 'VideoChatConferenceController@videoCall')->name('videocall');
 
-// *********************************************************************** //
+// ******************************** PAIEMENT *************************************** //
 
 Route::get('checkout/{operation}', 'CheckoutController@checkout')->name('checkout');
 Route::post('checkout', 'CheckoutController@afterpayment')->name('checkout.credit-card');
 
 
-Route::get('/investisseur', function () {
-    return view('investor');
-})->name('investor');
+Route::get('/investisseur', 'UsersController@investors')->name('investor');
+Route::get('/consultation-en-ligne', 'UsersController@experts')->name('expertChat');
 
 Route::get('/nos-service', function () {
     return view('our-service');
