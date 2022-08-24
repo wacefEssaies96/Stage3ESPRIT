@@ -8,9 +8,7 @@ use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 use App\Mail\VideoCallInvitation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Twilio\Jwt\Grants\ChatGrant;
-use Twilio\Rest\Client;
 
 class AccessTokenController extends Controller
 {

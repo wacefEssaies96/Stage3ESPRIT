@@ -128,12 +128,23 @@
                     <h5 dir="rtl" id="rs-des">ملعب 974 بقطر
                     </h5>
                 </div>
-                <img style="margin-left: 35%; margin-right: -50%; border-radius: 15% 10%; width: 45vh; "
+                <img style="margin-left: 20px; border-radius:10px; width: 45vh; float: right;"
                     src="{{ asset('images/projects/stage.jpg') }}">
+                <br>
+                <br>
                 <p dir="rtl">
                     أو كما كان يعرف سابقاً استاد رأس أبو عبود هو ملعب كرة قدم، يتسع لـ40,000 متفرج. تمّ بنائه من حاويات
                     الشّحن البحري ووحدات بناء قابلة للتفكيك وهو من بين مشاريع الشراكة بين القطاع العام والخاص في قطر
                 </p>
+                <br>
+                <br>
+                <br>
+                
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
 
                 <div class="right-side-description">
                     <h5 dir="rtl" id="rs-des">مستشفى باشاك شهير في أسطنبول

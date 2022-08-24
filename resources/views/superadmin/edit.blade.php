@@ -177,8 +177,8 @@
     <script language="JavaScript" type="text/javascript" src="{{ asset('js/connexion/addUser.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        var user = {!! json_encode($user->toArray(), JSON_HEX_TAG) !!};
-        var v = {!! json_encode($v->toArray(), JSON_HEX_TAG) !!};
+       var user = {!! json_encode($user) !!};
+        var v = {!! json_encode($v) !!};
         if (user.type == 'Expert') {
             e();
             document.getElementById('service').value = v.service;

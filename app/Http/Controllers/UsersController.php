@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Expert;
 use App\Investor;
 use App\Paiement;
-use App\Projects;
 use App\User;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class UsersController extends Controller
 {
@@ -98,9 +98,16 @@ class UsersController extends Controller
     public function show($id)
     {
         if (Auth::user()) {
+            $v = '';
+            if (Auth::user()->type == 'Expert') {
+                $v = Expert::where('client_id', Auth::user()->id)->first();
+            }
+            if (Auth::user()->type == 'Investor') {
+                $v = Investor::where('client_id', Auth::user()->id)->first();
+            }
             return view('_client/profile', [
                 'user' => User::find(Auth::user()->id),
-                'projects' => Projects::where('client_id', Auth::user()->id)->get()
+                'v' => $v
             ]);
         }
         return view('error');
@@ -171,13 +178,13 @@ class UsersController extends Controller
                 ]);
             }
         } else {
-            if ($request->type = 'Expert') {
+            if ($request->type == 'Expert') {
                 $expert = Expert::where('client_id', $user->id)->first();
                 $expert->update([
                     'service' => $request->service
                 ]);
             }
-            if ($request->type = 'Investor') {
+            if ($request->type == 'Investor') {
                 $investor = Investor::where('client_id', $user->id)->first();
                 $investor->update([
                     'description' => $request->description,
@@ -199,37 +206,74 @@ class UsersController extends Controller
     }
     public function updateProfile(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:75',
-            'email' => 'required|string|email|max:255',
-            'gender' => 'required|string|max:6',
-            'address' => 'required|string|max:50',
-            'phoneNbr' => 'required|regex:/[0-9]/|min:8'
-        ]);
+        if ($request->opwd) {
+            $request->validate([
+                'name' => 'required|string|max:75',
+                'email' => 'required|string|email|max:255',
+                'gender' => 'required|string|max:6',
+                'address' => 'required|string|max:50',
+                'pwd' => 'required|min:8|max:20',
+                'rePwd' => 'required|same:pwd',
+                'phoneNbr' => 'required|regex:/[0-9]/|min:8'
+            ]);
+        } else {
+            $request->validate([
+                'name' => 'required|string|max:75',
+                'email' => 'required|string|email|max:255',
+                'gender' => 'required|string|max:6',
+                'address' => 'required|string|max:50',
+                'phoneNbr' => 'required|regex:/[0-9]/|min:8'
+            ]);
+        }
         $user = User::find($id);
         if ($request->file != null) {
             $input = $request->all();
             $file = $request->file('file');
             $input['file'] = $file->getClientOriginalName();
             $file->move(public_path('upload'), $file->getClientOriginalName());
-            $user->update([
-                'image' => $file->getClientOriginalName(),
-                'name' => $request->name,
-                'email' => $request->email,
-                'gender' => $request->gender,
-                'state' => $request->address,
-                'phoneNbr' => $request->phoneNbr,
-                'password' => $user->password,
-            ]);
+            if ($request->opwd) {
+                if (Hash::check($request->opwd, $user->password)) {
+                    $user->update([
+                        'image' => $file->getClientOriginalName(),
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'gender' => $request->gender,
+                        'state' => $request->address,
+                        'phoneNbr' => $request->phoneNbr,
+                        'password' => Hash::make($request->pwd),
+                    ]);
+                } else {
+                    return Redirect::back()->withErrors(['p' => 'Mot de passe erroné']);
+                }
+            }
         } else {
-            $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'gender' => $request->gender,
-                'state' => $request->address,
-                'phoneNbr' => $request->phoneNbr,
-                'password' => $user->password,
-                'image' => $user->image,
+            if ($request->opwd) {
+                if (Hash::check($request->opwd, $user->password)) {
+                    $user->update([
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'gender' => $request->gender,
+                        'state' => $request->address,
+                        'phoneNbr' => $request->phoneNbr,
+                        'password' => Hash::make($request->pwd),
+                        'image' => $user->image,
+                    ]);
+                } else {
+                    return Redirect::back()->withErrors(['p' => 'Mot de passe erroné']);
+                }
+            }
+        }
+        if ($user->type == 'Expert') {
+            $expert = Expert::where('client_id', $user->id)->first();
+            $expert->update([
+                'service' => $request->service
+            ]);
+        }
+        if ($user->type == 'Investor') {
+            $investor = Investor::where('client_id', $user->id)->first();
+            $investor->update([
+                'description' => $request->description,
+                'fonds' => $request->fonds
             ]);
         }
         return redirect()->route('user.show', [Auth::user()->id]);
@@ -243,8 +287,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()->type != 'Super admin')
-            return $this->accessDenied();
         $user = User::findOrFail($id);
         if ($user->type == 'Expert') {
             $expert = Expert::where('client_id', $user->id)->first();
@@ -255,14 +297,18 @@ class UsersController extends Controller
             $investor->delete();
         }
         $user->delete();
-        return redirect()->route('user.index')->with('success', 'User deleted successfully');
+        if (Auth::user()->type != 'Super admin'){
+            return redirect()->route('user.index')->with('success', 'User deleted successfully');
+        } 
+        return redirect()->route('home')->with('success', 'User deleted successfully');
     }
 
     public function accessDenied()
     {
         return redirect()->route('home');
     }
-    public function investors(){
+    public function investors()
+    {
         $investors = User::join('investors', 'users.id', '=', 'investors.client_id')->select('users.*', 'investors.description', 'investors.fonds')->get();
         return view('investor', [
             'investors' => $investors

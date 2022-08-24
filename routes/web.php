@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get('/admin/index', 'ProjectController@index')->name('admin-index');
 // ******************************** CRUD USER ************************************** //
 Route::resource('user', UsersController::class);
-Route::post('/update/{id}', 'UsersController@updateProfile')->name('update-profile');
+Route::put('/update/{id}', 'UsersController@updateProfile')->name('update-profile');
 
 // ********************************* AUTHENTICATION ************************************* //
 Route::get('/inscription', 'Auth\AuthController@register')->name('sign-up');
