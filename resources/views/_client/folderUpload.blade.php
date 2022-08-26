@@ -22,6 +22,7 @@
     <script src=" {{ asset('js/_client/folderUpload.js') }} "></script>
 
     <link rel="stylesheet" href=" {{ asset('css/base.css') }} ">
+    <link rel="stylesheet" href=" {{ asset('css/_client/modal.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/folderUpload.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/slide-container.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/upload-notification.css') }} ">
@@ -310,7 +311,6 @@
     <script>
         beginSlide();
     </script>
-    <script src=" {{ asset('js/_client/fail_succ_popUp.js') }} "></script>
 
 </body>
 

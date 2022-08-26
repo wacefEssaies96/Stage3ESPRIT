@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gérer mon compte</title>
-
-    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{{ asset('css/_client/profileStructure.css') }}">
     <link rel="stylesheet" href="{{ asset('css/_client/profile.css') }}">
     <link rel="stylesheet" href="{{ asset('css/image.css') }}">
     <link rel="stylesheet" href=" {{ asset('css/connexion/addUser.css') }} ">
+    <link rel="stylesheet" href=" {{ asset('css/modals/successModal.css') }} ">
+
+    <link rel="stylesheet" href=" {{ asset('css/modals/failModal.css') }} ">
+    <link rel="stylesheet" href=" {{ asset('css/_client/upload-notification.css') }} ">
 
 </head>
 
@@ -36,11 +36,61 @@
         {{-- ------------------ --}}
 
         <div class="page-header">
-            <div class="logo" onclick="goHome()" style="cursor: pointer;">
-                <img id="logo" src="{{ asset('images/logo.png') }}">
-            </div>
             <div class="notification">
-                <i style="font-size:18px; color: #9c9c9c;" class="fa">&#xf0a2;</i>
+                @if ($message = Session::get('success'))
+                    <div class="push-success-notification">
+                        <i class="bell fa"><a href="#success_tic" data-target="#success_tic"
+                                data-toggle="modal">&#xf0f3;</a></i>
+                    </div>
+                    <!-- Modal -->
+                    <div id="success_tic" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <a class="close" href="#" data-dismiss="modal">&times;</a>
+                                <div class="page-body">
+                                    <div class="head">
+                                        <h3 style="margin-top:5px;">{{ $message }}</h3>
+                                        {{-- <h4>Lorem ipsum dolor sit amet</h4> --}}
+                                    </div>
+
+                                    <h1 style="text-align:center;">
+                                        <div class="checkmark-circle">
+                                            <div class="background"></div>
+                                            <div class="checkmark draw"></div>
+                                        </div>
+                                        <h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                @if ($message = Session::get('error'))
+                    <div class="push-fail-notification">
+                        <i class="bell fa"><a href="#fail" data-target="#fail" data-toggle="modal">&#xf0f3;</a></i>
+                    </div>
+                    <!-- Modal HTML -->
+                    <div id="fail" class="modal fade">
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header justify-content-center">
+                                    <div class="icon-box">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <h4>Ooops!</h4>
+                                    <p>{{ $message }}</p>
+                                    <button class="btn btn-success" data-dismiss="modal">Try Again</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
             </div>
             <div class="user_name">
                 {{ Auth::user()->name }}
@@ -66,8 +116,8 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-item box-item">
-                                    <input style="margin:0;" type="text" name="name" value="{{ $user->name }}"
-                                        placeholder="Nom" data-required required>
+                                    <input style="margin:0;" type="text" name="name"
+                                        value="{{ $user->name }}" placeholder="Nom" data-required required>
                                     @error('name')
                                         <span style="color: red">
                                             {{ $message }}
@@ -179,14 +229,15 @@
 
                                 </div>
 
-                                <p id="ppp" onclick="pass()" style="color: #fdc541; cursor: pointer;">Cliquer ici pour
+                                <p id="ppp" onclick="pass()" style="color: #fdc541; cursor: pointer;">Cliquer
+                                    ici pour
                                     modifier le mot de passe</p>
-
-                                
                                 <div id="pass">
 
                                 </div>
-                                <p onclick="remove()" style="border-radius: 20px; margin-left: 30%; margin-right: 30%; color:aliceblue; background-color: red; cursor: pointer;">Supprimer votre compte
+                                <p onclick="remove()"
+                                    style="border-radius: 20px; margin-left: 30%; margin-right: 30%; color:aliceblue; background-color: red; cursor: pointer;">
+                                    Supprimer votre compte
                                 </p>
                                 @error('p')
                                     <span style="color: red">
@@ -221,9 +272,18 @@
         {{-- ------------------ --}}
         {{-- ------------------ --}}
     </div>
+
     {{-- ############################################### --}}
     <script language="JavaScript" type="text/javascript" src="{{ asset('js/connexion/addUser.js') }}"></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
     <script>
         var loadFile = function(event) {
             var image = document.getElementById('preview');
@@ -250,8 +310,12 @@
         function logout() {
             document.getElementById('logout').click();
         }
-        function remove(){
-            document.getElementById('r').click();
+
+        function remove() {
+            var retVal = confirm("Voulez-vous vraiment supprimer votre compte ?");
+            if (retVal == true) {
+                document.getElementById('r').click();
+            }
         }
     </script>
 

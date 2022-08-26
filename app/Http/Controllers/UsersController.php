@@ -29,6 +29,11 @@ class UsersController extends Controller
         return view('superadmin.index', ['users' => User::where('id', '!=', Auth::user()->id)->get()]);
     }
 
+    public function searchByName(Request $request){
+        $users = User::where('name', 'like', '%'.$request->search.'%')->get();
+        return view('superadmin.index', ['users' =>$users]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -86,7 +91,7 @@ class UsersController extends Controller
                 'service' => $request->service
             ]);
         }
-        return $this->index();
+        return redirect()->route('user.index')->with('success', 'Utilisateur ajouté avec succés');
     }
 
     /**
@@ -202,11 +207,11 @@ class UsersController extends Controller
             'phoneNbr' => $request->phoneNbr
         ]);
 
-        return redirect()->route('user.index')->with('success', 'User updated successfully');
+        return redirect()->route('user.index')->with('success', 'Utilisateur modifié avec succés');
     }
     public function updateProfile(Request $request, $id)
     {
-        if ($request->opwd) {
+        if ($request->opwd != null) {
             $request->validate([
                 'name' => 'required|string|max:75',
                 'email' => 'required|string|email|max:255',
@@ -214,7 +219,7 @@ class UsersController extends Controller
                 'address' => 'required|string|max:50',
                 'pwd' => 'required|min:8|max:20',
                 'rePwd' => 'required|same:pwd',
-                'phoneNbr' => 'required|regex:/[0-9]/|min:8'
+                'phoneNbr' => 'required|regex:/[0-9]/|min:8|max:8'
             ]);
         } else {
             $request->validate([
@@ -222,7 +227,7 @@ class UsersController extends Controller
                 'email' => 'required|string|email|max:255',
                 'gender' => 'required|string|max:6',
                 'address' => 'required|string|max:50',
-                'phoneNbr' => 'required|regex:/[0-9]/|min:8'
+                'phoneNbr' => 'required|regex:/[0-9]/|min:8|max:8'
             ]);
         }
         $user = User::find($id);
@@ -231,36 +236,27 @@ class UsersController extends Controller
             $file = $request->file('file');
             $input['file'] = $file->getClientOriginalName();
             $file->move(public_path('upload'), $file->getClientOriginalName());
-            if ($request->opwd) {
+            if ($request->opwd != null) {
                 if (Hash::check($request->opwd, $user->password)) {
-                    $user->update([
-                        'image' => $file->getClientOriginalName(),
-                        'name' => $request->name,
-                        'email' => $request->email,
-                        'gender' => $request->gender,
-                        'state' => $request->address,
-                        'phoneNbr' => $request->phoneNbr,
-                        'password' => Hash::make($request->pwd),
-                    ]);
+                    $this->updateUserWithPwd($user, $request);
                 } else {
                     return Redirect::back()->withErrors(['p' => 'Mot de passe erroné']);
                 }
             }
-        } else {
-            if ($request->opwd) {
+            else{
+                $this->updateUserWithoutPwd($user, $request);
+            }
+        } 
+        else {
+            if ($request->opwd != null) {
                 if (Hash::check($request->opwd, $user->password)) {
-                    $user->update([
-                        'name' => $request->name,
-                        'email' => $request->email,
-                        'gender' => $request->gender,
-                        'state' => $request->address,
-                        'phoneNbr' => $request->phoneNbr,
-                        'password' => Hash::make($request->pwd),
-                        'image' => $user->image,
-                    ]);
+                    $this->updateUserWithoutPwd($user, $request);
                 } else {
                     return Redirect::back()->withErrors(['p' => 'Mot de passe erroné']);
                 }
+            }
+            else{
+                $this->updateUserWithoutPwd($user, $request);
             }
         }
         if ($user->type == 'Expert') {
@@ -276,7 +272,31 @@ class UsersController extends Controller
                 'fonds' => $request->fonds
             ]);
         }
-        return redirect()->route('user.show', [Auth::user()->id]);
+        return redirect()->route('user.show', [Auth::user()->id])->with('success', 'Votre profile à été modifié avec succées.');
+    }
+
+    public function updateUserWithPwd($user, $request){
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'state' => $request->address,
+            'phoneNbr' => $request->phoneNbr,
+            'password' => Hash::make($request->pwd),
+            'image' => $user->image,
+        ]);
+        return true;
+    }
+    public function updateUserWithoutPwd($user, $request){
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'state' => $request->address,
+            'phoneNbr' => $request->phoneNbr,
+            'image' => $user->image,
+        ]);
+        return true;
     }
 
     /**
@@ -297,10 +317,10 @@ class UsersController extends Controller
             $investor->delete();
         }
         $user->delete();
-        if (Auth::user()->type != 'Super admin'){
-            return redirect()->route('user.index')->with('success', 'User deleted successfully');
+        if (Auth::user()->type == 'Super admin'){
+            return redirect()->route('user.index')->with('success', 'Utilisateur supprimé avec succés');
         } 
-        return redirect()->route('home')->with('success', 'User deleted successfully');
+        return redirect()->route('home')->with('success', 'Utilisateur supprimé avec succés');
     }
 
     public function accessDenied()

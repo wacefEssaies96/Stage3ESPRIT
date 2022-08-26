@@ -21,8 +21,9 @@ Route::get('/', function () {
 
 // ********************************************************************** //
 
-Route::get('/admin/index', 'ProjectController@index')->name('admin-index');
 // ******************************** CRUD USER ************************************** //
+Route::post('/user/search', 'UsersController@searchByName')->name('user.search');
+Route::get('/admin/index', 'ProjectController@index')->name('admin-index');
 Route::resource('user', UsersController::class);
 Route::put('/update/{id}', 'UsersController@updateProfile')->name('update-profile');
 
