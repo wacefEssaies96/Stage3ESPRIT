@@ -26,24 +26,26 @@
             <button class="contact100-btn-hide">
                 <i class="fa fa-close" aria-hidden="true"></i>
             </button>
-            <form class="contact100-form validate-form" autocomplete="off">
+            <form class="contact100-form validate-form" autocomplete="off" method="POST"
+                action="{{ route('contact.store') }}">
+                @csrf
                 <span class="contact100-form-title">
                     Contacter Nous
                 </span>
                 <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Le nom est obligatoire">
                     <span class="label-input100">Votre nom</span>
-                    <input class="input100" type="text" name="name" placeholder="Taper votre nom">
+                    <input required class="input100" type="text" name="name" placeholder="Taper votre nom">
                     <span class="focus-input100"></span>
                 </div>
                 <div class="wrap-input100 rs1-wrap-input100 validate-input"
                     data-validate="L'e-mail est obligatoire: ex@abc.xyz">
                     <span class="label-input100">Email</span>
-                    <input class="input100" type="text" name="email" placeholder="Tapez votre e-mail">
+                    <input required class="input100" type="email" name="email" placeholder="Tapez votre e-mail">
                     <span class="focus-input100"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Le message ne doit pas etre vide">
                     <span class="label-input100">Message</span>
-                    <textarea class="input100" name="message" placeholder="Votre message ici..."></textarea>
+                    <textarea required class="input100" name="message" placeholder="Votre message ici..."></textarea>
                     <span class="focus-input100"></span>
                 </div>
                 <div class="container-contact100-form-btn">

@@ -24,7 +24,7 @@
                         src="{{ asset('images/logo.png') }}" alt="PPP 90" srcset=""></a>
                 <a href=" {{ route('about-us') }} " class="menu-item bgeff">Qui sommes nous ?</a>
                 <a href=" {{ route('services') }} " class="menu-item bgeff">Nos services</a>
-                <a href=" {{ route('contact') }} " class="menu-item bgeff">Contacter nous</a>
+                <a href=" {{ route('contact.create') }} " class="menu-item bgeff">Contacter nous</a>
                 <a href=" {{ route('projects') }} " class="menu-item bgeff">Exemple de ppp realisés</a>
             </div>
             <div class="rightSide">
@@ -119,9 +119,6 @@
                 </div>
             </div>
         </footer>
-
     </div>
-
 </body>
-
 </html>

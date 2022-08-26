@@ -52,11 +52,8 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        if (Auth::user()->type != 'Super admin')
-            return $this->accessDenied();
-        $request->validate([
+    public function rules(){
+        return [
             'name' => 'required|string|max:75',
             'email' => 'required|string|email|max:255|unique:users',
             'gender' => 'required|string|max:6',
@@ -65,8 +62,13 @@ class UsersController extends Controller
             'pwd' => 'required|min:8|max:20',
             'rePwd' => 'required|same:pwd',
             'phoneNbr' => 'required|regex:/[0-9]/|min:8|unique:users'
-        ]);
-
+        ];
+    }
+    public function store(Request $request)
+    {
+        if (Auth::user()->type != 'Super admin')
+            return $this->accessDenied();
+        $request->validate($this->rules());
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -153,16 +155,7 @@ class UsersController extends Controller
     {
         if (Auth::user()->type != 'Super admin')
             return $this->accessDenied();
-        $request->validate([
-            'name' => 'required|string|max:75',
-            'email' => 'required|string|email|max:255',
-            'gender' => 'required|string|max:6',
-            'gender2' => 'required|string|max:12',
-            'address' => 'required|string|max:50',
-            'pwd' => 'required|min:8|max:20',
-            'rePwd' => 'required|same:pwd',
-            'phoneNbr' => 'required|regex:/[0-9]/|min:8'
-        ]);
+        $request->validate($this->rules());
         $user = User::find($id);
         if ($user->type != $request->gender2) {
             if ($user->type == 'Expert') {

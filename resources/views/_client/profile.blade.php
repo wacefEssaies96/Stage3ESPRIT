@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{{ asset('css/image.css') }}">
     <link rel="stylesheet" href=" {{ asset('css/connexion/addUser.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/modals/successModal.css') }} ">
-
     <link rel="stylesheet" href=" {{ asset('css/modals/failModal.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/upload-notification.css') }} ">
 
@@ -36,6 +35,9 @@
         {{-- ------------------ --}}
 
         <div class="page-header">
+            <div class="logo">
+                <a href="{{route('home')}}"><img style="max-height: 50px;" src="{{asset('images/logo.png')}}"></a>
+            </div>
             <div class="notification">
                 @if ($message = Session::get('success'))
                     <div class="push-success-notification">

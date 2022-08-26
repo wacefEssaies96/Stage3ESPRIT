@@ -61,6 +61,10 @@ Route::get('/video-call/{email}/{room}', 'VideoChatConferenceController@videoCal
 Route::get('checkout/{operation}', 'CheckoutController@checkout')->name('checkout');
 Route::post('checkout', 'CheckoutController@afterpayment')->name('checkout.credit-card');
 
+// ******************************** CONTACT *************************************** //
+Route::post('/contact/search', 'ContactController@search')->name('contact.search');
+Route::resource('contact', ContactController::class, ['only' => ['create', 'store', 'index', 'destroy', 'show']]);
+
 
 Route::get('/investisseur', 'UsersController@investors')->name('investor');
 Route::get('/consultation-en-ligne', 'UsersController@experts')->name('expertChat');
@@ -76,11 +80,6 @@ Route::get('/eligibilite', function () {
 Route::get('/qui-somme-nous', function () {
     return view('about-us');
 })->name('about-us');
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
 Route::get('/projects', function () {
     return view('projects');
 })->name('projects');
