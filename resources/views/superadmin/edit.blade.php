@@ -71,11 +71,13 @@
                             <div class="radio-label">
                                 <label class="label">Type</label>
                             </div>
-                            <div class="form-item">
-                                <input id="admin" type="radio" name="gender2" value="Admin" onclick="c()"
-                                    data-once {{ $user->type == 'Admin' ? 'checked' : '' }}>
-                                <label for="client">Admin</label>
-                            </div>
+                            @if (Auth::user()->type == 'Super admin')
+                                <div class="form-item">
+                                    <input id="admin" type="radio" name="gender2" value="Admin" onclick="c()"
+                                        data-once {{ $user->type == 'Admin' ? 'checked' : '' }}>
+                                    <label for="client">Admin</label>
+                                </div>
+                            @endif
                             <div class="form-item">
                                 <input id="client" type="radio" name="gender2" value="Client" onclick="c()"
                                     data-once {{ $user->type == 'Client' ? 'checked' : '' }}>
@@ -166,7 +168,6 @@
                     </div>
                     <div class="form-item">
                         <button type="submit" id="submit" class="submit">Enregistrer</button>
-                        <button type="button" class="fa fa-remove" onclick="reset()"></button>
                     </div>
                 </form>
             </main>
@@ -177,7 +178,7 @@
     <script language="JavaScript" type="text/javascript" src="{{ asset('js/connexion/addUser.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-       var user = {!! json_encode($user) !!};
+        var user = {!! json_encode($user) !!};
         var v = {!! json_encode($v) !!};
         if (user.type == 'Expert') {
             e();

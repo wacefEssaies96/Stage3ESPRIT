@@ -43,8 +43,10 @@ class ProjectController extends Controller
             $project->update([
                 'validated' => 'true'
             ]);
+        } else {
+            return redirect()->route('edit.dossier', [$req->theProIdentifier])->with('error', 'Aucun administrateur inscrit dans votre zone !');
         }
-        return redirect()->route('user.show', ['id', Auth::user()->id]);
+        return redirect()->route('home')->with('success', 'Dossier déposé avec succés !');
     }
     // Files view
     public function filesUploadView()
@@ -56,7 +58,7 @@ class ProjectController extends Controller
         return view('_client/folderUpload');
     }
 
-    // Add project deatils
+    // Add project details
     public function addProject(Request $req, $id)
     {
         $req->validate([
@@ -71,8 +73,8 @@ class ProjectController extends Controller
         // ***************************** Upload Folder ********************************* //
         $input = $req->all();
         $file = $req->file('file');
-        $input['file'] = $file->getClientOriginalName();
-        $file->move(public_path('upload'), $file->getClientOriginalName());
+        $input['file'] = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('upload'), $input['file']);
         // **************************************************************************** //
         // ***************************** Upload Pro Info. ***************************** //
         $projet = Projects::create([
@@ -92,18 +94,19 @@ class ProjectController extends Controller
         ]);
         $paiement = Paiement::where('client_id', Auth::user()->id)->where('operation', 'depot')->first();
         $paiement->delete();
-        return redirect()->route('edit.dossier', $projet->id);
+        return redirect()->route('edit.dossier', $projet->id)->with(
+            'success',
+            'Données bien enregistrées, vous devez maintenant sauvegardées tous. '
+        );
     }
 
     public function editProject($id)
     {
         $project = Projects::find($id);
         $file = File::where('project_name', $project->proTitle)->first();
-        $success = 'Données bien enregistrées, vous devez maintenant sauvegardées tous. ';
         return view('_client.editProject', [
             'proData' => $project,
             'file' => $file,
-            'success' => $success
         ]);
     }
     public function downloadZip($fileName)
@@ -114,23 +117,43 @@ class ProjectController extends Controller
 
     public function updateProject(Request $req)
     {
-        $req->validate([
-            'proImp' => 'required',
-            'proDesc' => 'required',
-            'proInteg' => 'required',
-            'proTech' => 'required|max:255',
-            'file' => 'required|mimes:zip|max:2048'
-        ]);
+        if ($req->file == null) {
+            $req->validate([
+                'proImp' => 'required',
+                'proDesc' => 'required',
+                'proInteg' => 'required',
+                'proTech' => 'required|max:255'
+            ]);
+        } else {
+            $req->validate([
+                'proImp' => 'required',
+                'proDesc' => 'required',
+                'proInteg' => 'required',
+                'proTech' => 'required|max:255',
+                'file' => 'required|mimes:zip|max:2048'
+            ]);
+            $input = $req->all();
+            $file = $req->file('file');
 
-        // ###############################################################################
-        $input = $req->all();
-        $file = $req->file('file');
-        $input['file'] = $file->getClientOriginalName();
-        $file->move(public_path('upload'), $file->getClientOriginalName());
-        // ###############################################################################
+            $input['file'] = time() . '.' . $file->getClientOriginalExtension();
+
+            $file->move(public_path('upload'), $input['file']);
+
+            $file = File::find($req->fileid);
+
+            $path = str_replace('\\', '/', public_path('upload\\' . $file->data));
+            if (file_exists($path)) {
+                unlink($path);
+            } else {
+                return view('error');
+            }
+            $file->update([
+                'data' => $input['file'],
+                'project_name' => $req->proTitle
+            ]);
+        }
 
         $project = Projects::find($req->id);
-        $file = File::find($req->fileid);
 
         $project->update([
             'proTitle' => $req->proTitle,
@@ -139,12 +162,11 @@ class ProjectController extends Controller
             'proInteg' => $req->proInteg,
             'proTech' => $req->proTech
         ]);
-        $file->update([
-            'data' => $input['file'],
-            'project_name' => $req->proTitle
-        ]);
 
-        return redirect()->route('edit.dossier', $req->id);
+        return redirect()->route('edit.dossier', $req->id)->with(
+            'success',
+            'Données bien enregistrées, vous devez maintenant sauvegardées tous. '
+        );
     }
 
     public function removeFile($id)
@@ -164,12 +186,26 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = Projects::join('users', 'users.id', '=', 'projects.client_id')->select('projects.*', 'users.state')->get();
-        $result = [];
-        foreach ($projects as $item) {
-            if ($item->state == Auth::user()->state)
-                array_push($result, $item);
+        if (Auth::user()->type == 'Admin' || Auth::user()->type == 'Super admin') {
+            if (Auth::user()->type == 'Super admin') {
+                $result = Projects::all();
+            } else {
+                $projects = Projects::join('users', 'users.id', '=', 'projects.client_id')->select('projects.*', 'users.state')->get();
+                $result = [];
+                foreach ($projects as $item) {
+                    if ($item->state == Auth::user()->state)
+                        array_push($result, $item);
+                }
+            }
+            return view('admin.index', ['projects' => $result]);
         }
-        return view('admin.index', ['projects' => $result]);
+        return redirect()->route('home')->with('error', 'Vous n\'avez pas l\'accées !');
+    }
+    public function search(Request $request)
+    {
+        $projects = Projects::where('proTitle', 'like', '%' . $request->search . '%')->get();
+        return view('admin.index', [
+            'contacts' => $projects
+        ]);
     }
 }

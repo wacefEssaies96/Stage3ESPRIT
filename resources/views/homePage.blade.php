@@ -25,7 +25,15 @@
                 <a href=" {{ route('about-us') }} " class="menu-item bgeff">Qui sommes nous ?</a>
                 <a href=" {{ route('services') }} " class="menu-item bgeff">Nos services</a>
                 <a href=" {{ route('contact.create') }} " class="menu-item bgeff">Contacter nous</a>
-                <a href=" {{ route('projects') }} " class="menu-item bgeff">Exemple de ppp realisés</a>
+                <a style="width: 200px;" href=" {{ route('projects') }} " class="menu-item bgeff">Exemple de ppp
+                    realisés</a>
+                @if (Auth::user())
+                    @if (Auth::user()->type == 'Super admin' || Auth::user()->type == 'Admin')
+                        <a href=" {{ route('user.index') }} "
+                            class="menu-item bgeff">Dashboard</a>
+                    @endif
+                @endif
+
             </div>
             <div class="rightSide">
                 <a href="" class="menu-item bgeff" style="border-right: white 1px solid"><span
@@ -121,4 +129,5 @@
         </footer>
     </div>
 </body>
+
 </html>

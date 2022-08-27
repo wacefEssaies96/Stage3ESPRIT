@@ -14,7 +14,6 @@ class CheckoutController extends Controller
     }
     public function checkout($operation)
     {
-
         // Enter Your Stripe Secret
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -44,7 +43,7 @@ class CheckoutController extends Controller
         ]);
 
         if ($request->operation == 'depot') {
-            return redirect('/' . Auth::user()->id . '/Dépot_dossier');
+            return redirect()->route('uploadF',[Auth::user()->id]);
         }
         if ($request->operation == 'expert') {
             return redirect()->route('expertChat');

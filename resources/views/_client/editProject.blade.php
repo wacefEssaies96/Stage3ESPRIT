@@ -22,6 +22,7 @@
     <script src=" {{ asset('js/_client/folderUpload.js') }} "></script>
 
     <link rel="stylesheet" href=" {{ asset('css/base.css') }} ">
+    <link rel="stylesheet" href=" {{ asset('css/_client/modal.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/folderUpload.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/slide-container.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/upload-notification.css') }} ">
@@ -66,27 +67,26 @@
                     @csrf
                     <div class="form slides fade">
                         @php
-                            $msg = '';
-                            $_errors = null;
-                            $proTitle = '';
+                            $successMsg = '';
+                            $errorMsg = '';
                         @endphp
-                        @isset($success)
+                        @if ($message = Session::get('success'))
                             <div class="push-success-notification">
                                 <i class="bell fa"><a href="#id02">&#xf0f3;</a></i>
                             </div>
                             @php
-                                $msg = $success;
-                                $selector = 0;
+                                $successMsg = $message;
                             @endphp
                         @endisset
-                        @if (count($errors) > 0)
+                        @if ($message = Session::get('error'))
                             <div class="push-fail-notification">
                                 <i class="bell fa"><a href="#id01">&#xf0f3;</a></i>
                             </div>
                             @php
-                                $_errors = $errors;
+                                $errorMsg = $message;
                             @endphp
                         @endif
+
                         {{-- ====================================== **1** =============================== --}}
                         <div class="field">
                             <input hidden type="text" name="id" value="{{ $proData->id }}" />
@@ -97,7 +97,8 @@
                                     <i>{{ $message }}</i>
                                 </span>
                             @enderror
-                            <label for="input" alt="Nom du projet" placeholder="Ce champ est obligatoire"></label>
+                            <label for="input" alt="Nom du projet"
+                                placeholder="Ce champ est obligatoire"></label>
                         </div>
                         {{-- ======================================= **2** ============================== --}}
                         <div class="field">
@@ -152,82 +153,73 @@
                                 onclick="switchButton(2)">Suivant</button>
                         </div>
                         {{-- ============================================================================ --}}
+                </div>
+                <div class="attachment slides fade">
+                    <h3 style="width:100%; vertical-align: middle;">Fichier(s) à transférer</h3>
+                    <div class="icon">
+                        <a href="{{ route('download.zip', [$file->data]) }}">
+                            <img id="preview" src="{{ asset('/images/zip.png') }}" alt="NO IMAGE">
+                            <p style="text-align: center;">{{ $file->data }}</p>
+                        </a>
                     </div>
-                    <div class="attachment slides fade">
-                        <h3 style="width:100%; vertical-align: middle;">Fichier(s) à transférer</h3>
-                        <div class="icon">
-                            <a href="{{ route('download.zip', [$file->data]) }}">
-                                <img id="preview" src="{{ asset('/images/zip.png') }}" alt="NO IMAGE">
-                                <p style="text-align: center;">{{ $file->data }}</p>
-                            </a>
-                        </div>
-                        <div class="addBtn">
-                            <button class="trigger">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                <input hidden type="text" name="fileid" value="{{ $file->id }}" />
-                                <input id="uploadedFiles" type="file" name="file" value="{{ $file->data }}"
-                                    onchange="displayPreview(event)">
-                            </button>
-                        </div>
-                        <div class="btns">
-                            <button type="button" id="precedent" class="btn2"
-                                onclick="switchButton(1)">Précédent</button>
-                            <button class="btn1" type="submit">Modifier</button>
-                            @if (isset($success))
-                                <button class="btn2" type="button"
-                                    onclick="window.location='{{ route('sendProjectToADMIN', [Auth::user()->id, $proData->id]) }}'">Sauvegarder</button>
-                            @endif
-                        </div>
+                    <div class="addBtn">
+                        <button class="trigger">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <input hidden type="text" name="fileid" value="{{ $file->id }}" />
+                            <input id="uploadedFiles" type="file" name="file" value="{{ $file->data }}"
+                                onchange="displayPreview(event)">
+                        </button>
                     </div>
-                </form>
+                    <div class="btns">
+                        <button type="button" id="precedent" class="btn2"
+                            onclick="switchButton(1)">Précédent</button>
+                        <button class="btn1" type="submit">Modifier</button>
+                        <button class="btn2" type="button"
+                            onclick="window.location='{{ route('sendProjectToADMIN', [Auth::user()->id, $proData->id]) }}'">Sauvegarder</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{-- ***************************************************************************************************************** --}}
+    {{-- ***************************************************************************************************************** --}}
+</div>
+<div id="id01" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <header id="fail" class="container">
+                <a href="#" class="closebtn">×</a>
+                <h2 class="fa">&#xf071; Erreur</h2>
+            </header>
+            <div class="container">
+                <p>
+                <ul>
+                    <li>{{ $errorMsg }}</li>
+                </ul>
+                </p>
             </div>
         </div>
-        {{-- ***************************************************************************************************************** --}}
-        {{-- ***************************************************************************************************************** --}}
     </div>
+</div>
+<div id="id02" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <header id="success" class="container">
+                <a href="#" class="closebtn">×</a>
+                <h2 class="fa">&#xf14a; Succés</h2>
+            </header>
+            <div class="container">
+                <p>
+                    {{ $successMsg }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
-    {{-- ========================================= --}}
-    <div id="id01" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <header id="fail" class="container">
-                    <a href="#" class="closebtn">×</a>
-                    <h2 class="fa">&#xf071; Une Erreur se produite</h2>
-                </header>
-                <div class="container">
-                    <p>
-                    <ul>
-                        @if ($_errors != null)
-                            @foreach ($_errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        @endif
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- ========================================= --}}
-    <div id="id02" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <header id="success" class="container">
-                    <a href="#" class="closebtn">×</a>
-                    <h2 class="fa">&#xf14a; Succée</h2>
-                </header>
-                <div class="container">
-                    <p>
-                        {{ $msg }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- ========================================= --}}
-    <script>
-        beginSlide();
-    </script>
+<script>
+    beginSlide();
+</script>
 </body>
 
 </html>

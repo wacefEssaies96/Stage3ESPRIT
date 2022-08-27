@@ -24,13 +24,23 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->type != 'Super admin')
+        if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
             return $this->accessDenied();
-        return view('superadmin.index', ['users' => User::where('id', '!=', Auth::user()->id)->get()]);
+        if(Auth::user()->type == 'Admin'){
+            $users = User::where('id', '!=', Auth::user()->id)->where('type', 'Expert')->get();
+        }
+        else{
+            $users = User::where('id', '!=', Auth::user()->id)->get();
+        }
+        return view('superadmin.index', ['users' => $users]);
     }
 
     public function searchByName(Request $request){
         $users = User::where('name', 'like', '%'.$request->search.'%')->get();
+        return view('superadmin.index', ['users' =>$users]);
+    }
+    public function searchForAdmin(Request $request){
+        $users = User::where('name', 'like', '%'.$request->search.'%')->where('type', 'Expert')->get();
         return view('superadmin.index', ['users' =>$users]);
     }
 
@@ -41,7 +51,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->type != 'Super admin')
+        if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
             return $this->accessDenied();
         return view('superadmin.add');
     }
@@ -66,7 +76,7 @@ class UsersController extends Controller
     }
     public function store(Request $request)
     {
-        if (Auth::user()->type != 'Super admin')
+        if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
             return $this->accessDenied();
         $request->validate($this->rules());
         $user = User::create([
@@ -128,7 +138,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::user()->type != 'Super admin')
+        if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
             $this->accessDenied();
         $user = User::find($id);
         $v = '';
@@ -153,7 +163,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::user()->type != 'Super admin')
+        if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
             return $this->accessDenied();
         $request->validate($this->rules());
         $user = User::find($id);

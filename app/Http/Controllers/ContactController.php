@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
     public function index()
     {
-        return view('contact.index', [
-            'contacts' => Contact::all()
-        ]);
+        if(Auth::user()->type == 'Admin' || Auth::user()->type == 'Super admin'){
+            return view('contact.index', [
+                'contacts' => Contact::all()
+            ]);
+        }
+        return redirect()->route('home')->with('error', 'Vous n\'avez pas l\'accées !');
     }
 
     public function create()

@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 // ******************************** CRUD USER ************************************** //
 Route::post('/user/search', 'UsersController@searchByName')->name('user.search');
-Route::get('/admin/index', 'ProjectController@index')->name('admin-index');
+Route::post('/user/search', 'UsersController@searchForAdmin')->name('user.search.admin');
 Route::resource('user', UsersController::class);
 Route::put('/update/{id}', 'UsersController@updateProfile')->name('update-profile');
 
@@ -68,6 +68,10 @@ Route::resource('contact', ContactController::class, ['only' => ['create', 'stor
 
 Route::get('/investisseur', 'UsersController@investors')->name('investor');
 Route::get('/consultation-en-ligne', 'UsersController@experts')->name('expertChat');
+
+
+Route::get('/admin/index', 'ProjectController@index')->name('admin.index');
+Route::post('/projects/search', 'ProjectController@search')->name('project.search');
 
 Route::get('/nos-service', function () {
     return view('our-service');
