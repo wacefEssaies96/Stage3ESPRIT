@@ -62,7 +62,7 @@
             </div>
 
             <div class="right-side-content slideshow-container">
-                <form id="req" method="post" action=" {{ route('uploadF', Auth::user()->id) }} "
+                <form id="req" method="post" action=" {{ route('dossier.store', Auth::user()->id) }} "
                     enctype="multipart/form-data">
                     @csrf
                     <div class="form slides fade">

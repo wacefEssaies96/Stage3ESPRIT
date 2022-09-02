@@ -1,4 +1,5 @@
 <div class="left-side">
+
     {{-- ################################################################################################ --}}
     {{-- ################################################################################################ --}}
     <div class="left-side-top">
@@ -15,58 +16,34 @@
     </div>
     {{-- ################################################################################################ --}}
     {{-- ################################################################################################ --}}
-    <div class="drpodown">
-        <button onclick="toggleFunction('0')" class="fa fa-play dropbtn"></button>
-        <a href="#">Information</a>
-        <div id="0" class="dropdown-content">
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
+    <a class="sidebarbtn" href="{{ route('informations') }}">
+        <div class="drpodown">
+            <i class="fa fa-play dropbtn"></i> Information
         </div>
-    </div>
+    </a>
     {{-- ###################### --}}
-    <div class="drpodown">
-        <button onclick="toggleFunction('1')" class="fa fa-play dropbtn"></button>
-        <a href="{{ route('elig') }}">Éligibilité du projet</a>
-        <div id="1" class="dropdown-content">
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
+    <a class="sidebarbtn" href="{{ route('elig') }}">
+        <div class="drpodown">
+            <i class="fa fa-play dropbtn"></i> Éligibilité du projet
         </div>
-    </div>
+    </a>
     {{-- ###################### --}}
-    <div class="drpodown">
-        <button onclick="toggleFunction('2')" class="fa fa-play dropbtn"></button>
-        <a href="#">Dépôt des dossiers</a>
-        <div id="2" class="dropdown-content">
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
+    <a class="sidebarbtn" href="{{ route('uploadF') }}">
+        <div class="drpodown">
+            <i class="fa fa-play dropbtn"></i> Dépôt des dossiers
         </div>
-    </div>
+    </a>
     {{-- ###################### --}}
-    <div class="drpodown">
-        <button onclick="toggleFunction('3')" class="fa fa-play dropbtn"></button>
-        <a href="{{ route('expertChat') }}">Consultation en ligne</a>
-        <div id="3" class="dropdown-content">
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
+    <a class="sidebarbtn" href="{{ route('expertChat') }}">
+        <div class="drpodown">
+            <i class="fa fa-play dropbtn"></i> Consultation en ligne
         </div>
-    </div>
+    </a>
     {{-- ###################### --}}
-    <div class="drpodown">
-        <button onclick="toggleFunction('4')" class="fa fa-play dropbtn"></button>
-        <a href="{{ route('investor') }}">Espace investisseur</a>
-        <div id="4" class="dropdown-content">
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
-            <a href="#">Link</a>
+    <a class="sidebarbtn" href="{{ route('investor') }}">
+        <div class="drpodown">
+            <i class="fa fa-play dropbtn"></i> Espace investisseur
         </div>
-    </div>
+    </a>
+
 </div>

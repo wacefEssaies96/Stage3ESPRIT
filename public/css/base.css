@@ -71,20 +71,23 @@ img#ppp90Lg {
     box-shadow: 0 4px 8px 0 rgba(65, 65, 65, 0.774), 0 6px 20px 0 rgba(121, 121, 121, 0.486);
 }
 
-.drpodown a {
-    text-decoration: none;
+.drpodown{
+    
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: small;
     font-weight: bold;
     color: rgb(27, 27, 27);
 }
 
-button.dropbtn {
-    background: none;
+.sidebarbtn{
+    text-decoration: none !important;
+}
+.sidebarbtn:active{
+    text-decoration: none !important;
+}
+
+.dropbtn {
     color: #FCB918;
-    font-size: medium;
-    border: none;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .dropdown-content {

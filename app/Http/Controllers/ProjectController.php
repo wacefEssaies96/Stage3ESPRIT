@@ -181,26 +181,35 @@ class ProjectController extends Controller
         } else {
             return view('error');
         }
-        return redirect()->route('user.show', [Auth::user()->id]);
+        return back()->with('success', 'Project supprimé avec succés');
     }
 
     public function index()
     {
         if (Auth::user()->type == 'Admin' || Auth::user()->type == 'Super admin') {
             if (Auth::user()->type == 'Super admin') {
-                $result = Projects::all();
+                $projects = Projects::all();
             } else {
-                $projects = Projects::join('users', 'users.id', '=', 'projects.client_id')->select('projects.*', 'users.state')->get();
-                $result = [];
-                foreach ($projects as $item) {
-                    if ($item->state == Auth::user()->state)
-                        array_push($result, $item);
-                }
+                $projects = Projects::join('users', 'users.id', '=', 'projects.client_id')
+                ->join('files', 'files.project_name', '=', 'projects.proTitle')
+                ->select('projects.*', 'users.state', 'files.data')
+                ->where('projects.validated', 'true')
+                ->where('users.state', Auth::user()->state)
+                ->get();
             }
-            return view('admin.index', ['projects' => $result]);
+            return view('admin.index', ['projects' => $projects]);
         }
         return redirect()->route('home')->with('error', 'Vous n\'avez pas l\'accées !');
     }
+    public function validateProject(Request $request)
+    {
+        $project = Projects::find($request->id);
+        $project->update([
+            'status' => 'validate'
+        ]);
+        return back()->with('success', 'Dossier validé avec succés');
+    }
+
     public function search(Request $request)
     {
         $projects = Projects::where('proTitle', 'like', '%' . $request->search . '%')->get();

@@ -45,25 +45,22 @@
 
             <div class="right-side-content">
                 <div class="investors">
-                    @for ($i = 0; $i < 11; $i++)
+                    @foreach ($investors as $investor)
                         <div class="investor-details">
                             <div class="logo-block">
                                 <div class="lg">
                                     <img src=" {{ asset('images/logo-design.png') }} " width="65px" height="65px"
                                         alt="" srcset="">
                                 </div>
-                                <div class="company-name">Nom.Organisme</div>
+                                <div class="company-name">{{$investor->name}}</div>
                             </div>
                             <div class="inv-description">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo, obcaecati sequi,
-                                exercitationem soluta amet impedit esse consequatur eius quibusdam
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo, obcaecati sequi,
-                                exercitationem soluta amet impedit esse consequatur eius quibusdam
+                                {{$investor->description}}
                             </div>
                             <div class="amount">
-                                <h3>&#36;</h3>
+                                <h3>{{$investor->fonds}} dt</h3>
                             </div>
-                            <div class="inv-contact">
+                            <div class="inv-contact" onclick="window.location='{{ route('contact.investor', [$investor->id]) }}'">
                                 <span class="fa fa-phone"></span>
                                 <span class="fa fa-comments-o"></span>
                             </div>
@@ -75,7 +72,7 @@
                             <div class="info">FONDS MOBILISÉS</div>
                             <div class="info">CONTACT</div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
 

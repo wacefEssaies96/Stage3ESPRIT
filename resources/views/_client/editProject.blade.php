@@ -77,7 +77,7 @@
                             @php
                                 $successMsg = $message;
                             @endphp
-                        @endisset
+                        @endif
                         @if ($message = Session::get('error'))
                             <div class="push-fail-notification">
                                 <i class="bell fa"><a href="#id01">&#xf0f3;</a></i>

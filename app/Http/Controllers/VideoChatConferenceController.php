@@ -22,6 +22,15 @@ class VideoChatConferenceController extends Controller
             'otherUser' => $otherUser
         ]);
     }
+    public function videoCallInvestor($id,$room)
+    {
+        $otherUser = User::find($id);
+        return view('videocall', [
+            'email' => $otherUser->email,
+            'room' => $room,
+            'otherUser' => $otherUser
+        ]);
+    }
 
     public function videoCallPost(Request $request)
     {

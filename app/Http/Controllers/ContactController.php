@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VideoCallInvitation;
+use App\User;
 
 class ContactController extends Controller
 {
@@ -60,5 +63,21 @@ class ContactController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
         ];
+    }
+
+    public function investor($id){
+        $user = User::find($id);
+        return view('contact.contactInvestor', [
+            'investor' => $user
+        ]);
+    }
+
+    public function sendMailInvestor(Request $request){
+        $details = [
+            'title' => 'Contact',
+            'body' => $request->body
+        ];
+        Mail::to($request->email)->send(new VideoCallInvitation($details));
+        return redirect()->route('home')->with('success', 'Email envoyé avec succés.');
     }
 }

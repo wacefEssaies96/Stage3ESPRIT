@@ -37,7 +37,7 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    
+
                     <div class="card-tools">
                         <form method="POST" action="{{ route('project.search') }}">
                             @csrf
@@ -54,7 +54,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
-                    @if (count($projects) >0)
+                    @if (count($projects) > 0)
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
@@ -65,6 +65,7 @@
                                     <th>Industries</th>
                                     <th>Technologie</th>
                                     <th>Status</th>
+                                    <th>Dossier</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -78,14 +79,25 @@
                                         <td>{{ $item->proInteg }}</td>
                                         <td>{{ $item->proTech }}</td>
                                         <td>{{ $item->status }}</td>
+                                        <td><a href="{{ route('download.zip', [$item->data]) }}">{{ $item->data }}</a>
+                                        </td>
                                         <td>
-                                        {{-- <form method="POST" action="{{ route('user.destroy', $user->id) }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" style="background: none; border: none;"><i
-                                                    class="fa fa-trash" aria-hidden="true"
-                                                    style="color: red;"></i></button>
-                                        </form> --}}
+                                            <form method="POST" action="{{ route('project.validate.admin') }}">
+                                                @csrf
+                                                <input type="text" hidden style="display: none;" name="id" value="{{$item->id}}">
+                                                <button type="submit"
+                                                    style="background: none; border: none;">
+                                                    <i class="fa fa-check" aria-hidden="true"
+                                                        style="color: rgb(0, 207, 38);"></i>
+                                                </button>
+                                            </form>
+                                            <form method="POST" action="{{ route('remove-file', $item->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" style="background: none; border: none;">
+                                                    <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -72,7 +72,7 @@ img#ppp90Lg {
 
 nav .leftSide {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
   font-size: small;
 }
 

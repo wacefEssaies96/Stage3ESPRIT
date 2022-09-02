@@ -38,12 +38,12 @@ Route::get('logout', 'Auth\AuthController@logout')->name('logout');
 
 
 // ******************************** DEPOT DES DOSSIER *************************************** //
-Route::get('/{id}/Dépot_dossier', 'ProjectController@filesUploadView')->name('uploadF');
-Route::post('/{id}/Dépot_dossier', 'ProjectController@addProject');
+Route::get('/depot/dossier', 'ProjectController@filesUploadView')->name('uploadF');
+Route::post('/depot/dossier/store/{id}', 'ProjectController@addProject')->name('dossier.store');
 Route::post('/update-project', 'ProjectController@updateProject')->name('dossier.update');
-Route::get('/remove-file/{id}', 'ProjectController@removeFile')->name('remove-file');
+Route::delete('/remove-file/{id}', 'ProjectController@removeFile')->name('remove-file');
 Route::get('/edit-project/{id}', 'ProjectController@editProject')->name('edit.dossier');
-
+Route::post('/validate/project', 'ProjectController@validateProject')->name('project.validate.admin');
 Route::get('/download-zip/{fileName}', 'ProjectController@downloadZip')->name('download.zip');
 
 // ********************************* VALIDATE PROJECT *************************************** //
@@ -52,7 +52,6 @@ Route::get('/validate/{id}/{proTitle}', 'ProjectController@addToValidationQueueV
 Route::post('/validate', 'ProjectController@addToValidationQueue')->name('project.validate');
 
 // *********************************VIDEO CHAT CONFERENCE************************************** //
-
 Route::post('/video-call', 'VideoChatConferenceController@videoCallPost')->name('videocallpost');
 Route::get('/video-call/{email}/{room}', 'VideoChatConferenceController@videoCall')->name('videocall');
 
@@ -64,6 +63,8 @@ Route::post('checkout', 'CheckoutController@afterpayment')->name('checkout.credi
 // ******************************** CONTACT *************************************** //
 Route::post('/contact/search', 'ContactController@search')->name('contact.search');
 Route::resource('contact', ContactController::class, ['only' => ['create', 'store', 'index', 'destroy', 'show']]);
+Route::get('/contact/investor/{id}', 'ContactController@investor')->name('contact.investor');
+Route::post('/contact/send', 'ContactController@sendMailInvestor')->name('contact.investor.send');
 
 
 Route::get('/investisseur', 'UsersController@investors')->name('investor');
@@ -87,3 +88,7 @@ Route::get('/qui-somme-nous', function () {
 Route::get('/projects', function () {
     return view('projects');
 })->name('projects');
+
+Route::get('/information', function () {
+    return view('informations');
+})->name('informations');

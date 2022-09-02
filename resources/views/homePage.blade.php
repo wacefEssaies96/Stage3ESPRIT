@@ -8,10 +8,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>PPP 90</title>
-    <script src=" {{ asset('js/windowAccess.js') }} "></script>
 
     <link rel="stylesheet" href=" {{ asset('css/home.css') }} ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href=" {{ asset('css/modals/homeModal.css') }} ">
+    <link rel="stylesheet" href=" {{ asset('css/_client/upload-notification.css') }} ">
 </head>
 
 <body>
@@ -22,22 +23,44 @@
             <div class="leftSide">
                 <a href=" {{ route('home') }} " class="menu-item"><img id="ppp90Lg"
                         src="{{ asset('images/logo.png') }}" alt="PPP 90" srcset=""></a>
-                <a href=" {{ route('about-us') }} " class="menu-item bgeff">Qui sommes nous ?</a>
+                <a style="width: 150px;" href=" {{ route('about-us') }} " class="menu-item bgeff">Qui sommes nous ?</a>
                 <a href=" {{ route('services') }} " class="menu-item bgeff">Nos services</a>
                 <a href=" {{ route('contact.create') }} " class="menu-item bgeff">Contacter nous</a>
                 <a style="width: 200px;" href=" {{ route('projects') }} " class="menu-item bgeff">Exemple de ppp
                     realisés</a>
                 @if (Auth::user())
                     @if (Auth::user()->type == 'Super admin' || Auth::user()->type == 'Admin')
-                        <a href=" {{ route('user.index') }} "
-                            class="menu-item bgeff">Dashboard</a>
+                        <a href=" {{ route('user.index') }} " class="menu-item bgeff">Dashboard</a>
                     @endif
                 @endif
 
             </div>
             <div class="rightSide">
-                <a href="" class="menu-item bgeff" style="border-right: white 1px solid"><span
-                        class="fa">&#xf002;</span></a>
+                @php
+                    $successMsg = '';
+                    $errorMsg = '';
+                @endphp
+                @if ($message = Session::get('success'))
+                    <div class="push-success-notification menu-item bgeff" style="border-right: white 1px solid">
+                        <i class="bell fa"><a href="#" onclick="clickBtnSuccess()">&#xf0f3;</a></i>
+                    </div>
+                    @php
+                        $successMsg = $message;
+                    @endphp
+                @elseif ($message = Session::get('error'))
+                    <div class="push-fail-notification menu-item bgeff" style="border-right: white 1px solid">
+                        <i class="bell fa"><a href="#" onclick="clickBtnFail()">&#xf0f3;</a></i>
+                    </div>
+                    @php
+                        $errorMsg = $message;
+                    @endphp
+                @else
+                    <div class="menu-item bgeff" style="border-right: white 1px solid">
+                        <i class="fa fa-bell" aria-hidden="true"></i>                    
+                        </div>
+                @endif
+
+
                 @guest
                     <a href="{{ route('login') }}" class="menu-item bgeff" style="border-right: white 1px solid"><span
                             class="fa">&#xf2c0;</span></a>
@@ -72,7 +95,7 @@
                 </div>
             </div>
             <div class="bottom-menu">
-                <div class="flex-container">
+                <div class="flex-container" onclick="window.location='{{ route('informations') }}'">
                     <div class="row">
                         <div><span class="fa">&#xf05a;</span></div>
                         <div>PAGE D'INFORMATIONS</div>
@@ -93,7 +116,7 @@
                     </div>
                 @else
                     @if (Auth::user()->type == 'Client')
-                        <div class="flex-container" onclick="window.location='{{ route('uploadF', Auth::user()->id) }}'">
+                        <div class="flex-container" onclick="window.location='{{ route('uploadF') }}'">
                             <div class="row">
                                 <div><span class="fa">&#xf115;</span></div>
                                 <div>DÉPÔT DES DOSSIERS</div>
@@ -128,6 +151,39 @@
             </div>
         </footer>
     </div>
+    <button hidden id="failBtn"></button>
+    <div id="fail" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header-fail">
+                <span class="close">&times;</span>
+                <h2>Erreur</h2>
+            </div>
+            <div class="modal-body">
+                <p>Echec de l'opération !</p>
+                <p>{{ $errorMsg }}</p>
+            </div>
+        </div>
+    </div>
+
+    <button hidden id="successBtn"></button>
+    <div id="success" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header-success">
+                <span class="closeSucess">&times;</span>
+                <h2>Succés</h2>
+            </div>
+            <div class="modal-body">
+                <p>Opération réussie !</p>
+                <p>{{ $successMsg }}</p>
+            </div>
+        </div>
+    </div>
+
+    <script src=" {{ asset('js/windowAccess.js') }} "></script>
+    <script src=" {{ asset('js/successModals.js') }} "></script>
+    <script src=" {{ asset('js/failModals.js') }} "></script>
 </body>
 
 </html>
