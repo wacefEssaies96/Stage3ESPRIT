@@ -212,9 +212,15 @@ class ProjectController extends Controller
 
     public function search(Request $request)
     {
-        $projects = Projects::where('proTitle', 'like', '%' . $request->search . '%')->get();
+        $projects = Projects::join('users', 'users.id', '=', 'projects.client_id')
+                ->join('files', 'files.project_name', '=', 'projects.proTitle')
+                ->select('projects.*', 'users.state', 'files.data')
+                ->where('projects.validated', 'true')
+                ->where('projects.proTitle', 'like', '%' . $request->search . '%')
+                ->where('users.state', Auth::user()->state)
+                ->get();
         return view('admin.index', [
-            'contacts' => $projects
+            'projects' => $projects
         ]);
     }
 }

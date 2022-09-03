@@ -84,9 +84,9 @@
                                         <td>
                                             <form method="POST" action="{{ route('project.validate.admin') }}">
                                                 @csrf
-                                                <input type="text" hidden style="display: none;" name="id" value="{{$item->id}}">
-                                                <button type="submit"
-                                                    style="background: none; border: none;">
+                                                <input type="text" hidden style="display: none;" name="id"
+                                                    value="{{ $item->id }}">
+                                                <button type="submit" style="background: none; border: none;">
                                                     <i class="fa fa-check" aria-hidden="true"
                                                         style="color: rgb(0, 207, 38);"></i>
                                                 </button>
