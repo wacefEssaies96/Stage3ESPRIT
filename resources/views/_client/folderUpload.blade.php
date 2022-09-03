@@ -20,7 +20,7 @@
     <script src=" {{ asset('js/windowAccess.js') }} "></script>
     <script src=" {{ asset('js/_client/slide-container.js') }} "></script>
     <script src=" {{ asset('js/_client/folderUpload.js') }} "></script>
-
+    <link rel="icon" href="{{ asset('images/logoapp.png') }}" type="image/png">
     <link rel="stylesheet" href=" {{ asset('css/base.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/modal.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/folderUpload.css') }} ">

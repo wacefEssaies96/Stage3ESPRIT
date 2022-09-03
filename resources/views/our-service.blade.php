@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href=" {{ asset('css/our-service.css') }} " media="screen">
     <link rel="stylesheet" href=" {{ asset('css/ncpTmp.css') }} " media="screen">
+    <link rel="icon" href="{{ asset('images/logoapp.png') }}" type="image/png">
 
 
     <link id="u-theme-google-font" rel="stylesheet"

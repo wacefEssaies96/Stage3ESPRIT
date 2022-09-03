@@ -9,6 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Modifier un compte</title>
+    <link rel="icon" href="{{ asset('images/logoapp.png') }}" type="image/png">
     <link rel="stylesheet" href=" {{ asset('css/connexion/addUser.css') }} ">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 

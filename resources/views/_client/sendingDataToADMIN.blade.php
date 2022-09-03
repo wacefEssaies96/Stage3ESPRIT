@@ -8,7 +8,7 @@
     <title>Sending Data ...</title>
 
     <script src=" {{ asset('js/_client/sendingDataToADMIN.js') }} "></script>
-
+    <link rel="icon" href="{{ asset('images/logoapp.png') }}" type="image/png">
     <link rel="stylesheet" href=" {{ asset('css/_client/sendingDataToADMIN.css') }} ">
 
 </head>

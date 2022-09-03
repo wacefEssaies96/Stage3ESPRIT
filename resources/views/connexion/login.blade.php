@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Se connecter</title>
+    <link rel="icon" href="{{ asset('images/logoapp.png') }}" type="image/png">
 
     <script src=" {{ asset('js/windowAccess.js') }} "></script>
     <script src=" {{ asset('js/connexion/login.js') }} "></script>

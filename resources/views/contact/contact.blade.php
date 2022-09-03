@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Nous contacter</title>
 
+    <link rel="icon" href="{{ asset('images/logoapp.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <link rel="stylesheet" href=" {{ asset('css/contact/contact.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/contact/util.css') }} ">
 

@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Mot de passe oublié</title>
-
+    <link rel="icon" href="{{ asset('images/logoapp.png') }}" type="image/png">
     <script src=" {{ asset('js/windowAccess.js') }} "></script>
     <script src=" {{ asset('js/connexion/login.js') }} "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
