@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,11 +31,13 @@ Route::put('/update/{id}', 'UsersController@updateProfile')->name('update-profil
 // ********************************* AUTHENTICATION ************************************* //
 Route::get('/inscription', 'Auth\AuthController@register')->name('sign-up');
 Route::post('/inscription', 'Auth\AuthController@storeUser');
-
 Route::get('/login', 'Auth\AuthController@login')->name('login');
 Route::post('/login', 'Auth\AuthController@authenticate');
-
 Route::get('logout', 'Auth\AuthController@logout')->name('logout');
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
 // ******************************** DEPOT DES DOSSIER *************************************** //

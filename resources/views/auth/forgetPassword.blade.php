@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Se connecter</title>
+    <title>Mot de passe oublié</title>
 
     <script src=" {{ asset('js/windowAccess.js') }} "></script>
     <script src=" {{ asset('js/connexion/login.js') }} "></script>
@@ -22,7 +22,7 @@
 <body onload="controlLab()">
 
     <div class="container">
-        <form method="POST" action=" {{ route('login') }} " class="left">
+        <form method="POST" action=" {{ route('forget.password.post') }} " class="left">
             {{-- ***************************************************** --}}
             @if (session()->has('error'))
                 <div class="popup-wrap">
@@ -70,7 +70,7 @@
             {{-- ***************************************************** --}}
             @csrf
             {{-- ***************************************************** --}}
-            <h2 id="log-title" class="log"><b>Se connecter</b></h2>
+            <h2 id="log-title" class="log"><b>Mot de passe oublié</b></h2>
             {{-- ***************************************************** --}}
             <div class="icons log">
                 <div class="social-icon"><span class="fa fa-facebook-f"></span></div>
@@ -90,25 +90,10 @@
                         </span>
                     @enderror
                 </div>
-                <div class="col input-effect">
-                    <input name="password" class="border-effect" type="password" placeholder=""
-                        autocomplete="current-password">
-                    <label><span class="fa fa-lock" style="margin-right: 2%"></span>Mot de passe</label>
-                    <span class="focus-border"></span>
-                    @error('password')
-                        <span class="invalid-feedback" role="alert" style="color: red">
-                            <i>* {{ $message }}</i>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-            {{-- ***************************************************** --}}
-            <div class="forget-pwd">
-                <a href="{{ route('forget.password.get') }}" style="margin-right: 2%">Mot de passe oublié?</a>
-                <a href=" {{ route('home') }} " style="margin-left: 2%"><span class="fa fa-home"></span></a>
+
             </div>
             <div class="login-btn">
-                <button type="submit" class="btn">Se connecter</button>
+                <button type="submit" class="btn">Envoyé</button>
                 <span class="focus-border">
                     <i></i>
                 </span>
@@ -120,7 +105,8 @@
             <h1>Bienvenue</h1>
             <p>Si vous n'avez pas un compte</p>
             <p>Créer un nouveau</p>
-            <button class="sign-up"><a class="sign-up-link" href="{{ route('sign-up') }}">Créer un compte</a></button>
+            <button class="sign-up"><a class="sign-up-link" href="{{ route('sign-up') }}">Créer un
+                    compte</a></button>
         </div>
     </div>
 

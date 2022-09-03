@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Se connecter</title>
+    <title>Réinitialiser le mot de passe</title>
 
     <script src=" {{ asset('js/windowAccess.js') }} "></script>
     <script src=" {{ asset('js/connexion/login.js') }} "></script>
@@ -22,30 +22,15 @@
 <body onload="controlLab()">
 
     <div class="container">
-        <form method="POST" action=" {{ route('login') }} " class="left">
+        <form method="POST" action=" {{ route('reset.password.post') }} " class="left">
+            @csrf
+            <input type="hidden" name="token" value="{{ $token }}">
             {{-- ***************************************************** --}}
             @if (session()->has('error'))
                 <div class="popup-wrap">
                     <div class="popup-box">
                         <h2>Une erreur se produite!</h2>
                         <h3>{{ session()->get('error') }}.</h3>
-                        <a class="close-btn popup-close" href="#">x</a>
-                    </div>
-                </div>
-                <script>
-                    $(document).ready(function() {
-                        $('.focus-border').append('<style>#log-title:before{width: 0;}</style>');
-                        $('.log').fadeOut(300);
-                        $('.popup-wrap').fadeIn(500);
-                        $('.popup-box').removeClass('transform-out').addClass('transform-in');
-                    });
-                </script>
-            @endif
-            @if (Session::has('message'))
-                <div class="popup-wrap">
-                    <div class="popup-box">
-                        <h2 style="color: greenyellow;">Alert !</h2>
-                        <h3>{{ Session::get('message') }}</h3>
                         <a class="close-btn popup-close" href="#">x</a>
                     </div>
                 </div>
@@ -68,9 +53,8 @@
                 });
             </script>
             {{-- ***************************************************** --}}
-            @csrf
             {{-- ***************************************************** --}}
-            <h2 id="log-title" class="log"><b>Se connecter</b></h2>
+            <h2 id="log-title" class="log"><b>Réinitialiser le mot de passe</b></h2>
             {{-- ***************************************************** --}}
             <div class="icons log">
                 <div class="social-icon"><span class="fa fa-facebook-f"></span></div>
@@ -84,7 +68,7 @@
                         placeholder="" autocomplete="email">
                     <label><span class="fa fa-user-o" style="margin-right: 2%"></span>E-mail</label>
                     <span class="focus-border"></span>
-                    @error('email')
+                    @error($errors->has('email'))
                         <span class="invalid-feedback" role="alert" style="color: red">
                             <i>* {{ $message }}</i>
                         </span>
@@ -95,20 +79,26 @@
                         autocomplete="current-password">
                     <label><span class="fa fa-lock" style="margin-right: 2%"></span>Mot de passe</label>
                     <span class="focus-border"></span>
-                    @error('password')
+                    @error($errors->has('password'))
+                        <span class="invalid-feedback" role="alert" style="color: red">
+                            <i>* {{ $message }}</i>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="col input-effect">
+                    <input name="password_confirmation" class="border-effect" type="password" placeholder="" required>
+                    <label><span class="fa fa-lock" style="margin-right: 2%"></span>Confirmer le mot de passe</label>
+                    <span class="focus-border"></span>
+                    @error($errors->has('password_confirmation'))
                         <span class="invalid-feedback" role="alert" style="color: red">
                             <i>* {{ $message }}</i>
                         </span>
                     @enderror
                 </div>
             </div>
-            {{-- ***************************************************** --}}
-            <div class="forget-pwd">
-                <a href="{{ route('forget.password.get') }}" style="margin-right: 2%">Mot de passe oublié?</a>
-                <a href=" {{ route('home') }} " style="margin-left: 2%"><span class="fa fa-home"></span></a>
-            </div>
             <div class="login-btn">
-                <button type="submit" class="btn">Se connecter</button>
+                <button type="submit" class="btn">Réinitialiser</button>
                 <span class="focus-border">
                     <i></i>
                 </span>
@@ -120,7 +110,8 @@
             <h1>Bienvenue</h1>
             <p>Si vous n'avez pas un compte</p>
             <p>Créer un nouveau</p>
-            <button class="sign-up"><a class="sign-up-link" href="{{ route('sign-up') }}">Créer un compte</a></button>
+            <button class="sign-up"><a class="sign-up-link" href="{{ route('sign-up') }}">Créer un
+                    compte</a></button>
         </div>
     </div>
 
