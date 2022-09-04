@@ -23,7 +23,7 @@ Route::get('/', function () {
 // ********************************************************************** //
 
 // ******************************** CRUD USER ************************************** //
-Route::post('/user/search', 'UsersController@searchByName')->name('user.search');
+Route::post('/user/search/super-admin', 'UsersController@searchByName')->name('user.search');
 Route::post('/user/search', 'UsersController@searchForAdmin')->name('user.search.admin');
 Route::resource('user', UsersController::class);
 Route::put('/update/{id}', 'UsersController@updateProfile')->name('update-profile');
@@ -33,11 +33,19 @@ Route::get('/inscription', 'Auth\AuthController@register')->name('sign-up');
 Route::post('/inscription', 'Auth\AuthController@storeUser');
 Route::get('/login', 'Auth\AuthController@login')->name('login');
 Route::post('/login', 'Auth\AuthController@authenticate');
-Route::get('logout', 'Auth\AuthController@logout')->name('logout');
-Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
-Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
-Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
+Route::get('/forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('/forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('/reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+Route::get('/new-password', function () {
+    return view('auth.newPassword');
+})->name('new.password');
+Route::post('/new-password', 'UsersController@newPassword')->name('new.password.post');
+
+Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
 
 
 // ******************************** DEPOT DES DOSSIER *************************************** //

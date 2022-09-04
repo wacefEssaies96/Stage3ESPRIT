@@ -349,4 +349,12 @@ class UsersController extends Controller
         $user = User::where('type', 'expert')->join('experts', 'users.id', '=', 'experts.client_id')->select('users.*', 'experts.service')->get();
         return view('expert', ['users' => $user]);
     }
+
+    public function newPassword(Request $request){
+        $user = Auth::user();
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+        return redirect()->route('home')->with('success', 'Votre compte à été crée avec succés');
+    }
 }
