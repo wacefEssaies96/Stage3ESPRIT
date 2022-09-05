@@ -62,12 +62,12 @@ function e() {
     div.appendChild(input);
 }
 
-function t(){
+function t() {
     document.getElementById('pp').remove();
     var divp = document.getElementById('p');
     var p = document.createElement('p');
     p.style.color = '#fdc541',
-    p.style.cursor = 'pointer';
+        p.style.cursor = 'pointer';
     p.onclick = pass;
     p.innerHTML = 'Cliquer ici pour modifier le mot de passe';
     p.id = 'ppp';
@@ -76,7 +76,7 @@ function t(){
     var myNode = document.getElementById('pass');
     while (myNode.firstChild) {
         myNode.removeChild(myNode.lastChild);
-      }
+    }
 }
 
 function pass() {
@@ -84,7 +84,7 @@ function pass() {
     var divp = document.getElementById('p');
     var p = document.createElement('p');
     p.style.color = '#fdc541',
-    p.style.cursor = 'pointer';
+        p.style.cursor = 'pointer';
     p.onclick = t;
     p.innerHTML = 'Annuler';
     p.id = 'pp';
@@ -103,6 +103,10 @@ function pass() {
     input2.type = 'password';
     input2.name = 'opwd';
     input2.placeholder = 'Ancien mot de passe';
+    input0.classList.add('form-control')
+    input1.classList.add('form-control')
+    input2.classList.add('form-control')
+    input2.style.marginRight = '0';
     input2.required = true;
 
     div1.classList.add('form-item-double', 'box-item')
@@ -114,13 +118,14 @@ function pass() {
     input0.required = true;
     input1.type = 'password';
     input1.name = 'rePwd';
-    input1.placeholder = 'Confirmer votre nouveau mot de passe';
+    input1.placeholder = 'Confirmer';
     input1.required = true;
 
     div0.appendChild(div4);
     div0.appendChild(div1);
     div1.appendChild(div2);
     div1.appendChild(div3);
+
     div2.appendChild(input0);
     div3.appendChild(input1);
     div4.appendChild(input2);

@@ -2,35 +2,25 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use App\Http\Controllers\Controller;
 use Socialite;
 use Auth;
 use Exception;
-use App\User;
 use Illuminate\Support\Facades\Hash;
 
-class GoogleController extends Controller
+class LinkedInController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function redirectToGoogle()
-    {
-        return Socialite::driver('google')->redirect();
-    }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function handleGoogleCallback()
+    public function redirectToLinkedin()
+    {
+        return Socialite::driver('linkedin')->redirect();
+    }
+    public function handleLinkedinCallback()
     {
         try {
-            $user = Socialite::driver('google')->user();
-            $finduser = User::where('google_id', $user->id)->first();
+            $user = Socialite::driver('linkedin')->user();
+            $finduser = User::where('linkedin_id', $user->id)->first();
             if ($finduser) {
                 Auth::login($finduser);
                 return redirect()->route('home');

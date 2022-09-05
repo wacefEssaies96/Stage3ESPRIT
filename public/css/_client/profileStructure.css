@@ -43,6 +43,12 @@
 
 /*****************************************************************/
 /*****************************************************************/
+
+.profile{
+    padding-left:15%;
+    padding-right:15%;
+    background-color: white;
+}
 .left-menu {
     grid-area: menu;
     display: flex;
@@ -52,6 +58,7 @@
     padding-bottom: 7%;
     padding-left: 5%;
     padding-right: 5%;
+    background-color: #d4d3d3;
 }
 
 .left-menu :last-child {
@@ -64,17 +71,20 @@
 }
 
 .left-menu .item1 {
-    color: #acacac;
+    color: white;
 }
 
 .left-menu .item2 {
     background-color: #FCB918;
-    color: whitesmoke;
+    color: white;
     font-weight: bold;
     border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 .left-menu .item3 {
+  background-color: white;
     border-radius: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -129,11 +139,112 @@ input[type='search'] {
 /*#######################################################################################*/
 /*****************************************************************/
 /*****************************************************************/
-.container {
+.containerr {
     grid-area: main;
-    padding-left: 5%;
-    padding-right: 3%;
+    padding: 5% 5% 5% 5%;
+    background-color: #d4d3d3;
+    width: 100%;
 }
+.r{
+    background-color: #d4d3d3;  
+}
+
+.form-item input[type=text],
+.form-item input[type=password],
+.form-item input[type=tel],
+.form-item input[type=email],
+.form-item input[type=number] {
+  display: block;
+  color: #000000;
+  font-size: 16px;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #FCB918;
+  padding: 8px 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
+.form-item i {
+    font-size: 12px;
+    color: red;
+  }
+  
+  .box-item {
+    height: 60px;
+    margin-bottom: 16px;
+  }
+  
+  .form-item-double {
+    display: flex;
+  }
+  
+  .form-item-double .form-item {
+    flex: 1 1 auto;
+  }
+  
+  .form-item-double .form-item:nth-child(1) {
+    padding-right: 16px;
+  }
+  
+  .form-item-double .form-item:nth-child(2) {
+    padding-left: 16px;
+  }
+  
+  .form-item-triple {
+    display: flex;
+    align-items: center;
+    padding-top: 6px;
+  }
+  
+  .form-item-triple .radio-label {
+    flex: 1 1 auto;
+    text-align: left;
+  }
+  
+  .form-item-triple .radio-label label {
+    display: inline-block;
+    /* vertical-align: middle; */
+  }
+  
+  .form-item-triple .form-item {
+    flex: 1 1 1;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .form-item-triple .form-item label,
+  .form-item-triple .form-item input[type=radio] {
+    display: inline-block;
+    /* vertical-align: middle; */
+    margin: 0 4px;
+  }
+
+.submit{
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 48px;
+  /* margin-top: 32px; */
+  border: 2px solid #FCB918;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all ease 0.2s;
+}
+
+.submit:hover{
+  background-color: #FCB918;
+  color: white;
+  border: 2px solid white;
+}
+
+.box-item {
+    height: 60px;
+    margin-bottom: 16px;
+  }
 
 /*****************************************************************/
 /*****************************************************************/

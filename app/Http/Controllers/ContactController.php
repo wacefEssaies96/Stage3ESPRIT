@@ -78,6 +78,6 @@ class ContactController extends Controller
             'body' => $request->body
         ];
         Mail::to($request->email)->send(new VideoCallInvitation($details));
-        return redirect()->route('home')->with('success', 'Email envoyé avec succés.');
+        return redirect()->route('home')->with('success', 'Votre messsage à été envoyé ! ');
     }
 }

@@ -35,4 +35,11 @@ return [
         'client_secret' => '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',
         'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
     ],
+
+    'linkedin' => [
+        'client_id' => '77i33b3ypka8eb',
+        'client_secret' => '3fgIyCXJo4ClvMNh',
+        'redirect' => 'http://127.0.0.1:8000/auth/linkedin/callback'
+    ],
+ 
 ];

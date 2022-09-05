@@ -25,23 +25,25 @@ class UsersController extends Controller
     public function index()
     {
         if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
-            return $this->accessDenied();
-        if(Auth::user()->type == 'Admin'){
+            return redirect()->route('home')->with('error', 'Vous n\'avez pas l\'accées ! ');
+
+        if (Auth::user()->type == 'Admin') {
             $users = User::where('id', '!=', Auth::user()->id)->where('type', 'Expert')->get();
-        }
-        else{
+        } else {
             $users = User::where('id', '!=', Auth::user()->id)->get();
         }
         return view('superadmin.index', ['users' => $users]);
     }
 
-    public function searchByName(Request $request){
-        $users = User::where('name', 'like', '%'.$request->search.'%')->get();
-        return view('superadmin.index', ['users' =>$users]);
+    public function searchByName(Request $request)
+    {
+        $users = User::where('name', 'like', '%' . $request->search . '%')->get();
+        return view('superadmin.index', ['users' => $users]);
     }
-    public function searchForAdmin(Request $request){
-        $users = User::where('name', 'like', '%'.$request->search.'%')->where('type', 'Expert')->get();
-        return view('superadmin.index', ['users' =>$users]);
+    public function searchForAdmin(Request $request)
+    {
+        $users = User::where('name', 'like', '%' . $request->search . '%')->where('type', 'Expert')->get();
+        return view('superadmin.index', ['users' => $users]);
     }
 
     /**
@@ -52,7 +54,8 @@ class UsersController extends Controller
     public function create()
     {
         if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
-            return $this->accessDenied();
+            return redirect()->route('home')->with('error', 'Vous n\'avez pas l\'accées ! ');
+
         return view('superadmin.add');
     }
 
@@ -62,7 +65,8 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function rules(){
+    public function rules()
+    {
         return [
             'name' => 'required|string|max:75',
             'email' => 'required|string|email|max:255|unique:users',
@@ -77,7 +81,8 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
-            return $this->accessDenied();
+            return redirect()->route('home')->with('error', 'Vous n\'avez pas l\'accées ! ');
+
         $request->validate($this->rules());
         $user = User::create([
             'name' => $request->name,
@@ -127,7 +132,7 @@ class UsersController extends Controller
                 'v' => $v
             ]);
         }
-        return view('error');
+        return redirect() - route('home')->with('error', 'Une erreur s\'est produite !');
     }
 
     /**
@@ -139,7 +144,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
-            $this->accessDenied();
+            return redirect()->route('home')->with('error', 'Vous n\'avez pas l\'accées ! ');
+
         $user = User::find($id);
         $v = '';
         if ($user->type == 'Expert') {
@@ -164,8 +170,18 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         if (Auth::user()->type != 'Super admin' && Auth::user()->type != 'Admin')
-            return $this->accessDenied();
-        $request->validate($this->rules());
+            return redirect()->route('home')->with('error', 'Vous n\'avez pas l\'accées ! ');
+
+        $request->validate([
+            'name' => 'required|string|max:75',
+            'email' => 'required|string|email|max:255',
+            'gender' => 'required|string|max:6',
+            'gender2' => 'required|string|max:12',
+            'address' => 'required|string|max:50',
+            'pwd' => 'sometimes',
+            'rePwd' => 'sometimes|same:pwd',
+            'phoneNbr' => 'required|regex:/[0-9]/|min:8'
+        ]);
         $user = User::find($id);
         if ($user->type != $request->gender2) {
             if ($user->type == 'Expert') {
@@ -237,28 +253,40 @@ class UsersController extends Controller
         if ($request->file != null) {
             $input = $request->all();
             $file = $request->file('file');
-            $input['file'] = $file->getClientOriginalName();
-            $file->move(public_path('upload'), $file->getClientOriginalName());
+            $input['file'] = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('upload'), $input['file']);
+            if ($request->opwd != null) {
+                if (Hash::check($request->opwd, $user->password)) {
+                    $user->update([
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'gender' => $request->gender,
+                        'state' => $request->address,
+                        'phoneNbr' => $request->phoneNbr,
+                        'password' => Hash::make($request->pwd),
+                        'image' => $request->$input['file'],
+                    ]);
+                } else {
+                    return Redirect::back()->withErrors(['p' => 'Mot de passe erroné']);
+                }
+            } else {
+                $user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'gender' => $request->gender,
+                    'state' => $request->address,
+                    'phoneNbr' => $request->phoneNbr,
+                    'image' => $input['file'],
+                ]);
+            }
+        } else {
             if ($request->opwd != null) {
                 if (Hash::check($request->opwd, $user->password)) {
                     $this->updateUserWithPwd($user, $request);
                 } else {
                     return Redirect::back()->withErrors(['p' => 'Mot de passe erroné']);
                 }
-            }
-            else{
-                $this->updateUserWithoutPwd($user, $request);
-            }
-        } 
-        else {
-            if ($request->opwd != null) {
-                if (Hash::check($request->opwd, $user->password)) {
-                    $this->updateUserWithoutPwd($user, $request);
-                } else {
-                    return Redirect::back()->withErrors(['p' => 'Mot de passe erroné']);
-                }
-            }
-            else{
+            } else {
                 $this->updateUserWithoutPwd($user, $request);
             }
         }
@@ -275,10 +303,11 @@ class UsersController extends Controller
                 'fonds' => $request->fonds
             ]);
         }
-        return redirect()->route('user.show', [Auth::user()->id])->with('success', 'Votre profile à été modifié avec succées.');
+        return redirect()->route('user.show', [Auth::user()->id])->with('success', 'Votre profile à été modifié avec succés.');
     }
 
-    public function updateUserWithPwd($user, $request){
+    public function updateUserWithPwd($user, $request)
+    {
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -290,7 +319,8 @@ class UsersController extends Controller
         ]);
         return true;
     }
-    public function updateUserWithoutPwd($user, $request){
+    public function updateUserWithoutPwd($user, $request)
+    {
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -320,15 +350,15 @@ class UsersController extends Controller
             $investor->delete();
         }
         $user->delete();
-        if (Auth::user()->type == 'Super admin'){
+        if (Auth::user()->type == 'Super admin') {
             return redirect()->route('user.index')->with('success', 'Utilisateur supprimé avec succés');
-        } 
+        }
         return redirect()->route('home')->with('success', 'Utilisateur supprimé avec succés');
     }
 
     public function accessDenied()
     {
-        return redirect()->route('home');
+        return redirect()->route('home')->with('error', 'Vous n\'avez pas l\'accées ! ');
     }
     public function investors()
     {
@@ -350,7 +380,8 @@ class UsersController extends Controller
         return view('expert', ['users' => $user]);
     }
 
-    public function newPassword(Request $request){
+    public function newPassword(Request $request)
+    {
         $user = Auth::user();
         $user->update([
             'password' => Hash::make($request->password)

@@ -44,8 +44,14 @@ Route::get('/new-password', function () {
 })->name('new.password');
 Route::post('/new-password', 'UsersController@newPassword')->name('new.password.post');
 
-Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
-Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
+Route::get('/auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('/auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
+
+Route::get('/auth/linkedin', 'Auth\LinkedInController@redirectToLinkedin')->name('linked.in');
+Route::get('/auth/linkedin/callback', 'Auth\LinkedInController@handleLinkedinCallback');
+
+Route::get('/auth/facebook', 'Auth\FacebookController@redirect');
+Route::get('/auth/facebook/callback', 'Auth\FacebookController@callback');
 
 
 // ******************************** DEPOT DES DOSSIER *************************************** //
@@ -56,6 +62,7 @@ Route::delete('/remove-file/{id}', 'ProjectController@removeFile')->name('remove
 Route::get('/edit-project/{id}', 'ProjectController@editProject')->name('edit.dossier');
 Route::post('/validate/project', 'ProjectController@validateProject')->name('project.validate.admin');
 Route::get('/download-zip/{fileName}', 'ProjectController@downloadZip')->name('download.zip');
+Route::get('/projects/user', 'ProjectController@showUserProjects')->name('show.user.projects');
 
 // ********************************* VALIDATE PROJECT *************************************** //
 
@@ -103,3 +110,7 @@ Route::get('/projects', function () {
 Route::get('/information', function () {
     return view('informations');
 })->name('informations');
+
+Route::get('/error', function(){
+    return view('error');
+});

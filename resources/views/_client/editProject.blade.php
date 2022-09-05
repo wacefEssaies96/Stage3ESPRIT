@@ -175,7 +175,7 @@
                             onclick="switchButton(1)">Précédent</button>
                         <button class="btn1" type="submit">Modifier</button>
                         <button class="btn2" type="button"
-                            onclick="window.location='{{ route('sendProjectToADMIN', [Auth::user()->id, $proData->id]) }}'">Sauvegarder</button>
+                            onclick="window.location='{{ route('sendProjectToADMIN', [Auth::user()->id, $proData->id]) }}'">Valider</button>
                     </div>
                 </div>
             </form>

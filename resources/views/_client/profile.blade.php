@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/_client/profileStructure.css') }}">
     <link rel="stylesheet" href="{{ asset('css/_client/profile.css') }}">
     <link rel="stylesheet" href="{{ asset('css/image.css') }}">
-    <link rel="stylesheet" href=" {{ asset('css/connexion/addUser.css') }} ">
+    {{-- <link rel="stylesheet" href=" {{ asset('css/connexion/addUser.css') }} "> --}}
     <link rel="stylesheet" href=" {{ asset('css/modals/successModal.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/modals/failModal.css') }} ">
     <link rel="stylesheet" href=" {{ asset('css/_client/upload-notification.css') }} ">
@@ -25,10 +25,12 @@
     <div class="page-content">
         {{-- ------------------ --}}
         <div class="left-menu">
-            <a id="home" hidden href="{{ route('home') }}">Acceuil</a>
-            <a id="logout" hidden href="{{ route('logout') }}">Déconnexion</a>
-            <div class="item1" style="cursor: pointer;" onclick="goHome()">Acceuil</div>
+            <a id="home" hidden href="{{ route('home') }}"></a>
+            <a id="logout" hidden href="{{ route('logout') }}"></a>
+            <a id="dossiers" hidden href="{{ route('show.user.projects') }}"></a>
+            <div class="item3" style="cursor: pointer;" onclick="goHome()">Acceuil</div>
             <div class="item2" style="cursor: pointer;">Profile</div>
+            <div class="item3" style="cursor: pointer;" onclick="goDossiers()">Dossiers</div>
             <div class="item3" style="cursor: pointer;" onclick="logout()">Déconnexion</div>
         </div>
         {{-- ------------------ --}}
@@ -36,7 +38,7 @@
 
         <div class="page-header">
             <div class="logo">
-                <a href="{{route('home')}}"><img style="max-height: 50px;" src="{{asset('images/logo.png')}}"></a>
+                <a href="{{ route('home') }}"><img style="max-height: 50px;" src="{{ asset('images/logo.png') }}"></a>
             </div>
             <div class="notification">
                 @if ($message = Session::get('success'))
@@ -86,7 +88,8 @@
                                 <div class="modal-body text-center">
                                     <h4>Ooops!</h4>
                                     <p>{{ $message }}</p>
-                                    <button class="btn btn-success" data-dismiss="modal">Try Again</button>
+                                    <button class="btn btn-success" data-dismiss="modal">
+                                        Réessayer</button>
                                 </div>
                             </div>
                         </div>
@@ -108,17 +111,45 @@
         </div>
         {{-- ------------------ --}}
         {{-- ------------------ --}}
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-11 col-sm-9 col-md-7 col-lg-11 col-xl-11 text-center p-0 mt-3 mb-2">
-                    <div class="px-0 pt-4 pb-0 mt-3 mb-3">
-                        <div class="profile" style="padding-left:15%; padding-right:15% ;">
-                            <form id="form" method="POST" action=" {{ route('update-profile', $user->id) }} "
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
+        <div class="containerr">
+            {{-- <div class="row justify-content-center r"> --}}
+            {{-- <div class="col-11 col-sm-9 col-md-7 col-lg-11 col-xl-11 text-center p-0 mt-3 mb-2"> --}}
+            {{-- <div class="px-0 pt-4 pb-0 mt-3 mb-3"> --}}
+            <form id="form" method="POST" action=" {{ route('update-profile', $user->id) }} "
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Gérer mon profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="attachment">
+                                    <h3 style="width:100%; vertical-align: middle;">Photo de profile</h3>
+                                    <div class="icon">
+                                        @if ($user->image == ' ')
+                                            <img id="preview" src="{{ asset('images/upload-file.png') }}"
+                                                alt="NO IMAGE">
+                                        @else
+                                            <img id="preview" src="{{ asset('upload/' . $user->image . '') }}"
+                                                alt="{{ $user->image }}">
+                                        @endif
+
+                                    </div>
+                                    <div class="addBtn">
+                                        <button class="trigger">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                            <input id="uploadedFiles" type="file" name="file"
+                                                onchange="loadFile(event)">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
                                 <div class="form-item box-item">
-                                    <input style="margin:0;" type="text" name="name"
+                                    <input style="margin:0;" class="form-control" type="text" name="name"
                                         value="{{ $user->name }}" placeholder="Nom" data-required required>
                                     @error('name')
                                         <span style="color: red">
@@ -141,7 +172,7 @@
                                             <label class="label">Genre</label>
                                         </div>
                                         <div class="form-item">
-                                            <select name="gender">
+                                            <select name="gender" class="form-control">
                                                 <option id="Male" value="Male">Male</option>
                                                 <option id="Female" value="Female">Female</option>
                                             </select>
@@ -157,10 +188,10 @@
                                 <div class="form-item box-item">
                                     <div class="form-item-triple">
                                         <div class="radio-label">
-                                            <label style="color: #fdc541;" for="address">Municipalité</label>
+                                            <label for="address">Municipalité</label>
                                         </div>
                                         <div class="form-item">
-                                            <select style="float: right;" name="address">
+                                            <select class="form-control" style="float: right;" name="address">
                                                 <option id="Tunis" value="Tunis">Tunis</option>
                                                 <option id="Ariana" value="Ariana">Ariana</option>
                                                 <option id="Ben Arous" value="Ben Arous">Ben Arous</option>
@@ -204,43 +235,26 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div id="addons">
 
-                                </div>
-                                <div class="attachment">
-                                    <h3 style="width:100%; vertical-align: middle;">Photo de profile</h3>
-                                    <div class="icon">
-                                        @if ($user->image == ' ')
-                                            <img id="preview" src="{{ asset('images/upload-file.png') }}"
-                                                alt="NO IMAGE">
-                                        @else
-                                            <img id="preview" src="{{ asset('upload/' . $user->image . '') }}"
-                                                alt="{{ $user->image }}">
-                                        @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                
+                                <p onclick="remove()"
+                                    style="border-radius: 20px; margin-left: 30%; margin-right: 30%; color:aliceblue; background-color: red; cursor: pointer;">
+                                    Supprimer votre compte
+                                </p>
+                                
+                                <div id="p"></div>
 
-                                    </div>
-                                    <div class="addBtn">
-                                        <button class="trigger">
-                                            <i class="fa fa-plus" aria-hidden="true"></i>
-                                            <input id="uploadedFiles" type="file" name="file"
-                                                onchange="loadFile(event)">
-                                        </button>
-                                    </div>
-                                </div>
-                                <div id="p">
-
-                                </div>
-
-                                <p id="ppp" onclick="pass()" style="color: #fdc541; cursor: pointer;">Cliquer
+                                <p id="ppp" onclick="pass()" style="color: #fdc541; cursor: pointer;">
+                                    Cliquer
                                     ici pour
                                     modifier le mot de passe</p>
                                 <div id="pass">
 
                                 </div>
-                                <p onclick="remove()"
-                                    style="border-radius: 20px; margin-left: 30%; margin-right: 30%; color:aliceblue; background-color: red; cursor: pointer;">
-                                    Supprimer votre compte
-                                </p>
                                 @error('p')
                                     <span style="color: red">
                                         {{ $message }}
@@ -256,70 +270,80 @@
                                         {{ $message }}
                                     </span>
                                 @enderror
-                                <div class="form-item">
-                                    <button type="submit" id="submit" class="submit"
-                                        style="background-color:#fdc541 ;">Enregistrer</button>
+
+                            </div>
+                            <div class="col">
+                                <div id="addons">
+
                                 </div>
-                            </form>
-                            <form hidden method="POST" action="{{ route('user.destroy', $user->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button id="r" type="submit"></button>
-                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-item">
+                            <button type="submit" id="submit" class="submit"
+                                style="background-color:#fdc541 ;">Enregistrer</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
+            <form hidden method="POST" action="{{ route('user.destroy', $user->id) }}">
+                @csrf
+                @method('DELETE')
+                <button hidden id="r" type="submit"></button>
+            </form>
+            {{-- ------------------ --}}
+            {{-- ------------------ --}}
         </div>
-        {{-- ------------------ --}}
-        {{-- ------------------ --}}
-    </div>
 
-    {{-- ############################################### --}}
-    <script language="JavaScript" type="text/javascript" src="{{ asset('js/connexion/addUser.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
-    <script>
-        var loadFile = function(event) {
-            var image = document.getElementById('preview');
-            image.src = URL.createObjectURL(event.target.files[0]);
-        };
-        var user = {!! json_encode($user) !!};
-        var v = {!! json_encode($v) !!};
-        document.getElementById(user.gender).setAttribute('selected', '');
-        document.getElementById(user.state).setAttribute('selected', '');
-        if (user.type == 'Expert') {
-            e();
-            document.getElementById('service').value = v.service;
-        }
-        if (user.type == 'Investor') {
-            i();
-            document.getElementById('desc').value = v.description;
-            document.getElementById('fond').value = v.fonds;
-        }
-
-        function goHome() {
-            document.getElementById('home').click();
-        }
-
-        function logout() {
-            document.getElementById('logout').click();
-        }
-
-        function remove() {
-            var retVal = confirm("Voulez-vous vraiment supprimer votre compte ?");
-            if (retVal == true) {
-                document.getElementById('r').click();
+        {{-- ############################################### --}}
+        <script language="JavaScript" type="text/javascript" src="{{ asset('js/connexion/addUser.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
+        <script>
+            var loadFile = function(event) {
+                var image = document.getElementById('preview');
+                image.src = URL.createObjectURL(event.target.files[0]);
+            };
+            var user = {!! json_encode($user) !!};
+            var v = {!! json_encode($v) !!};
+            document.getElementById(user.gender).setAttribute('selected', '');
+            document.getElementById(user.state).setAttribute('selected', '');
+            if (user.type == 'Expert') {
+                e();
+                document.getElementById('service').value = v.service;
             }
-        }
-    </script>
+            if (user.type == 'Investor') {
+                i();
+                document.getElementById('desc').value = v.description;
+                document.getElementById('fond').value = v.fonds;
+            }
+
+            function goHome() {
+                document.getElementById('home').click();
+            }
+
+            function logout() {
+                document.getElementById('logout').click();
+            }
+            function goDossiers(){
+                document.getElementById('dossiers').click();
+            }
+
+            function remove() {
+                var retVal = confirm("Voulez-vous vraiment supprimer votre compte ?");
+                if (retVal == true) {
+                    document.getElementById('r').click();
+                }
+            }
+        </script>
 
 </body>
 

@@ -28,7 +28,7 @@
             @if (session()->has('error'))
                 <div class="popup-wrap">
                     <div class="popup-box">
-                        <h2>Une erreur se produite!</h2>
+                        <h2>Une erreur s'est produite!</h2>
                         <h3>{{ session()->get('error') }}.</h3>
                         <a class="close-btn popup-close" href="#">x</a>
                     </div>

@@ -10,7 +10,6 @@ use App\Paiement;
 use DB;
 use Illuminate\Support\Facades\Auth;
 
-
 class ProjectController extends Controller
 {
     public function __construct()
@@ -46,7 +45,7 @@ class ProjectController extends Controller
         } else {
             return redirect()->route('edit.dossier', [$req->theProIdentifier])->with('error', 'Aucun administrateur inscrit dans votre zone !');
         }
-        return redirect()->route('home')->with('success', 'Dossier déposé avec succés !');
+        return redirect()->route('home')->with('success', 'Le dossier à été déposé avec succés !');
     }
     // Files view
     public function filesUploadView()
@@ -96,7 +95,7 @@ class ProjectController extends Controller
         $paiement->delete();
         return redirect()->route('edit.dossier', $projet->id)->with(
             'success',
-            'Données bien enregistrées, vous devez maintenant sauvegardées tous. '
+            'Le dossier à été bien enregistrés, vous devez maintenant valider ce dernier.'
         );
     }
 
@@ -165,7 +164,7 @@ class ProjectController extends Controller
 
         return redirect()->route('edit.dossier', $req->id)->with(
             'success',
-            'Données bien enregistrées, vous devez maintenant sauvegardées tous. '
+            'Le dossier à été bien enregistrés, vous devez maintenant valider ce dernier.'
         );
     }
 
@@ -179,9 +178,9 @@ class ProjectController extends Controller
             $project->delete();
             $file->delete();
         } else {
-            return view('error');
+            return back()->with('error', 'Une erreur est survenu !');
         }
-        return back()->with('success', 'Project supprimé avec succés');
+        return back()->with('success', 'Dossier supprimé avec succés');
     }
 
     public function index()
@@ -220,6 +219,13 @@ class ProjectController extends Controller
                 ->where('users.state', Auth::user()->state)
                 ->get();
         return view('admin.index', [
+            'projects' => $projects
+        ]);
+    }
+
+    public function showUserProjects(){
+        $projects = Projects::where('client_id', Auth::user()->id)->where('validated', 'false')->get();
+        return view('_client.dossiers', [
             'projects' => $projects
         ]);
     }

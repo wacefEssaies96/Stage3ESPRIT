@@ -28,7 +28,7 @@
             @if (session()->has('error'))
                 <div class="popup-wrap">
                     <div class="popup-box">
-                        <h2>Une erreur se produite!</h2>
+                        <h2>Une erreur s'est produite!</h2>
                         <h3>{{ session()->get('error') }}.</h3>
                         <a class="close-btn popup-close" href="#">x</a>
                     </div>
@@ -74,8 +74,8 @@
             <h2 id="log-title" class="log"><b>Se connecter</b></h2>
             {{-- ***************************************************** --}}
             <div class="icons log">
-                <div class="social-icon"><span class="fa fa-facebook-f"></span></div>
-                <div class="social-icon"><span class="fa fa-linkedin"></span></div>
+                {{-- <div onclick="window.location='{{  url('/auth/facebook') }}'" class="social-icon"><span class="fa fa-facebook-f"></span></div> --}}
+                <div onclick="window.location='{{ route('linked.in') }}'" class="social-icon"><span class="fa fa-linkedin"></span></div>
                 <div onclick="window.location='{{  url('auth/google') }}'" class="social-icon"><span class="fa fa-google-plus"></span></div>
             </div>
             {{-- ***************************************************** --}}
