@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Mail;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 use App\Mail\VideoCallInvitation;
+use App\User;
 use Illuminate\Http\Request;
 use Twilio\Jwt\Grants\ChatGrant;
+use Twilio\Rest\Client;
 
 class AccessTokenController extends Controller
 {
@@ -83,5 +85,54 @@ class AccessTokenController extends Controller
         Mail::to($email)->send(new VideoCallInvitation($details));
     }
 
-    
+    public function chat($authUser, $otherUser)
+    {
+        $ids = $authUser.'-'.$otherUser;
+
+        $user1 = User::findOrFail($authUser);
+        $user2 = User::findOrFail($otherUser);
+
+        $twilio = new Client(env('TWILIO_ACCOUNT_SID'), env('TWILIO_AUTH_TOKEN'));
+
+        // Fetch channel or create a new one if it doesn't exist
+        try {
+            $channel = $twilio->chat->v2->services(env('TWILIO_SERVICE_SID'))
+                ->channels($ids)
+                ->fetch();
+        } catch (\Twilio\Exceptions\RestException $e) {
+            $channel = $twilio->chat->v2->services(env('TWILIO_SERVICE_SID'))
+                ->channels
+                ->create([
+                    'uniqueName' => $ids,
+                    'type' => 'private',
+                ]);
+        }
+
+        // Add first user to the channel
+        try {
+            $twilio->chat->v2->services(env('TWILIO_SERVICE_SID'))
+                ->channels($ids)
+                ->members($user1->email)
+                ->fetch();
+        } catch (\Twilio\Exceptions\RestException $e) {
+            $member = $twilio->chat->v2->services(env('TWILIO_SERVICE_SID'))
+                ->channels($ids)
+                ->members
+                ->create($user1->email);
+        }
+
+        // Add second user to the channel
+        try {
+            $twilio->chat->v2->services(env('TWILIO_SERVICE_SID'))
+                ->channels($ids)
+                ->members($user2->email)
+                ->fetch();
+        } catch (\Twilio\Exceptions\RestException $e) {
+            $twilio->chat->v2->services(env('TWILIO_SERVICE_SID'))
+                ->channels($ids)
+                ->members
+                ->create($user2->email);
+        }
+        return true;
+    }
 }
